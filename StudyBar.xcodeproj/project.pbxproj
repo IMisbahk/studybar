@@ -18,6 +18,7 @@
 		332A57FE318948289EA62095 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D96943278C495F8032A4A7 /* SessionManager.swift */; };
 		FCC773A1C2CE4201B0A9A441 /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F446E51634244D7E81400D54 /* ProgressRingView.swift */; };
 		C130C868C41F49C892D05208 /* MenuBarLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */; };
+		E0D6D2E96D7241738BE048B0 /* ActiveSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00430BC44574480DA107E5E3 /* ActiveSessionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		64D96943278C495F8032A4A7 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		F446E51634244D7E81400D54 /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
 		6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabelView.swift; sourceTree = "<group>"; };
+		00430BC44574480DA107E5E3 /* ActiveSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSessionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				8F303CC0BA7A4AA9B69E7A68 /* IdleView.swift */,
 				F446E51634244D7E81400D54 /* ProgressRingView.swift */,
 				6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */,
+				00430BC44574480DA107E5E3 /* ActiveSessionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				332A57FE318948289EA62095 /* SessionManager.swift in Sources */,
 				FCC773A1C2CE4201B0A9A441 /* ProgressRingView.swift in Sources */,
 				C130C868C41F49C892D05208 /* MenuBarLabelView.swift in Sources */,
+				E0D6D2E96D7241738BE048B0 /* ActiveSessionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
