@@ -38,7 +38,7 @@ A native macOS menu bar app (like the "Claude usage" style popover apps) for run
 ## Subject/topic model
 - User-editable list, not hardcoded. Ship with an empty or minimally seeded list; user adds their own subjects (e.g. Maths, Physics, Chemistry) and can add topics under each subject (e.g. Maths → Quadratics, Complex Numbers) for more granular logging.
 - Store subjects/topics + history locally, persist across launches.
-
+- Store study sessions like [weekly] [today] [monthly] [daily-average] and things like that titled.
 ## Visual/animation requirements
 - Menu bar icon state change (idle → countdown) should feel smooth, not an abrupt swap — a quick transition/fade is enough, doesn't need to be elaborate
 - Progress ring should visibly animate/drain in real time, not just jump every minute

@@ -1,2 +1,13 @@
 .env
 
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+.build/
+*.hmap
+*.ipa
+
+CLAUDE.md
+AGENTS.md
+PRODUCT.md
