@@ -11,6 +11,7 @@ struct StudyBarApp: App {
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
+        NotificationManager.shared.requestAuthorization()
     }
 
     var body: some Scene {

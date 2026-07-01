@@ -181,7 +181,12 @@ struct IdleView: View {
     }
 
     private func startSession() {
-        // wired up once session state exists (later step)
+        guard let subject = selectedSubject, let minutes = selectedMinutes, minutes > 0 else { return }
+        NotificationManager.shared.fireSessionStarted(
+            subjectName: subject.name,
+            topicName: selectedTopic?.name,
+            minutes: minutes
+        )
     }
 
     private func trimmed(_ text: String) -> String {
