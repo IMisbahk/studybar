@@ -1,0 +1,38 @@
+VERSION
+  s_5fd0366a7edc70::t_1e771385ca2527 1
+StudyBar/StudyBar.entitlements
+  s_5fd0366a7edc70::t_dd3bdbd9b692b1 7-8
+StudyBar/Core/UpdateChecker.swift
+  s_5fd0366a7edc70::t_12e04ad761e1dc 1-52
+packaging/dmg/create-dmg.sh
+  s_5fd0366a7edc70::t_eb2478f42f68b1 13-20,35,37,40-44,51
+StudyBar/Views/SettingsView.swift
+  s_5fd0366a7edc70::t_9c63e2808d27e5 8-9,30-31,59-114
+packaging/dmg/configure.applescript
+  s_5fd0366a7edc70::t_d3732b6eab1e42 2-9,11-36,38
+StudyBar.xcodeproj/project.pbxproj
+  s_5fd0366a7edc70::t_4475c7349d844f 113
+  s_5fd0366a7edc70::t_a9093ac6d39a7a 221
+  s_5fd0366a7edc70::t_1e771385ca2527 350,360,377,387
+  s_5fd0366a7edc70::t_925f3cdd0101ae 28
+  s_5fd0366a7edc70::t_152b6dad6e834a 53
+CHANGELOG.md
+  s_5fd0366a7edc70::t_6ef9364960743a 5-13
+  s_5fd0366a7edc70::t_2e6ca0d672d01c 54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "2665f07bf3cdad713e3fc538410a04480537ed39",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
