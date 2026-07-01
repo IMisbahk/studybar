@@ -1,0 +1,20 @@
+StudyBar/Views/SettingsView.swift
+  s_5fd0366a7edc70::t_e3873a5f8fa52b 3
+  s_5fd0366a7edc70::t_c5d5a721e96902 24-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "cfe26f67955dd0a9fe3e20c536b97276f46a5400",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
