@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+      - name: Xcode first launch
+        run: xcodebuild -runFirstLaunch
+
+      - name: Build Release
+        run: ./scripts/build.sh Release
+
+      - name: Verify app bundle
+        run: |
+          test -d build/Build/Products/Release/StudyBar.app
+          /usr/libexec/PlistBuddy -c 'Print :LSUIElement' build/Build/Products/Release/StudyBar.app/Contents/Info.plist | grep -q true

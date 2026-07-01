@@ -1,13 +1,17 @@
 .env
+.DS_Store
+**/.DS_Store
 
-# Xcode
+# Xcode / build output
+build/
+dist/
+DerivedData/
 xcuserdata/
 *.xcuserstate
-DerivedData/
 .build/
 *.hmap
 *.ipa
 
+# Agent-only files (not for public repo)
 CLAUDE.md
 AGENTS.md
-PRODUCT.md
