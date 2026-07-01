@@ -1,0 +1,35 @@
+StudyBar/StudyBarApp.swift
+  s_5fd0366a7edc70::t_9b70b55fd7dece 10-11
+StudyBar/Views/ManageSubjectsView.swift
+  s_5fd0366a7edc70::t_23a7f9de91952d 1-104
+StudyBar/Views/SettingsView.swift
+  s_5fd0366a7edc70::t_b6e18515c4ff3f 1-35,38-41
+  s_5fd0366a7edc70::t_62e395bca6d1db 36-37
+StudyBar/Views/PopoverRootView.swift
+  s_5fd0366a7edc70::t_747035dd3f38bb 32-35,43
+  s_5fd0366a7edc70::t_e0d5fc902d9366 6
+StudyBar/Core/SessionManager.swift
+  s_5fd0366a7edc70::t_35943a521fb85d 4
+  s_5fd0366a7edc70::t_e1d08b057e1461 97-99
+StudyBar.xcodeproj/project.pbxproj
+  s_5fd0366a7edc70::t_9463ff2befb372 204-205
+  s_5fd0366a7edc70::t_62adc1e0bc9180 44-45
+  s_5fd0366a7edc70::t_05fedba0a6e55e 117-118
+  s_5fd0366a7edc70::t_02c06ff1ee5565 23-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "7160434d2513b107986e931bb0e04477d11085ce",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
