@@ -19,6 +19,7 @@
 		FCC773A1C2CE4201B0A9A441 /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F446E51634244D7E81400D54 /* ProgressRingView.swift */; };
 		C130C868C41F49C892D05208 /* MenuBarLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */; };
 		E0D6D2E96D7241738BE048B0 /* ActiveSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00430BC44574480DA107E5E3 /* ActiveSessionView.swift */; };
+		AB9AA1F901E74657920A9148 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC97F8212C5644B0BE6649D7 /* HistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		F446E51634244D7E81400D54 /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
 		6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabelView.swift; sourceTree = "<group>"; };
 		00430BC44574480DA107E5E3 /* ActiveSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSessionView.swift; sourceTree = "<group>"; };
+		DC97F8212C5644B0BE6649D7 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				F446E51634244D7E81400D54 /* ProgressRingView.swift */,
 				6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */,
 				00430BC44574480DA107E5E3 /* ActiveSessionView.swift */,
+				DC97F8212C5644B0BE6649D7 /* HistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				FCC773A1C2CE4201B0A9A441 /* ProgressRingView.swift in Sources */,
 				C130C868C41F49C892D05208 /* MenuBarLabelView.swift in Sources */,
 				E0D6D2E96D7241738BE048B0 /* ActiveSessionView.swift in Sources */,
+				AB9AA1F901E74657920A9148 /* HistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
