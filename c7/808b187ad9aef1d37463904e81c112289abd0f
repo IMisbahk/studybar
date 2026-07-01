@@ -1,0 +1,63 @@
+packaging/dmg/create-dmg.sh
+  s_5fd0366a7edc70::t_2fed5383f0f4aa 2,17-18,21-23,28,33
+  s_5fd0366a7edc70::t_826e120d670dd8 1,3-16,19-20,24-27,29-32,34-38
+StudyBar/Views/StatPill.swift
+  s_5fd0366a7edc70::t_b907ba095dc7d6 1-19
+StudyBar/Views/SettingsView.swift
+  s_5fd0366a7edc70::t_b567e9b31f3c47 9-14,17-24,26,28-32,34-37,39-44
+StudyBar/Views/ActiveSessionView.swift
+  s_5fd0366a7edc70::t_dd5945f6bd4299 6-9,25-31,34-37,39,41,51,53-55,58,60-62
+README.md
+  s_5fd0366a7edc70::t_8eb802f5b3f07e 3-6
+StudyBar/Views/MenuBarLabelView.swift
+  s_5fd0366a7edc70::t_efd87888cb8c63 2,13-22,34-35
+StudyBar/Views/IdleView.swift
+  s_5fd0366a7edc70::t_5e0e9c9d0a0ca2 8,31-38,41-53,65-108,110,113-137,239-241,258,263
+StudyBar/Views/PopoverRootView.swift
+  s_5fd0366a7edc70::t_958e3e6f382620 3,7-22,56-60,62-63,66,70-79
+packaging/dmg/configure.applescript
+  s_5fd0366a7edc70::t_459f76e5953e19 1-26
+StudyBar/Views/AppLogoView.swift
+  s_5fd0366a7edc70::t_06970902f65f0f 1-25
+StudyBar/Core/StudyFormatting.swift
+  s_5fd0366a7edc70::t_64f1266de32fb1 1-31
+CHANGELOG.md
+  s_5fd0366a7edc70::t_02d85863cae01c 38
+  s_5fd0366a7edc70::t_6c2f6ce98c8654 5-23
+StudyBar/Views/HistoryView.swift
+  s_5fd0366a7edc70::t_88694433797a0c 151
+  s_5fd0366a7edc70::t_b2e9b3f98a2837 73-81,92-102
+  s_5fd0366a7edc70::t_6eb3bb587286fd 103-104
+scripts/package.sh
+  s_5fd0366a7edc70::t_a7755f40178b2b 22,24
+StudyBar.xcodeproj/project.pbxproj
+  s_5fd0366a7edc70::t_98f095f1819b62 126-127
+  s_5fd0366a7edc70::t_a2221301fba26e 215-217
+  s_5fd0366a7edc70::t_4455272ea554f7 49-51
+  s_5fd0366a7edc70::t_22153c5783b555 340,346,356,367
+  s_5fd0366a7edc70::t_21d0894d2a5a66 25-27
+  s_5fd0366a7edc70::t_bcf9e1983b8bed 110
+  s_5fd0366a7edc70::t_f75c060b39ae7d 373,383
+packaging/homebrew/StudyBar.rb
+  s_5fd0366a7edc70::t_ffe6097da5c17b 2,4
+StudyBar/Assets.xcassets/AppIcon.appiconset/Contents.json
+  s_5fd0366a7edc70::t_126440485b0dcb 1-68
+VERSION
+  s_5fd0366a7edc70::t_fc88d178cda69e 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "c7808b187ad9aef1d37463904e81c112289abd0f",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
