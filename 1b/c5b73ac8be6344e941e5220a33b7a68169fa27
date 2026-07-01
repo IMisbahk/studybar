@@ -1,0 +1,28 @@
+StudyBar/Views/IdleView.swift
+  s_5fd0366a7edc70::t_3b61d8b74475c8 1-190
+StudyBar/StudyBarApp.swift
+  s_5fd0366a7edc70::t_89909fb7961754 18
+StudyBar/Views/PopoverRootView.swift
+  s_5fd0366a7edc70::t_cca800dd9bdbcb 1-7
+StudyBar.xcodeproj/project.pbxproj
+  s_5fd0366a7edc70::t_020e73716df66f 93-94
+  s_5fd0366a7edc70::t_b3be0797b14452 28-29
+  s_5fd0366a7edc70::t_e4b75721fe30af 172-173
+  s_5fd0366a7edc70::t_7d3dca93969d04 15-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "1bc5b73ac8be6344e941e5220a33b7a68169fa27",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
