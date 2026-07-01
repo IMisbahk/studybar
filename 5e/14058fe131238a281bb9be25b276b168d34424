@@ -1,0 +1,30 @@
+StudyBar/Models/Subject.swift
+  s_5fd0366a7edc70::t_b53e0195885e4f 1-16
+StudyBar/StudyBarApp.swift
+  s_5fd0366a7edc70::t_6e11150dc79a3d 2,6-15,26
+StudyBar/Models/Topic.swift
+  s_5fd0366a7edc70::t_ab097353f12002 1-13
+StudyBar/Models/StudySession.swift
+  s_5fd0366a7edc70::t_1da4d455b092f7 1-33
+StudyBar.xcodeproj/project.pbxproj
+  s_5fd0366a7edc70::t_f4ed5606eab0c8 72-74
+  s_5fd0366a7edc70::t_0c8ba6b7318617 163-165
+  s_5fd0366a7edc70::t_585e664b5a48b6 23-25
+  s_5fd0366a7edc70::t_c5e971ddf5a885 12-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "5e14058fe131238a281bb9be25b276b168d34424",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
