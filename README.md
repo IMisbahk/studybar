@@ -19,12 +19,22 @@ A native macOS menu bar study timer. Pick a subject, start a session, and the me
 
 ## Install
 
-### Option 1 — Download release (recommended)
+> **Important:** use the **[Releases](https://github.com/IMisbahk/studybar/releases)** page.
+> Do **not** use GitHub's green **Code → Download ZIP** button — that downloads the **source code**, not the app.
 
-1. Open [Releases](https://github.com/IMisbahk/studybar/releases/latest)
-2. Download `StudyBar-x.y.z.zip` or `.dmg`
-3. Drag **StudyBar.app** to **Applications**
-4. Open StudyBar (right-click → Open the first time if Gatekeeper blocks unsigned builds)
+### Option 1 — Direct download (recommended)
+
+**[Download StudyBar.zip](https://github.com/IMisbahk/studybar/releases/latest)** (from Releases)
+
+1. Download `StudyBar-x.y.z.zip` from the [Releases](https://github.com/IMisbahk/studybar/releases/latest) page
+2. Double-click the zip to extract — you'll see **`StudyBar-x.y.z.dmg`** inside (not the repo, not source files)
+3. Double-click the `.dmg` to open it
+4. Drag **StudyBar.app** to your **Applications** folder
+5. Launch StudyBar — click the book icon in the menu bar
+
+On first launch, macOS may block the app (ad-hoc signed). Right-click **StudyBar.app → Open**, or allow it in **System Settings → Privacy & Security**.
+
+You can also download `StudyBar-x.y.z.dmg` directly from Releases if you prefer to skip the zip step.
 
 Verify checksum (optional):
 
@@ -93,10 +103,10 @@ See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 StudyBar uses [Semantic Versioning](https://semver.org/). The canonical version lives in [`VERSION`](VERSION). [CHANGELOG.md](CHANGELOG.md) tracks all releases.
 
-| Artifact | Description |
-|----------|-------------|
-| `StudyBar-x.y.z.zip` | App bundle, ready to drag to Applications |
-| `StudyBar-x.y.z.dmg` | Disk image for familiar macOS install flow |
+| Artifact | What's inside |
+|----------|---------------|
+| `StudyBar-x.y.z.zip` | **Only** `StudyBar-x.y.z.dmg` — unzip → open dmg → drag app to Applications |
+| `StudyBar-x.y.z.dmg` | Same dmg, for direct download without the zip wrapper |
 | `StudyBar-x.y.z.sha256` | SHA-256 checksums for zip + dmg |
 
 Releases are built automatically when a `v*` tag is pushed. Maintainer guide: [docs/RELEASING.md](docs/RELEASING.md).

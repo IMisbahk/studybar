@@ -16,13 +16,17 @@ This is normal for open-source macOS apps distributed outside the App Store.
 
 ## Method 1: GitHub Release (recommended)
 
+> **Do not** use **Code → Download ZIP** on the repo homepage. That is the **source code**. The app lives on the **Releases** page.
+
 **Best for:** most users who just want the app.
 
 1. Go to [github.com/IMisbahk/studybar/releases/latest](https://github.com/IMisbahk/studybar/releases/latest)
-2. Download one of:
-   - `StudyBar-x.y.z.zip` — smaller, unzip and drag to Applications
-   - `StudyBar-x.y.z.dmg` — open DMG, drag icon to Applications
-3. Launch from Applications or Spotlight
+2. Download **`StudyBar-x.y.z.zip`**
+3. Double-click the zip — inside you'll find **`StudyBar-x.y.z.dmg`** (not the repo)
+4. Double-click the dmg → drag **StudyBar.app** to **Applications**
+5. Launch from Applications or Spotlight
+
+Alternatively, download **`StudyBar-x.y.z.dmg`** directly from the same Releases page.
 
 ### Verify download integrity
 

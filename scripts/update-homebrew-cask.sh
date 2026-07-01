@@ -12,10 +12,10 @@ if [[ ! -f "$shaFile" ]]; then
   exit 1
 fi
 
-zipHash="$(grep '\.zip' "$shaFile" | awk '{print $1}')"
+dmgHash="$(grep '\.dmg' "$shaFile" | awk '{print $1}')"
 
 sed -i '' "s/version \"[^\"]*\"/version \"${version}\"/" "$caskFile"
-sed -i '' "s/sha256 \"[^\"]*\"/sha256 \"${zipHash}\"/" "$caskFile"
+sed -i '' "s/sha256 \"[^\"]*\"/sha256 \"${dmgHash}\"/" "$caskFile"
 
 echo "==> updated $caskFile"
-echo "    version=$version sha256=$zipHash"
+echo "    version=$version sha256=$dmgHash (dmg)"

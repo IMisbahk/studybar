@@ -23,12 +23,18 @@ curl -fsSL "$zipUrl" -o "$tmpDir/${baseName}.zip"
 echo "==> verifying checksum (optional)..."
 checksumUrl="https://github.com/${repo}/releases/download/${tag}/${baseName}.sha256"
 if curl -fsSL "$checksumUrl" -o "$tmpDir/${baseName}.sha256" 2>/dev/null; then
-  (cd "$tmpDir" && shasum -a 256 -c "${baseName}.sha256")
+  expected="$(grep "${baseName}.zip" "$tmpDir/${baseName}.sha256" | awk '{print $1}')"
+  actual="$(shasum -a 256 "$tmpDir/${baseName}.zip" | awk '{print $1}')"
+  if [[ "$expected" != "$actual" ]]; then
+    echo "error: zip checksum mismatch" >&2
+    exit 1
+  fi
+  echo "    checksum OK"
 else
   echo "    (no checksum file on release — skipping)"
 fi
 
-echo "==> extracting..."
+echo "==> extracting zip..."
 unzip -q "$tmpDir/${baseName}.zip" -d "$tmpDir"
 
 targetPath="$installDir/StudyBar.app"
@@ -37,7 +43,21 @@ if [[ -d "$targetPath" ]]; then
   rm -rf "$targetPath"
 fi
 
-echo "==> installing to $targetPath"
-ditto "$tmpDir/StudyBar.app" "$targetPath"
+# release zip contains the .dmg (not source code, not the .app directly)
+dmgPath="$tmpDir/${baseName}.dmg"
+if [[ -f "$dmgPath" ]]; then
+  echo "==> mounting dmg..."
+  mountPoint="$(hdiutil attach "$dmgPath" -nobrowse -quiet | tail -1 | sed 's/.*\t//')"
+  trap 'hdiutil detach "$mountPoint" -quiet 2>/dev/null || true; rm -rf "$tmpDir"' EXIT
+  echo "==> installing to $targetPath"
+  ditto "$mountPoint/StudyBar.app" "$targetPath"
+elif [[ -d "$tmpDir/StudyBar.app" ]]; then
+  # fallback for older release layout
+  echo "==> installing to $targetPath"
+  ditto "$tmpDir/StudyBar.app" "$targetPath"
+else
+  echo "error: expected ${baseName}.dmg or StudyBar.app inside zip" >&2
+  exit 1
+fi
 
 echo "==> installed StudyBar ${version#v}. launch with: open -a StudyBar"

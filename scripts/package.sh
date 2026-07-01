@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# packages StudyBar.app into dist/ as .zip and .dmg with SHA256 checksums
+# packages StudyBar into dist/:
+#   StudyBar-x.y.z.dmg          — disk image (drag app to Applications)
+#   StudyBar-x.y.z.zip          — zip containing ONLY the .dmg (like Claude Usage releases)
+#   StudyBar-x.y.z.sha256       — checksums for both
 set -euo pipefail
 
 rootDir="$(cd "$(dirname "$0")/.." && pwd)"
@@ -16,18 +19,18 @@ baseName="StudyBar-${version}"
 mkdir -p "$distDir"
 rm -f "$distDir/${baseName}.zip" "$distDir/${baseName}.dmg" "$distDir/${baseName}.sha256"
 
-echo "==> creating zip..."
-ditto -c -k --sequesterRsrc --keepParent "$appPath" "$distDir/${baseName}.zip"
-
 echo "==> creating dmg..."
 dmgPath="$distDir/${baseName}.dmg"
-rm -f "$dmgPath"
 hdiutil create \
   -volname "StudyBar" \
   -srcfolder "$appPath" \
   -ov \
   -format UDZO \
   "$dmgPath" >/dev/null
+
+echo "==> creating zip (dmg inside, not source code)..."
+# -j flattens so unzip gives StudyBar-x.y.z.dmg at the top level
+(cd "$distDir" && zip -X -j "${baseName}.zip" "${baseName}.dmg")
 
 echo "==> writing checksums..."
 (
@@ -37,3 +40,5 @@ echo "==> writing checksums..."
 
 echo "==> packaged:"
 ls -lh "$distDir/${baseName}".*
+echo "==> zip contents:"
+unzip -l "$distDir/${baseName}.zip"
