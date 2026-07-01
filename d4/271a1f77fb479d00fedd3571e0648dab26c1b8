@@ -1,0 +1,29 @@
+CLAUDE.md
+  s_5fd0366a7edc70::t_3d5a1f1d63a78b 61-71
+packaging/dmg/configure.applescript
+  s_5fd0366a7edc70::t_8e7f6a9b6fc77b 30,33-35
+CHANGELOG.md
+  s_5fd0366a7edc70::t_578ee95f10f26a 13
+packaging/dmg/create-dmg.sh
+  s_5fd0366a7edc70::t_9a734c27d43239 41,49
+  s_5fd0366a7edc70::t_e4f087e4b2ac3c 15-16
+  s_5fd0366a7edc70::t_f59123e95532ce 17,25,29-30,33
+  s_5fd0366a7edc70::t_878b1deed18110 26-27
+  s_5fd0366a7edc70::t_c137f2f7402290 28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "d4271a1f77fb479d00fedd3571e0648dab26c1b8",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
