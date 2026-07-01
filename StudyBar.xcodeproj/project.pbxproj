@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		DAEE7EA4B27642868923EEEF /* StudyBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE546FB298B440A8E22DEA7 /* StudyBarApp.swift */; };
 		10D11BB161074123BA48E0AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BD337EB04F240C288C545F8 /* Assets.xcassets */; };
+		D5D6CF40716645F790C9D1A4 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A262244491B34E9D839FA6DC /* Subject.swift */; };
+		127D1F5F77E048F4BD5F959A /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB162A3B8B14954BEBF0291 /* Topic.swift */; };
+		C940B4E0FA994B33B5ECEE30 /* StudySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7A80CDCAD34F5F82EFC560 /* StudySession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +20,9 @@
 		97B6BE57188949C3B6A905E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24CD56D9D3F74F32A282FECC /* StudyBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudyBar.entitlements; sourceTree = "<group>"; };
 		1BD337EB04F240C288C545F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A262244491B34E9D839FA6DC /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		1DB162A3B8B14954BEBF0291 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		DC7A80CDCAD34F5F82EFC560 /* StudySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 		19B35C3CCC6E4ECB9749D88A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A262244491B34E9D839FA6DC /* Subject.swift */,
+				1DB162A3B8B14954BEBF0291 /* Topic.swift */,
+				DC7A80CDCAD34F5F82EFC560 /* StudySession.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,6 +160,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAEE7EA4B27642868923EEEF /* StudyBarApp.swift in Sources */,
+				D5D6CF40716645F790C9D1A4 /* Subject.swift in Sources */,
+				127D1F5F77E048F4BD5F959A /* Topic.swift in Sources */,
+				C940B4E0FA994B33B5ECEE30 /* StudySession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
