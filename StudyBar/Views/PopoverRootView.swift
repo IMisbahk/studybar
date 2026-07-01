@@ -3,6 +3,7 @@ import SwiftUI
 private enum PopoverTab {
     case timer
     case history
+    case settings
 }
 
 struct PopoverRootView: View {
@@ -28,6 +29,10 @@ struct PopoverRootView: View {
             }
         case .history:
             HistoryView()
+        case .settings:
+            NavigationStack {
+                SettingsView()
+            }
         }
     }
 
@@ -35,6 +40,7 @@ struct PopoverRootView: View {
         HStack(spacing: 32) {
             tabButton(.timer, systemImage: "timer")
             tabButton(.history, systemImage: "clock.arrow.circlepath")
+            tabButton(.settings, systemImage: "gearshape")
         }
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)

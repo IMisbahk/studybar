@@ -7,6 +7,8 @@ struct StudyBarApp: App {
     @State private var sessionManager: SessionManager
 
     init() {
+        UserDefaults.standard.register(defaults: ["soundOnSessionEnd": true])
+
         let container: ModelContainer
         do {
             container = try ModelContainer(for: Subject.self, Topic.self, StudySession.self)

@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import SwiftData
+import AppKit
 
 enum SessionPhase: Equatable {
     case idle
@@ -93,6 +94,9 @@ final class SessionManager {
 
     private func complete() {
         NotificationManager.shared.fireSessionCompleted(subjectName: subjectName, minutes: Int(plannedDuration / 60))
+        if UserDefaults.standard.bool(forKey: "soundOnSessionEnd") {
+            NSSound(named: "Glass")?.play()
+        }
         logSession(completed: true)
         stopTimer()
         resetToIdle()
