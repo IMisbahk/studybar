@@ -12,6 +12,8 @@
 		D5D6CF40716645F790C9D1A4 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A262244491B34E9D839FA6DC /* Subject.swift */; };
 		127D1F5F77E048F4BD5F959A /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB162A3B8B14954BEBF0291 /* Topic.swift */; };
 		C940B4E0FA994B33B5ECEE30 /* StudySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7A80CDCAD34F5F82EFC560 /* StudySession.swift */; };
+		E94199EE54554C948ADE25D1 /* PopoverRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954DA5CD5334F7D8CF46B1A /* PopoverRootView.swift */; };
+		A7C43A61B0AE4E27874BA0AC /* IdleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F303CC0BA7A4AA9B69E7A68 /* IdleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		A262244491B34E9D839FA6DC /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		1DB162A3B8B14954BEBF0291 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		DC7A80CDCAD34F5F82EFC560 /* StudySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySession.swift; sourceTree = "<group>"; };
+		E954DA5CD5334F7D8CF46B1A /* PopoverRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverRootView.swift; sourceTree = "<group>"; };
+		8F303CC0BA7A4AA9B69E7A68 /* IdleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 		6B76C25F8F474FDE82738C17 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E954DA5CD5334F7D8CF46B1A /* PopoverRootView.swift */,
+				8F303CC0BA7A4AA9B69E7A68 /* IdleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +169,8 @@
 				D5D6CF40716645F790C9D1A4 /* Subject.swift in Sources */,
 				127D1F5F77E048F4BD5F959A /* Topic.swift in Sources */,
 				C940B4E0FA994B33B5ECEE30 /* StudySession.swift in Sources */,
+				E94199EE54554C948ADE25D1 /* PopoverRootView.swift in Sources */,
+				A7C43A61B0AE4E27874BA0AC /* IdleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
