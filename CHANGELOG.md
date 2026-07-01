@@ -10,6 +10,7 @@ All notable changes to StudyBar are documented here. Versioning follows [Semanti
 ### Fixed
 - DMG window matches background aspect ratio (no white bar on the side)
 - DMG icons aligned on the same row; `.background` and `.fseventsd` hidden
+- DMG installer: white background, black arrow and instruction text; icon labels readable
 
 ## [1.1.1] - 2026-07-01
 

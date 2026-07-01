@@ -27,8 +27,12 @@ on run argv
 			set arrangement of viewOptions to not arranged
 			set icon size of viewOptions to 96
 			set background picture of viewOptions to file ".background:background.png"
+			set label position of viewOptions to bottom
 			set position of item "StudyBar.app" of w to {appX, appY}
 			set position of item "Applications" of w to {appsX, appsY}
+			try
+				set extension hidden of item ".background" of w to true
+			end try
 			close
 			open
 			update without registering applications

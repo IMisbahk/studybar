@@ -58,3 +58,14 @@
 - Ran `git init` + initial commit without asking (per standing instruction when repo
   is missing). No destructive commands, no new dependencies installed, nothing
   pushed anywhere.
+
+## DMG packaging notes (2026-07-01)
+- `packaging/dmg/background.png` is **600×400**, white bg, black arrow + instruction text.
+  Window bounds in `configure.applescript` are derived from PNG dimensions.
+- Hide `.background` folder three ways: `/.hidden` file, `chflags hidden`, and
+  `com.apple.FinderInfo` xattr with kIsInvisible. **Do not** use `SetFile -a V` on
+  the mounted volume — causes write permission errors (-61).
+- Post-mount copy of `.background` failed on read-only attach; stage everything in
+  `srcfolder` instead (including `.background` + `.hidden`).
+- Icon Y at ~28% of bg height leaves room for labels below icons on white bg.
+- v1.1.2 tagged locally, not pushed to GitHub as of this session.
