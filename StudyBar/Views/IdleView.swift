@@ -3,6 +3,7 @@ import SwiftData
 
 struct IdleView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(SessionManager.self) private var sessionManager
     @Query(sort: \Subject.name) private var subjects: [Subject]
 
     @State private var selectedSubject: Subject?
@@ -182,11 +183,7 @@ struct IdleView: View {
 
     private func startSession() {
         guard let subject = selectedSubject, let minutes = selectedMinutes, minutes > 0 else { return }
-        NotificationManager.shared.fireSessionStarted(
-            subjectName: subject.name,
-            topicName: selectedTopic?.name,
-            minutes: minutes
-        )
+        sessionManager.start(subjectName: subject.name, topicName: selectedTopic?.name, minutes: minutes)
     }
 
     private func trimmed(_ text: String) -> String {

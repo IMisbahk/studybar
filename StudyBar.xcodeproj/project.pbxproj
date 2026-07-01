@@ -15,6 +15,9 @@
 		E94199EE54554C948ADE25D1 /* PopoverRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954DA5CD5334F7D8CF46B1A /* PopoverRootView.swift */; };
 		A7C43A61B0AE4E27874BA0AC /* IdleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F303CC0BA7A4AA9B69E7A68 /* IdleView.swift */; };
 		EF5964E3176A4D9A8DA335F6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A36FBB441541F5BFB6D254 /* NotificationManager.swift */; };
+		332A57FE318948289EA62095 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D96943278C495F8032A4A7 /* SessionManager.swift */; };
+		FCC773A1C2CE4201B0A9A441 /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F446E51634244D7E81400D54 /* ProgressRingView.swift */; };
+		C130C868C41F49C892D05208 /* MenuBarLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		E954DA5CD5334F7D8CF46B1A /* PopoverRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverRootView.swift; sourceTree = "<group>"; };
 		8F303CC0BA7A4AA9B69E7A68 /* IdleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleView.swift; sourceTree = "<group>"; };
 		12A36FBB441541F5BFB6D254 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		64D96943278C495F8032A4A7 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		F446E51634244D7E81400D54 /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
+		6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				12A36FBB441541F5BFB6D254 /* NotificationManager.swift */,
+				64D96943278C495F8032A4A7 /* SessionManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -95,6 +102,8 @@
 			children = (
 				E954DA5CD5334F7D8CF46B1A /* PopoverRootView.swift */,
 				8F303CC0BA7A4AA9B69E7A68 /* IdleView.swift */,
+				F446E51634244D7E81400D54 /* ProgressRingView.swift */,
+				6DB20C4DCBCF49B99AE95D7C /* MenuBarLabelView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,6 +184,9 @@
 				E94199EE54554C948ADE25D1 /* PopoverRootView.swift in Sources */,
 				A7C43A61B0AE4E27874BA0AC /* IdleView.swift in Sources */,
 				EF5964E3176A4D9A8DA335F6 /* NotificationManager.swift in Sources */,
+				332A57FE318948289EA62095 /* SessionManager.swift in Sources */,
+				FCC773A1C2CE4201B0A9A441 /* ProgressRingView.swift in Sources */,
+				C130C868C41F49C892D05208 /* MenuBarLabelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

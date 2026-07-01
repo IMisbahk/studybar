@@ -4,6 +4,7 @@ import SwiftData
 @main
 struct StudyBarApp: App {
     let modelContainer: ModelContainer
+    @State private var sessionManager = SessionManager()
 
     init() {
         do {
@@ -17,8 +18,9 @@ struct StudyBarApp: App {
     var body: some Scene {
         MenuBarExtra {
             PopoverRootView()
+                .environment(sessionManager)
         } label: {
-            Image(systemName: "book.closed")
+            MenuBarLabelView(sessionManager: sessionManager)
         }
         .menuBarExtraStyle(.window)
         .modelContainer(modelContainer)
