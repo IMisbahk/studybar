@@ -1,0 +1,32 @@
+README.md
+  s_5fd0366a7edc70::t_6d64d57988edc3 106-109
+  s_5fd0366a7edc70::t_ca66c9f5e89cf0 22-23,25-37
+scripts/install-release.sh
+  s_5fd0366a7edc70::t_b713e06818643e 26-32
+  s_5fd0366a7edc70::t_85d5845e8b2039 37,46-61
+packaging/homebrew/StudyBar.rb
+  s_5fd0366a7edc70::t_369a062db036b0 4
+  s_5fd0366a7edc70::t_cd94565ef74201 6
+scripts/package.sh
+  s_5fd0366a7edc70::t_8e3abefd1c5237 2-5,31-34,43-44
+docs/INSTALL.md
+  s_5fd0366a7edc70::t_b11834ace0b996 19-20,24-29
+scripts/update-homebrew-cask.sh
+  s_5fd0366a7edc70::t_2b33bb06620479 15,18,21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "90917bb07d5f11e0f281b39ac13e337585425888",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
