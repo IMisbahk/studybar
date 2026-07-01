@@ -1,0 +1,45 @@
+StudyBar.xcodeproj/project.pbxproj
+  s_5fd0366a7edc70::t_b6e5b3573061db 1-349
+AGENTS.md
+  h_b8c068798e4e71 1
+StudyBar/StudyBar.entitlements
+  s_5fd0366a7edc70::t_23c7992e47a9a8 1-8
+StudyBar.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+  s_5fd0366a7edc70::t_8fe237e05b3b84 1-7
+StudyBar/Assets.xcassets/Contents.json
+  s_5fd0366a7edc70::t_5b212185f5bb5d 1-6
+StudyBar/StudyBarApp.swift
+  s_5fd0366a7edc70::t_d980478ac0ff15 1-16
+StudyBar/Assets.xcassets/AccentColor.colorset/Contents.json
+  s_5fd0366a7edc70::t_ed1bb9f1dff686 1-11
+PRODUCT.md
+  h_b8c068798e4e71 41
+StudyBar.xcodeproj/xcshareddata/xcschemes/StudyBar.xcscheme
+  s_5fd0366a7edc70::t_4c5d5020b59b9b 1-78
+StudyBar/Info.plist
+  s_5fd0366a7edc70::t_b32c3add2b4a52 1-30
+.gitignore
+  s_5fd0366a7edc70::t_969a47b6aba3ab 3-10
+  h_b8c068798e4e71 11-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "ddcc4f0840c9b91a9d5fa382f978fb032ebd9451",
+  "prompts": {},
+  "humans": {
+    "h_b8c068798e4e71": {
+      "author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
