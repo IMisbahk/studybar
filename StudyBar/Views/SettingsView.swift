@@ -1,5 +1,6 @@
 import SwiftUI
 import ServiceManagement
+import AppKit
 
 struct SettingsView: View {
     @AppStorage("soundOnSessionEnd") private var soundOnSessionEnd = true
@@ -19,6 +20,12 @@ struct SettingsView: View {
 
             NavigationLink("Manage Subjects…") {
                 ManageSubjectsView()
+            }
+
+            Divider()
+
+            Button("Quit StudyBar") {
+                NSApplication.shared.terminate(nil)
             }
         }
         .padding(16)
