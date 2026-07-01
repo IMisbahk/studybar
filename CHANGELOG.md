@@ -2,6 +2,13 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] - 2026-07-01
+
+### Changed
+- Simplified app icon: black open book on white, square
+- Menu bar back to native book symbol (no oversized app icon)
+- Popover logo uses clean asset without extra border or shadow
+
 ## [1.1.0] - 2026-07-01
 
 ### Added
@@ -35,5 +42,6 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.1.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.1.1
 [1.1.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.1.0
 [1.0.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.0.0
