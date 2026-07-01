@@ -1,0 +1,67 @@
+.github/ISSUE_TEMPLATE/bug_report.md
+  s_5fd0366a7edc70::t_715f9cfa4dd6c7 1-19
+docs/RELEASING.md
+  s_5fd0366a7edc70::t_b6ecadb700eeb4 1-15,17-18,20-77
+  s_5fd0366a7edc70::t_08d8f9a2e6eec1 16,19
+README.md
+  s_5fd0366a7edc70::t_28155f113afad2 1-125
+.github/pull_request_template.md
+  s_5fd0366a7edc70::t_b7e197253ac5e3 1-8
+.github/workflows/ci.yml
+  s_5fd0366a7edc70::t_2c19efa2437bc2 1-27
+scripts/update-homebrew-cask.sh
+  s_5fd0366a7edc70::t_54841b2d72759d 1-21
+VERSION
+  s_5fd0366a7edc70::t_2ed6e9dc9ffe71 1
+.gitignore
+  s_5fd0366a7edc70::t_9271c0607be6fe 2-3,5-8,15
+docs/INSTALL.md
+  s_5fd0366a7edc70::t_498517bd9eba37 1-148
+SECURITY.md
+  s_5fd0366a7edc70::t_0ba1ab4d9551be 1-24
+.github/workflows/release.yml
+  s_5fd0366a7edc70::t_731475961a7828 1-32,34-39
+  s_5fd0366a7edc70::t_a3f2c19e347121 33
+.github/ISSUE_TEMPLATE/feature_request.md
+  s_5fd0366a7edc70::t_64721363a63b69 1-14
+.github/ISSUE_TEMPLATE/config.yml
+  s_5fd0366a7edc70::t_9fb0f4b5fa355e 1-5
+CHANGELOG.md
+  s_5fd0366a7edc70::t_5df5644251745c 1-19
+scripts/build.sh
+  s_5fd0366a7edc70::t_52eda0c7dff638 1-32
+scripts/bump-version.sh
+  s_5fd0366a7edc70::t_105d0e2473b3a4 20-22
+  s_5fd0366a7edc70::t_1eebae73fd9ba7 1-19,23-31
+scripts/package.sh
+  s_5fd0366a7edc70::t_7ed78b7d4d2930 1-39
+scripts/install-from-source.sh
+  s_5fd0366a7edc70::t_37be29b8065603 1-23
+LICENSE
+  s_5fd0366a7edc70::t_8e24d04665c6db 1-21
+scripts/install-release.sh
+  s_5fd0366a7edc70::t_f3ab127e16f877 11
+  s_5fd0366a7edc70::t_d9cf81d6db2e25 1-10,12-43
+StudyBar.xcodeproj/project.pbxproj
+  s_5fd0366a7edc70::t_fc064323e0366b 333,343,359,369
+packaging/homebrew/StudyBar.rb
+  s_5fd0366a7edc70::t_4a3d8b842cd133 1-20
+docs/DEVELOPMENT.md
+  s_5fd0366a7edc70::t_c744fb86475a3f 1-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "fdbb92b8670e03056a504508a91750e1b668780c",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
