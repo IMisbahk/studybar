@@ -1,0 +1,23 @@
+StudyBar/Assets.xcassets/AppLogo.imageset/Contents.json
+  s_5fd0366a7edc70::t_26a81ffdef2afe 1-18
+StudyBar/Views/MenuBarLabelView.swift
+  s_5fd0366a7edc70::t_f757df60e398d7 12-13,25-30
+StudyBar/Views/AppLogoView.swift
+  s_5fd0366a7edc70::t_8e046c8a02f93b 4,7-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "7c3a509d1037d9f96d2c0481333174c03b042588",
+  "prompts": {},
+  "sessions": {
+    "s_5fd0366a7edc70": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9294c7a4-016b-45d0-bd86-4c7e1eb30f88",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
