@@ -19,14 +19,9 @@ baseName="StudyBar-${version}"
 mkdir -p "$distDir"
 rm -f "$distDir/${baseName}.zip" "$distDir/${baseName}.dmg" "$distDir/${baseName}.sha256"
 
-echo "==> creating dmg..."
+echo "==> creating styled dmg..."
 dmgPath="$distDir/${baseName}.dmg"
-hdiutil create \
-  -volname "StudyBar" \
-  -srcfolder "$appPath" \
-  -ov \
-  -format UDZO \
-  "$dmgPath" >/dev/null
+"$rootDir/packaging/dmg/create-dmg.sh" "$appPath" "$dmgPath"
 
 echo "==> creating zip (dmg inside, not source code)..."
 # -j flattens so unzip gives StudyBar-x.y.z.dmg at the top level

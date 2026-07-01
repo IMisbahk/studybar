@@ -22,6 +22,9 @@
 		AB9AA1F901E74657920A9148 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC97F8212C5644B0BE6649D7 /* HistoryView.swift */; };
 		63E936E982BB478280AA12B8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20165D43F24484B2D8E793 /* SettingsView.swift */; };
 		55BD5E37CE544ED7BF48F090 /* ManageSubjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4010F6454D4FC3AE9D59D9 /* ManageSubjectsView.swift */; };
+		781C9C80891D4412BF463F3C /* StudyFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5C48A032C1428189D9C55E /* StudyFormatting.swift */; };
+		A6C67C8CDACB474B912D3BF5 /* AppLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165117894DA8404A82C1CEDA /* AppLogoView.swift */; };
+		7AE03D39C7A8465397933082 /* StatPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C570557824E9A84AC03C0 /* StatPill.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,9 @@
 		DC97F8212C5644B0BE6649D7 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		8B20165D43F24484B2D8E793 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2B4010F6454D4FC3AE9D59D9 /* ManageSubjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSubjectsView.swift; sourceTree = "<group>"; };
+		BC5C48A032C1428189D9C55E /* StudyFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyFormatting.swift; sourceTree = "<group>"; };
+		165117894DA8404A82C1CEDA /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
+		C46C570557824E9A84AC03C0 /* StatPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatPill.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 			children = (
 				12A36FBB441541F5BFB6D254 /* NotificationManager.swift */,
 				64D96943278C495F8032A4A7 /* SessionManager.swift */,
+				BC5C48A032C1428189D9C55E /* StudyFormatting.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -116,6 +123,8 @@
 				DC97F8212C5644B0BE6649D7 /* HistoryView.swift */,
 				8B20165D43F24484B2D8E793 /* SettingsView.swift */,
 				2B4010F6454D4FC3AE9D59D9 /* ManageSubjectsView.swift */,
+				165117894DA8404A82C1CEDA /* AppLogoView.swift */,
+				C46C570557824E9A84AC03C0 /* StatPill.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +212,9 @@
 				AB9AA1F901E74657920A9148 /* HistoryView.swift in Sources */,
 				63E936E982BB478280AA12B8 /* SettingsView.swift in Sources */,
 				55BD5E37CE544ED7BF48F090 /* ManageSubjectsView.swift in Sources */,
+				781C9C80891D4412BF463F3C /* StudyFormatting.swift in Sources */,
+				A6C67C8CDACB474B912D3BF5 /* AppLogoView.swift in Sources */,
+				7AE03D39C7A8465397933082 /* StatPill.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,12 +337,13 @@
 		E4402AB16F6F4632A739AE22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10000;
+				CURRENT_PROJECT_VERSION = 10100;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -340,7 +353,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -351,12 +364,13 @@
 		BA2E506981884E70A780D9C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10000;
+				CURRENT_PROJECT_VERSION = 10100;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -366,7 +380,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

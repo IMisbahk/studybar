@@ -6,20 +6,42 @@ struct SettingsView: View {
     @AppStorage("soundOnSessionEnd") private var soundOnSessionEnd = true
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
 
+    private var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "?"
+        return "\(version) (\(build))"
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("Settings")
-                .font(.title3.bold())
-
-            Toggle("Launch at Login", isOn: $launchAtLogin)
-                .onChange(of: launchAtLogin) { _, newValue in
-                    setLaunchAtLogin(newValue)
+            HStack(spacing: 10) {
+                AppLogoView(size: 44)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("StudyBar")
+                        .font(.title3.bold())
+                    Text("Version \(appVersion)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
+            }
 
-            Toggle("Sound on Session End", isOn: $soundOnSessionEnd)
+            Group {
+                Toggle("Launch at Login", isOn: $launchAtLogin)
+                    .onChange(of: launchAtLogin) { _, newValue in
+                        setLaunchAtLogin(newValue)
+                    }
 
-            NavigationLink("Manage Subjects…") {
+                Toggle("Sound on Session End", isOn: $soundOnSessionEnd)
+            }
+
+            NavigationLink {
                 ManageSubjectsView()
+            } label: {
+                Label("Manage Subjects", systemImage: "books.vertical")
+            }
+
+            Link(destination: URL(string: "https://github.com/IMisbahk/studybar")!) {
+                Label("GitHub Repository", systemImage: "link")
             }
 
             Divider()
@@ -40,7 +62,6 @@ struct SettingsView: View {
                 try SMAppService.mainApp.unregister()
             }
         } catch {
-            // SMAppService registration can fail if the app isn't in /Applications - revert the toggle
             print("Failed to toggle launch at login: \(error)")
             launchAtLogin = SMAppService.mainApp.status == .enabled
         }

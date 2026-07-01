@@ -5,6 +5,7 @@ struct IdleView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(SessionManager.self) private var sessionManager
     @Query(sort: \Subject.name) private var subjects: [Subject]
+    @Query(sort: \StudySession.startedAt, order: .reverse) private var sessions: [StudySession]
 
     @State private var selectedSubject: Subject?
     @State private var selectedTopic: Topic?
@@ -27,17 +28,30 @@ struct IdleView: View {
         }
     }
 
+    private var todayStudied: String {
+        StudyFormatting.duration(StudyFormatting.todayTotal(from: sessions))
+    }
+
+    private var recentSubjects: [String] {
+        StudyFormatting.recentSubjectNames(from: sessions)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("StudyBar")
-                .font(.title3.bold())
-
-            subjectSection
-            if selectedSubject != nil {
-                topicSection
+            header
+            if subjects.isEmpty {
+                emptyState
+            } else {
+                if !recentSubjects.isEmpty {
+                    recentSection
+                }
+                subjectSection
+                if selectedSubject != nil {
+                    topicSection
+                }
+                durationSection
+                startButton
             }
-            durationSection
-            startButton
         }
         .padding(16)
         .frame(width: 300)
@@ -48,11 +62,79 @@ struct IdleView: View {
         }
     }
 
-    private var subjectSection: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("Subject")
+    private var header: some View {
+        HStack(spacing: 10) {
+            AppLogoView(size: 40)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("StudyBar")
+                    .font(.title3.bold())
+                Text("Focused study sessions")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+        }
+    }
+
+    private var emptyState: some View {
+        VStack(spacing: 12) {
+            StatPill(label: "Today", value: todayStudied)
+            Image(systemName: "books.vertical")
+                .font(.system(size: 36))
+                .foregroundStyle(.tertiary)
+                .padding(.top, 4)
+            Text("Add your first subject")
+                .font(.subheadline.weight(.medium))
+            Text("e.g. Maths, Physics, Chemistry")
                 .font(.caption)
                 .foregroundStyle(.secondary)
+            addFirstSubjectField
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 8)
+    }
+
+    private var addFirstSubjectField: some View {
+        HStack {
+            TextField("Subject name", text: $newSubjectName)
+                .textFieldStyle(.roundedBorder)
+                .onSubmit(addSubject)
+            Button("Add", action: addSubject)
+                .buttonStyle(.borderedProminent)
+                .disabled(trimmed(newSubjectName).isEmpty)
+        }
+    }
+
+    private var recentSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Recent")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    ForEach(recentSubjects, id: \.self) { name in
+                        Button(name) {
+                            selectedSubject = subjects.first { $0.name == name }
+                            selectedTopic = nil
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        .tint(selectedSubject?.name == name ? .accentColor : .secondary)
+                    }
+                }
+            }
+        }
+    }
+
+    private var subjectSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text("Subject")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Spacer()
+                StatPill(label: "Today", value: todayStudied)
+            }
 
             if addingSubject {
                 HStack {
@@ -154,9 +236,9 @@ struct IdleView: View {
                 .foregroundStyle(.secondary)
 
             Picker("Duration", selection: $duration) {
-                Text("25 min").tag(DurationChoice.preset(25))
-                Text("50 min").tag(DurationChoice.preset(50))
-                Text("90 min").tag(DurationChoice.preset(90))
+                Text("25").tag(DurationChoice.preset(25))
+                Text("50").tag(DurationChoice.preset(50))
+                Text("90").tag(DurationChoice.preset(90))
                 Text("Custom").tag(DurationChoice.custom)
             }
             .labelsHidden()
@@ -173,11 +255,12 @@ struct IdleView: View {
         Button {
             startSession()
         } label: {
-            Text("Start Session")
+            Label("Start Session", systemImage: "play.fill")
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
+        .keyboardShortcut(.return, modifiers: .command)
         .disabled(selectedSubject == nil || (selectedMinutes ?? 0) <= 0)
     }
 

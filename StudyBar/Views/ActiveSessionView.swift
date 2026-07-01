@@ -3,6 +3,10 @@ import SwiftUI
 struct ActiveSessionView: View {
     @Environment(SessionManager.self) private var sessionManager
 
+    private var elapsed: TimeInterval {
+        max(0, sessionManager.plannedDuration - sessionManager.remaining)
+    }
+
     var body: some View {
         VStack(spacing: 16) {
             VStack(spacing: 4) {
@@ -18,14 +22,23 @@ struct ActiveSessionView: View {
             ZStack {
                 ProgressRingView(progress: sessionManager.progress, lineWidth: 6)
                     .frame(width: 120, height: 120)
-                Text(sessionManager.remainingText)
-                    .font(.system(size: 28, weight: .semibold).monospacedDigit())
+                VStack(spacing: 2) {
+                    Text(sessionManager.remainingText)
+                        .font(.system(size: 28, weight: .semibold).monospacedDigit())
+                    Text("remaining")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
 
+            Text("Elapsed \(StudyFormatting.duration(elapsed)) · Planned \(StudyFormatting.duration(sessionManager.plannedDuration))")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
             if sessionManager.phase == .paused {
-                Text("Paused")
+                Label("Paused", systemImage: "pause.circle.fill")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.orange)
             }
 
             HStack(spacing: 8) {
@@ -35,16 +48,20 @@ struct ActiveSessionView: View {
             .buttonStyle(.bordered)
 
             HStack(spacing: 8) {
-                Button(sessionManager.phase == .paused ? "Resume" : "Pause") {
+                Button {
                     sessionManager.phase == .paused ? sessionManager.resume() : sessionManager.pause()
+                } label: {
+                    Label(sessionManager.phase == .paused ? "Resume" : "Pause", systemImage: sessionManager.phase == .paused ? "play.fill" : "pause.fill")
+                        .frame(maxWidth: .infinity)
                 }
-                .frame(maxWidth: .infinity)
 
-                Button("Stop") {
+                Button {
                     sessionManager.stop()
+                } label: {
+                    Label("Stop", systemImage: "stop.fill")
+                        .frame(maxWidth: .infinity)
                 }
                 .tint(.red)
-                .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
             .controlSize(.large)

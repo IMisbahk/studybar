@@ -1,5 +1,9 @@
 # StudyBar
 
+<p align="center">
+  <img src="docs/app-icon.png" width="128" alt="StudyBar app icon">
+</p>
+
 A native macOS menu bar study timer. Pick a subject, start a session, and the menu bar icon becomes a live countdown with a progress ring. Fully local — no accounts, no cloud, no network.
 
 ![Active session screenshot](docs/screenshots/active-session.png)

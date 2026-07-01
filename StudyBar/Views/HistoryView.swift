@@ -70,11 +70,15 @@ struct HistoryView: View {
     }
 
     private var statsGrid: some View {
-        VStack(spacing: 6) {
-            statRow(title: "Today", value: todayTotal)
-            statRow(title: "This Week", value: weekTotal)
-            statRow(title: "This Month", value: monthTotal)
-            statRow(title: "Daily Average", value: dailyAverage)
+        VStack(spacing: 8) {
+            HStack(spacing: 8) {
+                statCard(title: "Today", value: todayTotal)
+                statCard(title: "Week", value: weekTotal)
+            }
+            HStack(spacing: 8) {
+                statCard(title: "Month", value: monthTotal)
+                statCard(title: "Daily avg", value: dailyAverage)
+            }
 
             if !subjectTotals.isEmpty {
                 Divider().padding(.vertical, 2)
@@ -83,6 +87,19 @@ struct HistoryView: View {
                 }
             }
         }
+    }
+
+    private func statCard(title: String, value: TimeInterval) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+            Text(formatted(value))
+                .font(.subheadline.weight(.semibold).monospacedDigit())
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(10)
+        .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
     }
 
     private func statRow(title: String, value: TimeInterval, secondary: Bool = false) -> some View {
@@ -131,10 +148,7 @@ struct HistoryView: View {
     }
 
     private func formatted(_ interval: TimeInterval) -> String {
-        let totalMinutes = Int(interval / 60)
-        let hours = totalMinutes / 60
-        let minutes = totalMinutes % 60
-        return hours > 0 ? "\(hours)h \(minutes)m" : "\(minutes)m"
+        StudyFormatting.duration(interval)
     }
 
     private func dayLabel(_ day: Date) -> String {
