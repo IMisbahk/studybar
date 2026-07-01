@@ -4,14 +4,17 @@ import SwiftData
 @main
 struct StudyBarApp: App {
     let modelContainer: ModelContainer
-    @State private var sessionManager = SessionManager()
+    @State private var sessionManager: SessionManager
 
     init() {
+        let container: ModelContainer
         do {
-            modelContainer = try ModelContainer(for: Subject.self, Topic.self, StudySession.self)
+            container = try ModelContainer(for: Subject.self, Topic.self, StudySession.self)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
+        modelContainer = container
+        _sessionManager = State(initialValue: SessionManager(modelContext: container.mainContext))
         NotificationManager.shared.requestAuthorization()
     }
 

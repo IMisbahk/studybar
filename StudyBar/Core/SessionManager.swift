@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import SwiftData
 
 enum SessionPhase: Equatable {
     case idle
@@ -14,8 +15,14 @@ final class SessionManager {
     private(set) var topicName: String?
     private(set) var plannedDuration: TimeInterval = 0
     private(set) var remaining: TimeInterval = 0
+    private(set) var startedAt: Date?
 
+    private let modelContext: ModelContext
     private var timer: Timer?
+
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+    }
 
     var progress: Double {
         guard plannedDuration > 0 else { return 0 }
@@ -32,6 +39,7 @@ final class SessionManager {
         self.topicName = topicName
         plannedDuration = TimeInterval(minutes * 60)
         remaining = plannedDuration
+        startedAt = Date()
         phase = .running
 
         NotificationManager.shared.fireSessionStarted(subjectName: subjectName, topicName: topicName, minutes: minutes)
@@ -51,7 +59,8 @@ final class SessionManager {
     }
 
     func stop() {
-        // early stop - logging to history is wired up in a later step
+        guard phase != .idle else { return }
+        logSession(completed: false)
         stopTimer()
         resetToIdle()
     }
@@ -83,9 +92,24 @@ final class SessionManager {
     }
 
     private func complete() {
-        // notification + auto-logging land in the session-complete step
+        NotificationManager.shared.fireSessionCompleted(subjectName: subjectName, minutes: Int(plannedDuration / 60))
+        logSession(completed: true)
         stopTimer()
         resetToIdle()
+    }
+
+    private func logSession(completed: Bool) {
+        guard let startedAt else { return }
+        let session = StudySession(
+            subjectName: subjectName,
+            topicName: topicName,
+            plannedDuration: plannedDuration,
+            actualDuration: plannedDuration - remaining,
+            startedAt: startedAt,
+            endedAt: Date(),
+            completed: completed
+        )
+        modelContext.insert(session)
     }
 
     private func resetToIdle() {
@@ -94,5 +118,6 @@ final class SessionManager {
         topicName = nil
         plannedDuration = 0
         remaining = 0
+        startedAt = nil
     }
 }

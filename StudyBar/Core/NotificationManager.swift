@@ -26,6 +26,14 @@ final class NotificationManager {
         fire(content)
     }
 
+    func fireSessionCompleted(subjectName: String, minutes: Int) {
+        let content = UNMutableNotificationContent()
+        content.title = "Session Complete"
+        content.body = "\(subjectName), \(minutes) min"
+        content.sound = .default
+        fire(content)
+    }
+
     private func fire(_ content: UNMutableNotificationContent) {
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
