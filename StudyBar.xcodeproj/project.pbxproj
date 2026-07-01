@@ -25,6 +25,7 @@
 		781C9C80891D4412BF463F3C /* StudyFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5C48A032C1428189D9C55E /* StudyFormatting.swift */; };
 		A6C67C8CDACB474B912D3BF5 /* AppLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165117894DA8404A82C1CEDA /* AppLogoView.swift */; };
 		7AE03D39C7A8465397933082 /* StatPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C570557824E9A84AC03C0 /* StatPill.swift */; };
+		257E28C2F10749C6B832526E /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14939437AB1945BC8FDDC44F /* UpdateChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		BC5C48A032C1428189D9C55E /* StudyFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyFormatting.swift; sourceTree = "<group>"; };
 		165117894DA8404A82C1CEDA /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		C46C570557824E9A84AC03C0 /* StatPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatPill.swift; sourceTree = "<group>"; };
+		14939437AB1945BC8FDDC44F /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				12A36FBB441541F5BFB6D254 /* NotificationManager.swift */,
 				64D96943278C495F8032A4A7 /* SessionManager.swift */,
 				BC5C48A032C1428189D9C55E /* StudyFormatting.swift */,
+				14939437AB1945BC8FDDC44F /* UpdateChecker.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				781C9C80891D4412BF463F3C /* StudyFormatting.swift in Sources */,
 				A6C67C8CDACB474B912D3BF5 /* AppLogoView.swift in Sources */,
 				7AE03D39C7A8465397933082 /* StatPill.swift in Sources */,
+				257E28C2F10749C6B832526E /* UpdateChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +347,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10101;
+				CURRENT_PROJECT_VERSION = 10102;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -353,7 +357,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -370,7 +374,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10101;
+				CURRENT_PROJECT_VERSION = 10102;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -380,7 +384,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

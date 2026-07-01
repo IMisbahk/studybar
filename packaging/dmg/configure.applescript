@@ -1,26 +1,38 @@
 #!/usr/bin/env osascript
--- configures Finder window layout on the mounted StudyBar DMG volume
-property volumeName : "StudyBar"
-property appPosition : {170, 210}
-property applicationsPosition : {470, 210}
-property windowBounds : {100, 100, 760, 500}
+-- args: bgWidth, bgHeight, appX, appY, appsX, appsY
+on run argv
+	set bgW to item 1 of argv as integer
+	set bgH to item 2 of argv as integer
+	set appX to item 3 of argv as integer
+	set appY to item 4 of argv as integer
+	set appsX to item 5 of argv as integer
+	set appsY to item 6 of argv as integer
 
-tell application "Finder"
-	tell disk volumeName
-		open
-		set current view of container window to icon view
-		set toolbar visible of container window to false
-		set statusbar visible of container window to false
-		set the bounds of container window to windowBounds
-		set viewOptions to the icon view options of container window
-		set arrangement of viewOptions to not arranged
-		set icon size of viewOptions to 96
-		set background picture of viewOptions to file ".background:background.png"
-		set position of item "StudyBar.app" of container window to appPosition
-		set position of item "Applications" of container window to applicationsPosition
-		close
-		open
-		update without registering applications
-		delay 1
+	-- title bar chrome; keeps background aspect matching the png
+	set titleBar to 28
+	set winLeft to 200
+	set winTop to 120
+	set winRight to winLeft + bgW
+	set winBottom to winTop + bgH + titleBar
+
+	tell application "Finder"
+		tell disk "StudyBar"
+			open
+			set w to container window
+			set current view of w to icon view
+			set toolbar visible of w to false
+			set statusbar visible of w to false
+			set the bounds of w to {winLeft, winTop, winRight, winBottom}
+			set viewOptions to the icon view options of w
+			set arrangement of viewOptions to not arranged
+			set icon size of viewOptions to 96
+			set background picture of viewOptions to file ".background:background.png"
+			set position of item "StudyBar.app" of w to {appX, appY}
+			set position of item "Applications" of w to {appsX, appsY}
+			close
+			open
+			update without registering applications
+			delay 1
+		end tell
 	end tell
-end tell
+end run

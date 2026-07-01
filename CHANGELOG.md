@@ -2,6 +2,15 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.1.2] - 2026-07-01
+
+### Added
+- Settings → Updates: checks GitHub for new releases, download button or "up to date"
+
+### Fixed
+- DMG window matches background aspect ratio (no white bar on the side)
+- DMG icons aligned on the same row; `.background` and `.fseventsd` hidden
+
 ## [1.1.1] - 2026-07-01
 
 ### Changed
@@ -42,6 +51,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.1.2]: https://github.com/IMisbahk/studybar/releases/tag/v1.1.2
 [1.1.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.1.1
 [1.1.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.1.0
 [1.0.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.0.0
