@@ -12,6 +12,7 @@ final class StudySession {
     var startedAt: Date
     var endedAt: Date
     var completed: Bool
+    var notes: String?
 
     init(
         subjectName: String,
@@ -20,7 +21,8 @@ final class StudySession {
         actualDuration: TimeInterval,
         startedAt: Date,
         endedAt: Date,
-        completed: Bool
+        completed: Bool,
+        notes: String? = nil
     ) {
         self.subjectName = subjectName
         self.topicName = topicName
@@ -29,5 +31,6 @@ final class StudySession {
         self.startedAt = startedAt
         self.endedAt = endedAt
         self.completed = completed
+        self.notes = notes
     }
 }

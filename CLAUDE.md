@@ -1,20 +1,10 @@
 # StudyBar — session notes
 
-## Environment constraints (this sandbox, may not apply to your actual Mac)
-- No full Xcode installed here, only Command Line Tools - and CLT's `swift-frontend` is
-  itself broken (dyld: missing `lib_CompilerSwiftIDEUtils.dylib`). Could not run
-  `xcodebuild`, `swiftc`, or even `swift --version` in this environment.
-- The `.xcodeproj` was hand-written (no `xcodegen`/Xcode project wizard available,
-  and didn't want to add xcodegen as a dependency without asking first).
-- Verification used instead: `plutil -convert json` on `project.pbxproj` + a small
-  Python script that walks the object graph checking every UUID reference resolves
-  and every registered `.swift` file is actually in the Sources build phase. This
-  catches structural mistakes (dangling refs, files not added to build phase) but
-  NOT actual Swift compile errors. **First thing to do in Xcode: Cmd+B and fix
-  whatever that surfaces** - treat this build as unverified until then.
-- If you (future agent) also land in a sandbox without real Xcode, don't burn time
-  trying to fix the CLT install (needs sudo + big download) - just hand-edit the
-  pbxproj carefully and lean on the validation script approach above.
+## Environment (updated 2026-07-01)
+- **Xcode 26.6 is available on Misbah's Mac** — `xcodebuild -scheme StudyBar build` verified for v1.2.0.
+  The old "no Xcode / broken swiftc" note below only applied to an earlier sandbox session.
+- The `.xcodeproj` was hand-written (no `xcodegen`). New Swift files must be added to
+  `project.pbxproj` PBXFileReference + PBXBuildFile + group + Sources phase manually.
 
 ## Key deviations from product.md, called out to Misbah already
 - **Deployment target is macOS 14.0, not 13.0.** SwiftData requires macOS 14+;
@@ -31,33 +21,52 @@
 - Skipped the right-click/secondary-menu nice-to-have - not trivial with
   `.menuBarExtraStyle(.window)` (would need to drop to raw NSStatusItem/AppKit).
   Spec said skip if non-trivial.
+- **⌥⌘H (Open History)** cannot force-open the MenuBarExtra popover — `MenuBarExtra`
+  has no public API for that. Hotkey activates the app and queues History tab for
+  the next time the user clicks the menu bar icon. Fully global hotkeys for session
+  control (start/pause/resume/extend) work without opening the popover.
 
 ## Architecture
-- `Core/SessionManager.swift` - the whole state machine (idle/running/paused),
-  1s repeating `Timer`, owns the `ModelContext` and logs a `StudySession` on both
-  natural completion and early stop (`completed` flag distinguishes them).
-- `Views/PopoverRootView.swift` - switches Timer/History/Settings tabs, and within
-  the Timer tab switches Idle vs Active based on `sessionManager.phase`.
+- `Core/SessionManager.swift` - state machine (idle/running/paused), 1s `Timer`,
+  logs `StudySession` on completion/stop, owns `draftNotes`, `lastCompletion` event,
+  `startLastSession()`, auto-pause/resume via `pauseBySystem()` / `resumeIfAutoPaused()`.
+- `Core/GlobalHotkeyManager.swift` - NSEvent global+local monitors for ⌥⌘ shortcuts.
+  Global monitor requires Accessibility permission in System Settings.
+- `Core/FloatingTimerController.swift` - `NSPanel` (.floating, nonactivating) with
+  `FloatingTimerView`; polls phase every 0.25s to show/hide.
+- `Core/PowerEventsMonitor.swift` - `NSWorkspace` sleep/wake + distributed screen
+  lock/unlock notifications.
+- `Core/NotificationManager.swift` - UNUserNotificationCenterDelegate, categories
+  with Pause/+10/Stop actions routed back to SessionManager.
+- `Views/PopoverRootView.swift` - Timer/History/Settings tabs; consumes
+  `pendingOpenHistory` flag on appear.
 - Settings' "Manage Subjects" uses `NavigationStack`/`NavigationLink`, deliberately
-  NOT `.sheet` - sheets are known to be unreliable inside `MenuBarExtra(.window)`
-  popovers (no real host NSWindow to attach to).
-- `@Observable` (Observation framework) throughout, not `ObservableObject` -
-  `SessionManager` is injected via `.environment(sessionManager)` for the popover
-  content, but passed as a plain property to `MenuBarLabelView` since the label
-  closure is a separate view hierarchy that doesn't inherit that `.environment()`.
+  NOT `.sheet` - sheets are unreliable inside `MenuBarExtra(.window)` popovers.
+- `@Observable` throughout; `SessionManager` via `.environment()` for popover,
+  plain property for `MenuBarLabelView` (separate view hierarchy).
 
-## Things to visually check once it's running (couldn't verify without Xcode)
-- `ManageSubjectsView`: `TextField` for renaming is embedded inside a
-  `DisclosureGroup` label - possible click could both focus the field and toggle
-  expand/collapse. Works in theory, want eyes on it.
-- Menu bar label (icon + ring + `mm:ss`) foreground color/contrast in both light
-  and dark menu bar - it's a custom composite view, not a single template `Image`,
-  so it doesn't get automatic menu-bar vibrancy the way a plain SF Symbol would.
+## Phase 1 manual smoke-test checklist (v1.2.0)
+- [ ] Start session → ring animates smoothly, menu bar shows countdown
+- [ ] Under 5 min remaining → ring pulses red
+- [ ] Pause → breathing animation on ring (menu bar + popover + floating timer)
+- [ ] Complete session → bounce + checkmark in menu bar, Glass sound if enabled
+- [ ] Add notes during session → appears in History, searchable
+- [ ] ⌥⌘S starts last session when idle
+- [ ] ⌥⌘P/R/E work during active session (global, even when popover closed)
+- [ ] ⌥⌘H → click menu bar → History tab opens
+- [ ] Floating timer: draggable, opacity slider works, auto-hides when idle
+- [ ] Lock screen while running → auto-pauses; unlock → auto-resumes
+- [ ] Close lid / sleep → auto-pause; wake → auto-resume
+- [ ] Notification actions: Pause, +10 min, Stop work from banner
+- [ ] Reduced Motion in Accessibility → animations respect setting
+
+## Roadmap backlog (not in v1.2.0)
+Phases 2-9 from product spec: Analytics, Timeline, Gamification/Galaxy, Apple
+integration (no Widgets/CLI until separate Xcode targets), White noise, Smart
+insights, Command palette/deep links, Customization themes.
 
 ## Permissions used this session
-- Ran `git init` + initial commit without asking (per standing instruction when repo
-  is missing). No destructive commands, no new dependencies installed, nothing
-  pushed anywhere.
+- Version bump to 1.2.0, commit, tag, push to origin (per user instruction).
 
 ## DMG packaging notes (2026-07-01)
 - `packaging/dmg/background.png` is **600×400**, white bg, black arrow + instruction text.
@@ -68,4 +77,3 @@
 - Post-mount copy of `.background` failed on read-only attach; stage everything in
   `srcfolder` instead (including `.background` + `.hidden`).
 - Icon Y at ~28% of bg height leaves room for labels below icons on white bg.
-- v1.1.2 tagged locally, not pushed to GitHub as of this session.

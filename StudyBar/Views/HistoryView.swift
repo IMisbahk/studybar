@@ -3,41 +3,52 @@ import SwiftData
 
 struct HistoryView: View {
     @Query(sort: \StudySession.startedAt, order: .reverse) private var sessions: [StudySession]
+    @State private var searchText = ""
 
     private var calendar: Calendar { .current }
 
+    private var filteredSessions: [StudySession] {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard !query.isEmpty else { return sessions }
+        return sessions.filter { session in
+            session.subjectName.lowercased().contains(query)
+                || (session.topicName?.lowercased().contains(query) ?? false)
+                || (session.notes?.lowercased().contains(query) ?? false)
+        }
+    }
+
     private var todayTotal: TimeInterval {
-        total(for: sessions.filter { calendar.isDateInToday($0.startedAt) })
+        total(for: filteredSessions.filter { calendar.isDateInToday($0.startedAt) })
     }
 
     private var weekTotal: TimeInterval {
         guard let weekStart = calendar.dateInterval(of: .weekOfYear, for: Date())?.start else { return 0 }
-        return total(for: sessions.filter { $0.startedAt >= weekStart })
+        return total(for: filteredSessions.filter { $0.startedAt >= weekStart })
     }
 
     private var monthTotal: TimeInterval {
         guard let monthStart = calendar.dateInterval(of: .month, for: Date())?.start else { return 0 }
-        return total(for: sessions.filter { $0.startedAt >= monthStart })
+        return total(for: filteredSessions.filter { $0.startedAt >= monthStart })
     }
 
     private var dailyAverage: TimeInterval {
-        guard let firstDate = sessions.map(\.startedAt).min() else { return 0 }
+        guard let firstDate = filteredSessions.map(\.startedAt).min() else { return 0 }
         let dayCount = calendar.dateComponents(
             [.day],
             from: calendar.startOfDay(for: firstDate),
             to: calendar.startOfDay(for: Date())
         ).day ?? 0
-        return total(for: sessions) / Double(max(1, dayCount + 1))
+        return total(for: filteredSessions) / Double(max(1, dayCount + 1))
     }
 
     private var subjectTotals: [(name: String, duration: TimeInterval)] {
-        Dictionary(grouping: sessions, by: \.subjectName)
+        Dictionary(grouping: filteredSessions, by: \.subjectName)
             .map { (name: $0.key, duration: total(for: $0.value)) }
             .sorted { $0.duration > $1.duration }
     }
 
     private var groupedByDay: [(day: Date, sessions: [StudySession])] {
-        Dictionary(grouping: sessions) { calendar.startOfDay(for: $0.startedAt) }
+        Dictionary(grouping: filteredSessions) { calendar.startOfDay(for: $0.startedAt) }
             .map { (day: $0.key, sessions: $0.value.sorted { $0.startedAt > $1.startedAt }) }
             .sorted { $0.day > $1.day }
     }
@@ -54,15 +65,27 @@ struct HistoryView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 20)
             } else {
+                TextField("Search subjects or notes", text: $searchText)
+                    .textFieldStyle(.roundedBorder)
+
                 statsGrid
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 10) {
-                        ForEach(groupedByDay, id: \.day) { group in
-                            dayGroup(group)
+
+                if filteredSessions.isEmpty {
+                    Text("No matches")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 8)
+                } else {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 10) {
+                            ForEach(groupedByDay, id: \.day) { group in
+                                dayGroup(group)
+                            }
                         }
                     }
+                    .frame(maxHeight: 200)
                 }
-                .frame(maxHeight: 200)
             }
         }
         .padding(16)
@@ -121,23 +144,31 @@ struct HistoryView: View {
                 .foregroundStyle(.secondary)
 
             ForEach(group.sessions) { session in
-                HStack {
-                    VStack(alignment: .leading, spacing: 1) {
-                        Text(session.topicName.map { "\(session.subjectName) — \($0)" } ?? session.subjectName)
-                            .font(.callout)
-                        Text(session.startedAt, style: .time)
-                            .font(.caption2)
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(session.topicName.map { "\(session.subjectName) — \($0)" } ?? session.subjectName)
+                                .font(.callout)
+                            Text(session.startedAt, style: .time)
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        if !session.completed {
+                            Image(systemName: "xmark.circle")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
+                        Text(formatted(session.actualDuration))
+                            .font(.caption.monospacedDigit())
                             .foregroundStyle(.secondary)
                     }
-                    Spacer()
-                    if !session.completed {
-                        Image(systemName: "xmark.circle")
+                    if let notes = session.notes, !notes.isEmpty {
+                        Text(notes)
                             .font(.caption2)
                             .foregroundStyle(.secondary)
+                            .lineLimit(2)
                     }
-                    Text(formatted(session.actualDuration))
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(.secondary)
                 }
             }
         }

@@ -2,6 +2,22 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-07-01
+
+### Added
+- Phase 1 polish: spring-animated progress ring with urgent pulse (<5 min) and paused breathing
+- Menu bar icon morph + completion bounce/checkmark animation
+- Global keyboard shortcuts: ⌥⌘S (start last), ⌥⌘P (pause), ⌥⌘R (resume), ⌥⌘E (+10 min), ⌥⌘H (open history)
+- Floating mini timer panel (always on top, draggable, opacity + auto-hide settings)
+- Session notes field (optional, saved with session, searchable in History)
+- Auto-pause on Mac sleep and screen lock; auto-resume on wake/unlock (only if auto-paused)
+- Rich notifications with Pause, +10 min, and Stop actions
+- Redesigned Settings with grouped sections and shortcuts reference
+
+### Changed
+- Improved notification copy (title/subtitle/body)
+- History view includes search across subjects, topics, and notes
+
 ## [1.1.2] - 2026-07-01
 
 ### Added

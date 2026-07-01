@@ -26,6 +26,10 @@
 		A6C67C8CDACB474B912D3BF5 /* AppLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165117894DA8404A82C1CEDA /* AppLogoView.swift */; };
 		7AE03D39C7A8465397933082 /* StatPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C570557824E9A84AC03C0 /* StatPill.swift */; };
 		257E28C2F10749C6B832526E /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14939437AB1945BC8FDDC44F /* UpdateChecker.swift */; };
+		A1B2C3D4E5F64789A0B1C2D3 /* GlobalHotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F6A7B8C9D06123E4F5A6B7 /* GlobalHotkeyManager.swift */; };
+		B2C3D4E5F6A74890B1C2D3E4 /* FloatingTimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A7B8C9D0E17234F5A6B7C8 /* FloatingTimerController.swift */; };
+		C3D4E5F6A7B84901C2D3E4F5 /* PowerEventsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B8C9D0E1F28345A6B7C8D9 /* PowerEventsMonitor.swift */; };
+		D4E5F6A7B8C95012D3E4F5A6 /* FloatingTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C9D0E1F2A39456B7C8D9E0 /* FloatingTimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +55,10 @@
 		165117894DA8404A82C1CEDA /* AppLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogoView.swift; sourceTree = "<group>"; };
 		C46C570557824E9A84AC03C0 /* StatPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatPill.swift; sourceTree = "<group>"; };
 		14939437AB1945BC8FDDC44F /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
+		E5F6A7B8C9D06123E4F5A6B7 /* GlobalHotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkeyManager.swift; sourceTree = "<group>"; };
+		F6A7B8C9D0E17234F5A6B7C8 /* FloatingTimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTimerController.swift; sourceTree = "<group>"; };
+		A7B8C9D0E1F28345A6B7C8D9 /* PowerEventsMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerEventsMonitor.swift; sourceTree = "<group>"; };
+		B8C9D0E1F2A39456B7C8D9E0 /* FloatingTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,9 @@
 				64D96943278C495F8032A4A7 /* SessionManager.swift */,
 				BC5C48A032C1428189D9C55E /* StudyFormatting.swift */,
 				14939437AB1945BC8FDDC44F /* UpdateChecker.swift */,
+				E5F6A7B8C9D06123E4F5A6B7 /* GlobalHotkeyManager.swift */,
+				F6A7B8C9D0E17234F5A6B7C8 /* FloatingTimerController.swift */,
+				A7B8C9D0E1F28345A6B7C8D9 /* PowerEventsMonitor.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -128,6 +139,7 @@
 				2B4010F6454D4FC3AE9D59D9 /* ManageSubjectsView.swift */,
 				165117894DA8404A82C1CEDA /* AppLogoView.swift */,
 				C46C570557824E9A84AC03C0 /* StatPill.swift */,
+				B8C9D0E1F2A39456B7C8D9E0 /* FloatingTimerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +231,10 @@
 				A6C67C8CDACB474B912D3BF5 /* AppLogoView.swift in Sources */,
 				7AE03D39C7A8465397933082 /* StatPill.swift in Sources */,
 				257E28C2F10749C6B832526E /* UpdateChecker.swift in Sources */,
+				A1B2C3D4E5F64789A0B1C2D3 /* GlobalHotkeyManager.swift in Sources */,
+				B2C3D4E5F6A74890B1C2D3E4 /* FloatingTimerController.swift in Sources */,
+				C3D4E5F6A7B84901C2D3E4F5 /* PowerEventsMonitor.swift in Sources */,
+				D4E5F6A7B8C95012D3E4F5A6 /* FloatingTimerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +363,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10102;
+				CURRENT_PROJECT_VERSION = 10200;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -357,7 +373,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -374,7 +390,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10102;
+				CURRENT_PROJECT_VERSION = 10200;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -384,7 +400,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

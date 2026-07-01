@@ -32,6 +32,16 @@ struct PopoverRootView: View {
             Divider()
             tabBar
         }
+        .onAppear(perform: applyPendingTab)
+        .onChange(of: sessionManager.pendingOpenHistory) { _, _ in
+            applyPendingTab()
+        }
+    }
+
+    private func applyPendingTab() {
+        if sessionManager.consumePendingOpenHistory() {
+            tab = .history
+        }
     }
 
     @ViewBuilder
