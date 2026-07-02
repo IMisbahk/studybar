@@ -1,0 +1,47 @@
+StudyBar/Views/Dashboard/NotesBrowserView.swift
+  s_ef133bb69a3d94::t_71b11f6eb6fae2 1-60
+StudyBar/Views/Dashboard/DashboardView.swift
+  s_ef133bb69a3d94::t_4c9944336fa0aa 77-80
+  s_ef133bb69a3d94::t_3cf921794da6a0 5-6,15-16,25-26
+CHANGELOG.md
+  s_ef133bb69a3d94::t_3b4cba373f360b 5-12
+  s_ef133bb69a3d94::t_5b31cb59e7e769 108
+CLAUDE.md
+  s_ef133bb69a3d94::t_d10222ff7f5af8 29-35,37-42
+  s_ef133bb69a3d94::t_f99a9300f091cf 3-4
+  s_ef133bb69a3d94::t_225266c4770511 59-61,63-66
+StudyBar/Views/Dashboard/StudyHeatmapView.swift
+  s_ef133bb69a3d94::t_ca02e0b4bab9d7 1-75
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_bfa18ca06332ed 41-46
+  s_ef133bb69a3d94::t_b2b9764ecef5ca 190-192
+  s_ef133bb69a3d94::t_42bc34a5410c04 84-89
+  s_ef133bb69a3d94::t_bf3c64a5dd816d 296-300
+  s_ef133bb69a3d94::t_6d8908f172ad5b 97
+  s_ef133bb69a3d94::t_13c3fdae82f20b 158-159
+  s_ef133bb69a3d94::t_4d5e674ab6d009 429,439,456,466
+StudyBar/Core/AnalyticsEngine.swift
+  s_ef133bb69a3d94::t_109d0ab5d4da87 1-120
+StudyBar/Core/ExportService.swift
+  s_ef133bb69a3d94::t_b994e1ab513f78 1-55
+StudyBar/Views/Dashboard/AnalyticsDashboardView.swift
+  s_ef133bb69a3d94::t_632a194854cee3 1-125
+VERSION
+  s_ef133bb69a3d94::t_7b3f71931e8a06 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "ba2b8c0848888699c2be5d091b629bb65c9cb933",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
