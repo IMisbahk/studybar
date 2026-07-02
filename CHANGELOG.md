@@ -2,6 +2,16 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.5.2] - 2026-07-02
+
+### Added
+- Heatmap range modes: **Weekly**, **Monthly**, **YTD**, **Annual** (segmented picker)
+- Weekday labels, auto-scroll to most recent days, larger cells in weekly view
+
+### Fixed
+- Heatmap not showing today's study (date lookup + invisible green on dark backgrounds)
+- Heat levels use minute buckets so any study day is clearly visible
+
 ## [1.5.1] - 2026-07-02
 
 ### Fixed
@@ -112,6 +122,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.5.2]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.2
 [1.5.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.1
 [1.5.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.0
 [1.4.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.4.0

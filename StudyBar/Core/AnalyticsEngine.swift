@@ -1,5 +1,48 @@
 import Foundation
 
+enum HeatmapRange: String, CaseIterable, Identifiable {
+    case weekly
+    case monthly
+    case ytd
+    case annual
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .weekly: "Weekly"
+        case .monthly: "Monthly"
+        case .ytd: "YTD"
+        case .annual: "Annual"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .weekly: "Last 7 days"
+        case .monthly: "This month"
+        case .ytd: "Year to date"
+        case .annual: "Last 12 months"
+        }
+    }
+
+    func interval(using calendar: Calendar = .current, now: Date = Date()) -> (start: Date, end: Date) {
+        let end = calendar.startOfDay(for: now)
+        let start: Date
+        switch self {
+        case .weekly:
+            start = calendar.date(byAdding: .day, value: -6, to: end) ?? end
+        case .monthly:
+            start = calendar.date(from: calendar.dateComponents([.year, .month], from: end)) ?? end
+        case .ytd:
+            start = calendar.date(from: DateComponents(year: calendar.component(.year, from: end), month: 1, day: 1)) ?? end
+        case .annual:
+            start = calendar.date(byAdding: .day, value: -364, to: end) ?? end
+        }
+        return (calendar.startOfDay(for: start), end)
+    }
+}
+
 struct DayStudyTotal: Identifiable, Hashable {
     let date: Date
     let totalSeconds: TimeInterval
@@ -25,18 +68,33 @@ struct SubjectStudyTotal: Identifiable, Hashable {
 enum AnalyticsEngine {
     private static var calendar: Calendar { .current }
 
+    static func dailyTotals(from sessions: [StudySession], range: HeatmapRange = .annual) -> [DayStudyTotal] {
+        let interval = range.interval()
+        return dailyTotals(from: sessions, start: interval.start, end: interval.end)
+    }
+
     static func dailyTotals(from sessions: [StudySession], trailingDays: Int = 365) -> [DayStudyTotal] {
         let today = calendar.startOfDay(for: Date())
         guard let start = calendar.date(byAdding: .day, value: -(trailingDays - 1), to: today) else { return [] }
+        return dailyTotals(from: sessions, start: start, end: today)
+    }
 
-        let grouped = Dictionary(grouping: sessions) { calendar.startOfDay(for: $0.startedAt) }
-        let maxDaily = grouped.values.map { total(for: $0) }.max() ?? 0
+    private static func dailyTotals(from sessions: [StudySession], start: Date, end: Date) -> [DayStudyTotal] {
+        let rangeStart = calendar.startOfDay(for: start)
+        let rangeEnd = calendar.startOfDay(for: end)
 
+        var byDay: [Date: TimeInterval] = [:]
+        for session in sessions {
+            let day = calendar.startOfDay(for: session.startedAt)
+            guard day >= rangeStart, day <= rangeEnd else { continue }
+            byDay[day, default: 0] += session.actualDuration
+        }
+
+        let maxDaily = byDay.values.max() ?? 0
         var result: [DayStudyTotal] = []
-        var day = start
-        while day <= today {
-            let daySessions = grouped[day] ?? []
-            let total = total(for: daySessions)
+        var day = rangeStart
+        while day <= rangeEnd {
+            let total = byDay[day] ?? 0
             result.append(DayStudyTotal(date: day, totalSeconds: total, level: heatLevel(total: total, max: maxDaily)))
             guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
             day = next
@@ -110,11 +168,12 @@ enum AnalyticsEngine {
 
     private static func heatLevel(total: TimeInterval, max: TimeInterval) -> Int {
         guard total > 0 else { return 0 }
-        guard max > 0 else { return 1 }
-        let ratio = total / max
-        if ratio < 0.25 { return 1 }
-        if ratio < 0.5 { return 2 }
-        if ratio < 0.75 { return 3 }
+        let minutes = total / 60
+        // absolute buckets so a single study day is always visible
+        if minutes < 15 { return 1 }
+        if minutes < 30 { return 2 }
+        if minutes < 60 { return 3 }
+        if max > 0, total >= max * 0.9 { return 4 }
         return 4
     }
 }

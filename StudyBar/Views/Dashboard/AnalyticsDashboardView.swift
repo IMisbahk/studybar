@@ -4,9 +4,10 @@ import SwiftData
 
 struct AnalyticsDashboardView: View {
     @Query(sort: \StudySession.startedAt, order: .reverse) private var sessions: [StudySession]
+    @State private var heatmapRange: HeatmapRange = .annual
 
     private var dailyTotals: [DayStudyTotal] {
-        AnalyticsEngine.dailyTotals(from: sessions, trailingDays: 365)
+        AnalyticsEngine.dailyTotals(from: sessions, range: heatmapRange)
     }
 
     private var weeklyTotals: [WeekStudyTotal] {
@@ -57,14 +58,24 @@ struct AnalyticsDashboardView: View {
 
     private var heatmapCard: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Study Heatmap")
-                .font(.headline)
-            Text("Last 12 months")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            ScrollView(.horizontal, showsIndicators: false) {
-                StudyHeatmapView(days: dailyTotals)
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Study Heatmap")
+                        .font(.headline)
+                    Text(heatmapRange.subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Picker("Range", selection: $heatmapRange) {
+                    ForEach(HeatmapRange.allCases) { range in
+                        Text(range.title).tag(range)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .frame(maxWidth: 280)
             }
+            StudyHeatmapView(days: dailyTotals, range: heatmapRange)
         }
         .padding(14)
         .background(.quaternary.opacity(0.2), in: RoundedRectangle(cornerRadius: 12))
@@ -109,13 +120,14 @@ struct AnalyticsDashboardView: View {
         HStack(spacing: 10) {
             Button("Export Heatmap PNG") {
                 let exportView = VStack(alignment: .leading, spacing: 8) {
-                    Text("StudyBar Study Heatmap")
+                    Text("StudyBar Study Heatmap — \(heatmapRange.title)")
                         .font(.headline)
-                    StudyHeatmapView(days: dailyTotals, showLegend: true)
+                    StudyHeatmapView(days: dailyTotals, range: heatmapRange, showLegend: true)
                 }
                 .padding(16)
                 .background(Color.white)
-                ExportService.savePNG(from: exportView, size: CGSize(width: 900, height: 180), defaultName: "studybar-heatmap.png")
+                let width: CGFloat = heatmapRange == .weekly ? 360 : 900
+                ExportService.savePNG(from: exportView, size: CGSize(width: width, height: 180), defaultName: "studybar-heatmap-\(heatmapRange.rawValue).png")
             }
             Button("Export Sessions CSV") {
                 ExportService.exportSessionsCSV(sessions)
