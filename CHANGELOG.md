@@ -2,6 +2,14 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.5.0] - 2026-07-02
+
+### Added
+- **Analytics dashboard**: GitHub-style study heatmap, weekly bar chart, subject breakdown
+- **Notes browser**: dedicated searchable view for all session notes
+- **Export**: save heatmap as PNG, export session history as CSV
+- Streak tracking (current + longest)
+
 ## [1.4.0] - 2026-07-02
 
 ### Added
@@ -97,6 +105,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.5.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.0
 [1.4.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.4.0
 [1.3.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.3.0
 [1.2.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.2.1

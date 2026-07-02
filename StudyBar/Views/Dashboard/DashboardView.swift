@@ -2,6 +2,8 @@ import SwiftUI
 
 enum DashboardSection: String, CaseIterable, Identifiable {
     case overview
+    case analytics
+    case notes
     case history
     case settings
 
@@ -10,6 +12,8 @@ enum DashboardSection: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .overview: "Overview"
+        case .analytics: "Analytics"
+        case .notes: "Notes"
         case .history: "History"
         case .settings: "Settings"
         }
@@ -18,6 +22,8 @@ enum DashboardSection: String, CaseIterable, Identifiable {
     var systemImage: String {
         switch self {
         case .overview: "chart.bar.fill"
+        case .analytics: "square.grid.3x3.fill"
+        case .notes: "note.text"
         case .history: "clock.arrow.circlepath"
         case .settings: "gearshape.fill"
         }
@@ -68,6 +74,10 @@ struct DashboardView: View {
         switch section {
         case .overview:
             DashboardOverviewView()
+        case .analytics:
+            AnalyticsDashboardView()
+        case .notes:
+            NotesBrowserView()
         case .history:
             DashboardHistoryView()
         case .settings:

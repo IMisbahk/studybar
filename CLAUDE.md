@@ -1,8 +1,7 @@
 # StudyBar — session notes
 
-## Environment (updated 2026-07-01)
-- **Xcode 26.6 is available on Misbah's Mac** — `xcodebuild -scheme StudyBar build` verified for v1.2.0.
-  The old "no Xcode / broken swiftc" note below only applied to an earlier sandbox session.
+## Environment (updated 2026-07-02)
+- **Xcode 26.6** — `xcodebuild -scheme StudyBar build` verified through v1.5.0.
 - The `.xcodeproj` was hand-written (no `xcodegen`). New Swift files must be added to
   `project.pbxproj` PBXFileReference + PBXBuildFile + group + Sources phase manually.
 
@@ -27,24 +26,20 @@
   control (start/pause/resume/extend) work without opening the popover.
 
 ## Architecture
-- `Core/SessionManager.swift` - state machine (idle/running/paused), 1s `Timer`,
-  logs `StudySession` on completion/stop, owns `draftNotes`, `lastCompletion` event,
-  `startLastSession()`, auto-pause/resume via `pauseBySystem()` / `resumeIfAutoPaused()`.
+- `Core/SessionManager.swift` - state machine (idle/running/paused), countdown + **stopwatch**
+  (`SessionTimerMode`), 1s `Timer`, logs `StudySession` on completion/stop.
+- `Core/DashboardWindowController.swift` + `Core/AppDelegate.swift` - full `NSWindow` dashboard;
+  **⌘Q closes dashboard only** when open (`applicationShouldTerminate` → `.terminateCancel`).
+- `Core/UpdateInstaller.swift` - fetches GitHub release DMG + sha256, downloads with progress,
+  verifies checksum, `openInstaller()` mounts DMG via `NSWorkspace` (sandbox can't self-replace).
+- `Core/AnalyticsEngine.swift` + `Core/ExportService.swift` - heatmap levels, streaks, PNG/CSV export.
 - `Core/GlobalHotkeyManager.swift` - NSEvent global+local monitors for ⌥⌘ shortcuts.
-  Global monitor requires Accessibility permission in System Settings.
-- `Core/FloatingTimerController.swift` - `NSPanel` (.normal level, nonactivating); only
-  visible during active sessions, hidden when idle and while menu popover is open.
-- `Core/PowerEventsMonitor.swift` - `NSWorkspace` sleep/wake + distributed screen
-  lock/unlock notifications.
-- `Core/NotificationManager.swift` - UNUserNotificationCenterDelegate, categories
-  with Pause/+10/Stop actions routed back to SessionManager.
-- `Views/PopoverRootView.swift` - Timer/History/Settings tabs; `selectedTab` lives on
-  `SessionManager` (survives timer ticks). Content scrolls in a fixed 400pt viewport;
-  tab bar is always pinned below (Phase 1 bug: tall content pushed tabs off-screen).
-- Settings' "Manage Subjects" uses `NavigationStack`/`NavigationLink`, deliberately
-  NOT `.sheet` - sheets are unreliable inside `MenuBarExtra(.window)` popovers.
-- `@Observable` throughout; `SessionManager` via `.environment()` for popover,
-  plain property for `MenuBarLabelView` (separate view hierarchy).
+- `Core/FloatingTimerController.swift` - `NSPanel`; only during active sessions, hidden when idle
+  and while menu popover is open.
+- `Views/Dashboard/` - `NavigationSplitView` sidebar: Overview, Analytics, Notes, History, Settings.
+  Gear icon in popover header opens dashboard.
+- `Views/PopoverRootView.swift` - compact timer popover; tab bar uses `contentShape(Rectangle())`
+  for full-width hit targets. **Never wrap in outer ScrollView** — kills clicks on macOS.
 
 ## Phase 1 manual smoke-test checklist (v1.2.0)
 - [ ] Start session → ring animates smoothly, menu bar shows countdown
@@ -61,13 +56,14 @@
 - [ ] Notification actions: Pause, +10 min, Stop work from banner
 - [ ] Reduced Motion in Accessibility → animations respect setting
 
-## Roadmap backlog (not in v1.2.0)
-Phases 2-9 from product spec: Analytics, Timeline, Gamification/Galaxy, Apple
-integration (no Widgets/CLI until separate Xcode targets), White noise, Smart
-insights, Command palette/deep links, Customization themes.
+## Roadmap backlog (post v1.5.0)
+Phases 3-9 from product spec: Timeline, Gamification/Galaxy, Apple integration,
+White noise, Smart insights, Command palette/deep links, Customization themes.
 
-## Permissions used this session
-- Version bump to 1.2.0, commit, tag, push to origin (per user instruction).
+## Releases shipped 2026-07-02
+- **v1.3.0** — stopwatch mode, in-app updater, tab hit targets
+- **v1.4.0** — dashboard window, ⌘Q closes window only
+- **v1.5.0** — analytics heatmap, notes browser, PNG/CSV export
 
 ## DMG packaging notes (2026-07-01)
 - `packaging/dmg/background.png` is **600×400**, white bg, black arrow + instruction text.
