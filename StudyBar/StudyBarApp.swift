@@ -29,15 +29,22 @@ struct StudyBarApp: App {
         _sessionManager = State(initialValue: manager)
 
         NotificationManager.shared.configure(sessionManager: manager)
-        NotificationManager.shared.requestAuthorization()
 
-        hotkeyManager = GlobalHotkeyManager(sessionManager: manager)
-        floatingTimerController = FloatingTimerController(sessionManager: manager)
-        powerEventsMonitor = PowerEventsMonitor(sessionManager: manager)
+        let hotkeys = GlobalHotkeyManager(sessionManager: manager)
+        let floating = FloatingTimerController(sessionManager: manager)
+        let power = PowerEventsMonitor(sessionManager: manager)
 
-        hotkeyManager.start()
-        floatingTimerController.start()
-        powerEventsMonitor.start()
+        hotkeyManager = hotkeys
+        floatingTimerController = floating
+        powerEventsMonitor = power
+
+        // defer so MenuBarExtra can register before any NSPanel/orderFront runs
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            NotificationManager.shared.requestAuthorization()
+            hotkeys.start()
+            floating.start()
+            power.start()
+        }
     }
 
     var body: some Scene {

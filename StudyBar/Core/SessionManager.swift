@@ -9,6 +9,28 @@ enum SessionPhase: Equatable {
     case paused
 }
 
+enum PopoverTab: String, CaseIterable, Hashable {
+    case timer
+    case history
+    case settings
+
+    var title: String {
+        switch self {
+        case .timer: "Timer"
+        case .history: "History"
+        case .settings: "Settings"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .timer: "timer"
+        case .history: "clock.arrow.circlepath"
+        case .settings: "gearshape"
+        }
+    }
+}
+
 struct SessionCompletionEvent: Equatable {
     let subjectName: String
     let minutes: Int
@@ -27,7 +49,7 @@ final class SessionManager {
     private(set) var autoPausedBySystem = false
 
     var draftNotes: String = ""
-    var pendingOpenHistory = false
+    var selectedTab: PopoverTab = .timer
 
     private let modelContext: ModelContext
     private var timer: Timer?
@@ -63,6 +85,7 @@ final class SessionManager {
 
         NotificationManager.shared.fireSessionStarted(subjectName: subjectName, topicName: topicName, minutes: minutes)
         startTimer()
+        notifyPhaseChanged()
     }
 
     func startLastSession() {
@@ -81,6 +104,7 @@ final class SessionManager {
         autoPausedBySystem = false
         phase = .paused
         stopTimer()
+        notifyPhaseChanged()
     }
 
     func pauseBySystem() {
@@ -88,6 +112,7 @@ final class SessionManager {
         autoPausedBySystem = true
         phase = .paused
         stopTimer()
+        notifyPhaseChanged()
     }
 
     func resume() {
@@ -95,6 +120,7 @@ final class SessionManager {
         autoPausedBySystem = false
         phase = .running
         startTimer()
+        notifyPhaseChanged()
     }
 
     func resumeIfAutoPaused() {
@@ -117,14 +143,11 @@ final class SessionManager {
     }
 
     func requestOpenHistory() {
-        pendingOpenHistory = true
-        NSApp.activate(ignoringOtherApps: true)
+        selectedTab = .history
     }
 
-    func consumePendingOpenHistory() -> Bool {
-        guard pendingOpenHistory else { return false }
-        pendingOpenHistory = false
-        return true
+    private func notifyPhaseChanged() {
+        NotificationCenter.default.post(name: .studyBarSessionPhaseChanged, object: nil)
     }
 
     private func startTimer() {
@@ -193,5 +216,6 @@ final class SessionManager {
         remaining = 0
         startedAt = nil
         autoPausedBySystem = false
+        notifyPhaseChanged()
     }
 }

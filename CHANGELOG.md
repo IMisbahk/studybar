@@ -2,6 +2,14 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.2.1] - 2026-07-02
+
+### Fixed
+- Menu bar popover no longer closes immediately or ignores clicks
+- Floating timer no longer shows when idle (was blocking menu bar interaction)
+- Floating timer hides while popover is open; deferred service startup until after launch
+- Tab navigation restored with stable local state; History/Settings reachable again
+
 ## [1.2.0] - 2026-07-01
 
 ### Added

@@ -32,14 +32,15 @@
   `startLastSession()`, auto-pause/resume via `pauseBySystem()` / `resumeIfAutoPaused()`.
 - `Core/GlobalHotkeyManager.swift` - NSEvent global+local monitors for ⌥⌘ shortcuts.
   Global monitor requires Accessibility permission in System Settings.
-- `Core/FloatingTimerController.swift` - `NSPanel` (.floating, nonactivating) with
-  `FloatingTimerView`; polls phase every 0.25s to show/hide.
+- `Core/FloatingTimerController.swift` - `NSPanel` (.normal level, nonactivating); only
+  visible during active sessions, hidden when idle and while menu popover is open.
 - `Core/PowerEventsMonitor.swift` - `NSWorkspace` sleep/wake + distributed screen
   lock/unlock notifications.
 - `Core/NotificationManager.swift` - UNUserNotificationCenterDelegate, categories
   with Pause/+10/Stop actions routed back to SessionManager.
-- `Views/PopoverRootView.swift` - Timer/History/Settings tabs; consumes
-  `pendingOpenHistory` flag on appear.
+- `Views/PopoverRootView.swift` - Timer/History/Settings tabs; `selectedTab` lives on
+  `SessionManager` (survives timer ticks). Content scrolls in a fixed 400pt viewport;
+  tab bar is always pinned below (Phase 1 bug: tall content pushed tabs off-screen).
 - Settings' "Manage Subjects" uses `NavigationStack`/`NavigationLink`, deliberately
   NOT `.sheet` - sheets are unreliable inside `MenuBarExtra(.window)` popovers.
 - `@Observable` throughout; `SessionManager` via `.environment()` for popover,

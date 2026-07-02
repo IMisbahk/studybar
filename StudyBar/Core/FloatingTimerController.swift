@@ -4,24 +4,52 @@ import SwiftUI
 final class FloatingTimerController {
     private weak var sessionManager: SessionManager?
     private var panel: NSPanel?
-    private var syncTimer: Timer?
+    private var panelIsVisible = false
+    private var menuPopoverIsOpen = false
+    private var observers: [NSObjectProtocol] = []
 
     init(sessionManager: SessionManager) {
         self.sessionManager = sessionManager
     }
 
     func start() {
-        syncTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
+        let center = NotificationCenter.default
+        observers.append(center.addObserver(
+            forName: .studyBarSessionPhaseChanged,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
             self?.syncVisibility()
+        })
+        observers.append(center.addObserver(
+            forName: .studyBarMenuPopoverVisible,
+            object: nil,
+            queue: .main
+        ) { [weak self] note in
+            self?.menuPopoverIsOpen = (note.object as? Bool) ?? false
+            self?.syncVisibility()
+        })
+    }
+
+    deinit {
+        for observer in observers {
+            NotificationCenter.default.removeObserver(observer)
         }
     }
 
     private func syncVisibility() {
         guard let sessionManager else { return }
-        let enabled = UserDefaults.standard.object(forKey: "floatingTimerEnabled") as? Bool ?? true
-        let autoHide = UserDefaults.standard.object(forKey: "floatingTimerAutoHide") as? Bool ?? true
 
-        if !enabled || (autoHide && sessionManager.phase == .idle) {
+        // never cover the menu bar popover
+        if menuPopoverIsOpen {
+            hidePanel()
+            return
+        }
+
+        let enabled = UserDefaults.standard.object(forKey: "floatingTimerEnabled") as? Bool ?? true
+
+        // only show during an active session — never when idle (empty timer blocked clicks)
+        guard enabled, sessionManager.phase != .idle else {
             hidePanel()
             return
         }
@@ -39,30 +67,32 @@ final class FloatingTimerController {
 
             let panel = NSPanel(
                 contentRect: NSRect(x: 200, y: 200, width: 200, height: 72),
-                styleMask: [.nonactivatingPanel, .titled, .fullSizeContentView],
+                styleMask: [.nonactivatingPanel, .borderless, .fullSizeContentView],
                 backing: .buffered,
                 defer: false
             )
             panel.isFloatingPanel = true
-            panel.level = .floating
+            panel.level = .normal
             panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
-            panel.titlebarAppearsTransparent = true
-            panel.titleVisibility = .hidden
             panel.isMovableByWindowBackground = true
             panel.backgroundColor = .clear
             panel.isOpaque = false
             panel.hasShadow = true
+            panel.hidesOnDeactivate = false
             panel.contentView = hosting
             self.panel = panel
         }
 
         panel?.alphaValue = opacity
-        if panel?.isVisible != true {
-            panel?.orderFrontRegardless()
+        if !panelIsVisible {
+            panel?.orderFront(nil)
+            panelIsVisible = true
         }
     }
 
     private func hidePanel() {
+        guard panelIsVisible else { return }
         panel?.orderOut(nil)
+        panelIsVisible = false
     }
 }

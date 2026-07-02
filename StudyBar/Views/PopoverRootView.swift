@@ -1,27 +1,5 @@
 import SwiftUI
 
-private enum PopoverTab: String, CaseIterable {
-    case timer
-    case history
-    case settings
-
-    var title: String {
-        switch self {
-        case .timer: "Timer"
-        case .history: "History"
-        case .settings: "Settings"
-        }
-    }
-
-    var systemImage: String {
-        switch self {
-        case .timer: "timer"
-        case .history: "clock.arrow.circlepath"
-        case .settings: "gearshape"
-        }
-    }
-}
-
 struct PopoverRootView: View {
     @Environment(SessionManager.self) private var sessionManager
     @State private var tab: PopoverTab = .timer
@@ -32,15 +10,16 @@ struct PopoverRootView: View {
             Divider()
             tabBar
         }
-        .onAppear(perform: applyPendingTab)
-        .onChange(of: sessionManager.pendingOpenHistory) { _, _ in
-            applyPendingTab()
+        .frame(width: 300)
+        .onAppear {
+            tab = sessionManager.selectedTab
+            NotificationCenter.default.post(name: .studyBarMenuPopoverVisible, object: true)
         }
-    }
-
-    private func applyPendingTab() {
-        if sessionManager.consumePendingOpenHistory() {
-            tab = .history
+        .onDisappear {
+            NotificationCenter.default.post(name: .studyBarMenuPopoverVisible, object: false)
+        }
+        .onChange(of: sessionManager.selectedTab) { _, newTab in
+            tab = newTab
         }
     }
 
@@ -65,29 +44,25 @@ struct PopoverRootView: View {
     private var tabBar: some View {
         HStack(spacing: 0) {
             ForEach(PopoverTab.allCases, id: \.self) { item in
-                tabButton(item)
+                Button {
+                    tab = item
+                    sessionManager.selectedTab = item
+                } label: {
+                    VStack(spacing: 2) {
+                        Image(systemName: item.systemImage)
+                            .font(.system(size: 14))
+                        Text(item.title)
+                            .font(.caption2)
+                    }
+                    .foregroundStyle(tab == item ? Color.accentColor : Color.secondary)
                     .frame(maxWidth: .infinity)
+                    .padding(.vertical, 4)
+                    .background(tab == item ? Color.accentColor.opacity(0.12) : .clear, in: RoundedRectangle(cornerRadius: 8))
+                }
+                .buttonStyle(.plain)
             }
         }
         .padding(.vertical, 6)
         .padding(.horizontal, 8)
-    }
-
-    private func tabButton(_ target: PopoverTab) -> some View {
-        Button {
-            tab = target
-        } label: {
-            VStack(spacing: 2) {
-                Image(systemName: target.systemImage)
-                    .font(.system(size: 14))
-                Text(target.title)
-                    .font(.caption2)
-            }
-            .foregroundStyle(tab == target ? Color.accentColor : Color.secondary)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 4)
-            .background(tab == target ? Color.accentColor.opacity(0.12) : .clear, in: RoundedRectangle(cornerRadius: 8))
-        }
-        .buttonStyle(.plain)
     }
 }

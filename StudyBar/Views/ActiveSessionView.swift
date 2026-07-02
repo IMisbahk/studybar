@@ -11,17 +11,42 @@ struct ActiveSessionView: View {
     }
 
     var body: some View {
-        VStack(spacing: 16) {
-            VStack(spacing: 4) {
-                Text(sessionManager.subjectName)
-                    .font(.headline)
-                if let topicName = sessionManager.topicName, !topicName.isEmpty {
-                    Text(topicName)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
+        ScrollView {
+            VStack(spacing: 16) {
+                headerBlock
+                timingBlock
+                notesBlock
+                extendButtons
+                controlButtons
             }
+            .padding(16)
+        }
+        .frame(width: 300)
+        .frame(maxHeight: 400)
+        .onChange(of: sessionManager.lastCompletion?.token) { _, token in
+            guard token != nil, !reduceMotion else { return }
+            completionBounce = true
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(500))
+                completionBounce = false
+            }
+        }
+    }
 
+    private var headerBlock: some View {
+        VStack(spacing: 4) {
+            Text(sessionManager.subjectName)
+                .font(.headline)
+            if let topicName = sessionManager.topicName, !topicName.isEmpty {
+                Text(topicName)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    private var timingBlock: some View {
+        Group {
             ZStack {
                 ProgressRingView(
                     progress: sessionManager.progress,
@@ -53,51 +78,47 @@ struct ActiveSessionView: View {
                     .font(.caption)
                     .foregroundStyle(.orange)
             }
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Notes (optional)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                TextField("What are you working on?", text: Bindable(sessionManager).draftNotes, axis: .vertical)
-                    .textFieldStyle(.roundedBorder)
-                    .lineLimit(2...4)
-            }
-
-            HStack(spacing: 8) {
-                Button("+5 min") { sessionManager.extend(byMinutes: 5) }
-                Button("+10 min") { sessionManager.extend(byMinutes: 10) }
-            }
-            .buttonStyle(.bordered)
-
-            HStack(spacing: 8) {
-                Button {
-                    sessionManager.phase == .paused ? sessionManager.resume() : sessionManager.pause()
-                } label: {
-                    Label(sessionManager.phase == .paused ? "Resume" : "Pause", systemImage: sessionManager.phase == .paused ? "play.fill" : "pause.fill")
-                        .frame(maxWidth: .infinity)
-                }
-                .keyboardShortcut("p", modifiers: [.option, .command])
-
-                Button {
-                    sessionManager.stop()
-                } label: {
-                    Label("Stop", systemImage: "stop.fill")
-                        .frame(maxWidth: .infinity)
-                }
-                .tint(.red)
-            }
-            .buttonStyle(.bordered)
-            .controlSize(.large)
         }
-        .padding(16)
-        .frame(width: 300)
-        .onChange(of: sessionManager.lastCompletion?.token) { _, token in
-            guard token != nil, !reduceMotion else { return }
-            completionBounce = true
-            Task { @MainActor in
-                try? await Task.sleep(for: .milliseconds(500))
-                completionBounce = false
-            }
+    }
+
+    private var notesBlock: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Notes (optional)")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            TextField("What are you working on?", text: Bindable(sessionManager).draftNotes, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .lineLimit(2...4)
         }
+    }
+
+    private var extendButtons: some View {
+        HStack(spacing: 8) {
+            Button("+5 min") { sessionManager.extend(byMinutes: 5) }
+            Button("+10 min") { sessionManager.extend(byMinutes: 10) }
+        }
+        .buttonStyle(.bordered)
+    }
+
+    private var controlButtons: some View {
+        HStack(spacing: 8) {
+            Button {
+                sessionManager.phase == .paused ? sessionManager.resume() : sessionManager.pause()
+            } label: {
+                Label(sessionManager.phase == .paused ? "Resume" : "Pause", systemImage: sessionManager.phase == .paused ? "play.fill" : "pause.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .keyboardShortcut("p", modifiers: [.option, .command])
+
+            Button {
+                sessionManager.stop()
+            } label: {
+                Label("Stop", systemImage: "stop.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .tint(.red)
+        }
+        .buttonStyle(.bordered)
+        .controlSize(.large)
     }
 }
