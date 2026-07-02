@@ -1,0 +1,38 @@
+scripts/install-release.sh
+  s_ef133bb69a3d94::t_e919083bc92db9 63-71
+StudyBar/StudyBarApp.swift
+  s_ef133bb69a3d94::t_2ddbdd14b9908f 23
+README.md
+  s_ef133bb69a3d94::t_9b847f0d2b9448 37,39-43
+CHANGELOG.md
+  s_ef133bb69a3d94::t_1bc1d3ab82404c 5-11
+  s_ef133bb69a3d94::t_817e3759580cfb 115
+StudyBar/Core/StudyDataStore.swift
+  s_ef133bb69a3d94::t_19855a8e35d095 1-30
+StudyBar/Models/StudySession.swift
+  s_ef133bb69a3d94::t_d5511354317fe1 16
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_6fa5f16c473503 47
+  s_ef133bb69a3d94::t_bf7b09b4587bf3 304
+  s_ef133bb69a3d94::t_46b9682f4a87fc 91
+  s_ef133bb69a3d94::t_d0f03cbb3f754b 162
+  s_ef133bb69a3d94::t_ad82309999023d 433,443,460,470
+VERSION
+  s_ef133bb69a3d94::t_366f5b1ca6e264 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "19a2676d2f0ed9ee8f5f8e156513c09fba0709e4",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
