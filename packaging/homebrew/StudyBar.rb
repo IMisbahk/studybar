@@ -1,7 +1,7 @@
 cask "studybar" do
-  version "1.5.1"
+  version "1.5.2"
 
-  sha256 "0e2d51ee1aec382c54eea47e56c72a19967929bf15a4e25efa1af2d872a95a73"
+  sha256 "ecd7ce25ecbd7d06e1f261d7bff7ddb80877e05369382d9ae3f8f85411b6cf98"
 
   url "https://github.com/IMisbahk/studybar/releases/download/v#{version}/StudyBar-#{version}.dmg"
   name "StudyBar"
