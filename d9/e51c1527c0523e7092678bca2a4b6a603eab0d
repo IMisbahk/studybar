@@ -1,0 +1,55 @@
+StudyBar/Views/PopoverRootView.swift
+  s_ef133bb69a3d94::t_eed915c43a3853 27-46
+  s_ef133bb69a3d94::t_b2761b8e1650e9 9
+StudyBar/Views/Dashboard/DashboardSettingsView.swift
+  s_ef133bb69a3d94::t_89e264186a59e3 1-8
+StudyBar/StudyBarApp.swift
+  s_ef133bb69a3d94::t_257dc92e3bac30 6
+  s_ef133bb69a3d94::t_fdcb7fbf3fb572 33
+CHANGELOG.md
+  s_ef133bb69a3d94::t_791996e90c911e 100
+  s_ef133bb69a3d94::t_d8ca4334da5f01 5-14
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_3914526c0ce528 29-31
+  s_ef133bb69a3d94::t_afe27aaeb7f416 41-42
+  s_ef133bb69a3d94::t_6c72f1a960e4ff 47-56
+  s_ef133bb69a3d94::t_70ab1e51ca25f7 6
+StudyBar/Views/Dashboard/DashboardHistoryView.swift
+  s_ef133bb69a3d94::t_61a5a1e392dc60 1-98
+StudyBar/Views/Dashboard/DashboardOverviewView.swift
+  s_ef133bb69a3d94::t_51d0e63ed567e7 1-138
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_6f67a2f0057b0d 72-77
+  s_ef133bb69a3d94::t_3d031b93188aff 143-144
+  s_ef133bb69a3d94::t_7f8c38c2a6bffc 272-277
+  s_ef133bb69a3d94::t_e1d22fbcac85ad 35-40
+  s_ef133bb69a3d94::t_4bd62d572c51f4 163,168-176
+  s_ef133bb69a3d94::t_42a2ab334b10b6 177-178,406,416,433,443
+StudyBar/Core/AppDelegate.swift
+  s_ef133bb69a3d94::t_2c3099a93e471c 1-12
+StudyBar/Core/DashboardWindowController.swift
+  s_ef133bb69a3d94::t_6672a8a6169126 1-45,47-54
+  s_ef133bb69a3d94::t_65f3ea913c8b4a 46
+StudyBar/Core/AppNotifications.swift
+  s_ef133bb69a3d94::t_6daaa31fb13472 6
+StudyBar/Views/Dashboard/DashboardView.swift
+  s_ef133bb69a3d94::t_1f7b50e882e73a 1-77
+VERSION
+  s_ef133bb69a3d94::t_ee962610504486 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "d9e51c1527c0523e7092678bca2a4b6a603eab0d",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
