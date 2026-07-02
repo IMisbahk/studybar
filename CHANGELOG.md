@@ -2,6 +2,13 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.5.1] - 2026-07-02
+
+### Fixed
+- App crash on launch when upgrading from pre-1.3.0 data (SwiftData `openEnded` migration)
+- Corrupt migration now backs up the old store and recreates cleanly instead of `fatalError`
+- Clearer install docs: menu-bar-only app + Gatekeeper bypass steps
+
 ## [1.5.0] - 2026-07-02
 
 ### Added
@@ -105,6 +112,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.5.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.1
 [1.5.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.0
 [1.4.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.4.0
 [1.3.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.3.0

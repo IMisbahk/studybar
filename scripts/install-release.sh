@@ -60,4 +60,12 @@ else
   exit 1
 fi
 
-echo "==> installed StudyBar ${version#v}. launch with: open -a StudyBar"
+echo "==> installed StudyBar ${version#v}."
+xattr -cr "$targetPath" 2>/dev/null || true
+echo ""
+echo "Launch: open -a StudyBar"
+echo ""
+echo "First launch tips:"
+echo "  • StudyBar lives in the MENU BAR only (book icon) — no Dock icon"
+echo "  • If macOS blocks the app: right-click StudyBar.app → Open"
+echo "    or allow it in System Settings → Privacy & Security"

@@ -20,7 +20,7 @@ struct StudyBarApp: App {
 
         let container: ModelContainer
         do {
-            container = try ModelContainer(for: Subject.self, Topic.self, StudySession.self)
+            container = try StudyDataStore.makeContainer()
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }

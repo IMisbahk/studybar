@@ -34,9 +34,13 @@ A native macOS menu bar study timer. Pick a subject, start a session, and the me
 2. Double-click the zip to extract — you'll see **`StudyBar-x.y.z.dmg`** inside (not the repo, not source files)
 3. Double-click the `.dmg` to open it
 4. Drag **StudyBar.app** to your **Applications** folder
-5. Launch StudyBar — click the book icon in the menu bar
+5. Launch StudyBar — click the **book icon in the menu bar** (top right). There is **no Dock icon**; the app only lives in the menu bar.
 
-On first launch, macOS may block the app (ad-hoc signed). Right-click **StudyBar.app → Open**, or allow it in **System Settings → Privacy & Security**.
+On first launch, macOS may block the app because it is ad-hoc signed (not notarized). Fix it one of these ways:
+
+- **Right-click** `StudyBar.app` in Applications → **Open** → confirm Open
+- Or **System Settings → Privacy & Security** → allow StudyBar
+- Or in Terminal: `xattr -cr /Applications/StudyBar.app`
 
 You can also download `StudyBar-x.y.z.dmg` directly from Releases if you prefer to skip the zip step.
 

@@ -13,7 +13,7 @@ final class StudySession {
     var endedAt: Date
     var completed: Bool
     var notes: String?
-    var openEnded: Bool
+    var openEnded: Bool = false
 
     init(
         subjectName: String,
