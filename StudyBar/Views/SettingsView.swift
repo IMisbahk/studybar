@@ -3,6 +3,7 @@ import ServiceManagement
 import AppKit
 
 struct SettingsView: View {
+    var compact: Bool = true
     @AppStorage("soundOnSessionEnd") private var soundOnSessionEnd = true
     @AppStorage("floatingTimerEnabled") private var floatingTimerEnabled = true
     @AppStorage("floatingTimerOpacity") private var floatingTimerOpacity = 0.9
@@ -25,6 +26,9 @@ struct SettingsView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 aboutHeader
+                if !compact {
+                    openDashboardButton
+                }
                 updatesSection
                 generalSection
                 floatingTimerSection
@@ -34,9 +38,20 @@ struct SettingsView: View {
             }
             .padding(16)
         }
-        .frame(width: 300)
+        .frame(width: compact ? 300 : nil)
+        .frame(maxWidth: compact ? 300 : .infinity, alignment: .leading)
         .onAppear { checkForUpdates() }
         .onDisappear { updateTask?.cancel() }
+    }
+
+    private var openDashboardButton: some View {
+        Button {
+            DashboardWindowController.shared.show(section: .settings)
+        } label: {
+            Label("Open Dashboard Window", systemImage: "macwindow")
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .buttonStyle(.bordered)
     }
 
     private var aboutHeader: some View {

@@ -6,6 +6,7 @@ struct PopoverRootView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            popoverHeader
             content
             Divider()
             tabBar
@@ -21,6 +22,26 @@ struct PopoverRootView: View {
         .onChange(of: sessionManager.selectedTab) { _, newTab in
             tab = newTab
         }
+    }
+
+    private var popoverHeader: some View {
+        HStack {
+            Text("StudyBar")
+                .font(.subheadline.weight(.semibold))
+            Spacer()
+            Button {
+                DashboardWindowController.shared.show()
+            } label: {
+                Image(systemName: "gearshape")
+                    .font(.system(size: 13))
+            }
+            .buttonStyle(.plain)
+            .help("Open Dashboard")
+            .contentShape(Rectangle())
+        }
+        .padding(.horizontal, 14)
+        .padding(.top, 10)
+        .padding(.bottom, 4)
     }
 
     @ViewBuilder

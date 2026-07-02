@@ -2,6 +2,16 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.4.0] - 2026-07-02
+
+### Added
+- **Dashboard window**: full StudyBar app window with sidebar (Overview, History, Settings)
+- Gear icon in menu bar popover opens the dashboard
+- **⌘Q behavior**: closes dashboard window only; menu bar agent keeps running
+
+### Changed
+- Settings available in both compact popover and full dashboard layouts
+
 ## [1.3.0] - 2026-07-02
 
 ### Added
@@ -87,6 +97,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.4.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.4.0
 [1.3.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.3.0
 [1.2.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.2.1
 [1.2.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.2.0

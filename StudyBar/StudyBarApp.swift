@@ -3,6 +3,7 @@ import SwiftData
 
 @main
 struct StudyBarApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     let modelContainer: ModelContainer
     @State private var sessionManager: SessionManager
     private let hotkeyManager: GlobalHotkeyManager
@@ -29,6 +30,7 @@ struct StudyBarApp: App {
         _sessionManager = State(initialValue: manager)
 
         NotificationManager.shared.configure(sessionManager: manager)
+        DashboardWindowController.shared.configure(sessionManager: manager, modelContainer: container)
 
         let hotkeys = GlobalHotkeyManager(sessionManager: manager)
         let floating = FloatingTimerController(sessionManager: manager)
