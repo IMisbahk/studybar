@@ -55,8 +55,8 @@ struct PopoverRootView: View {
                             .font(.caption2)
                     }
                     .foregroundStyle(tab == item ? Color.accentColor : Color.secondary)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity, minHeight: 36)
+                    .contentShape(Rectangle())
                     .background(tab == item ? Color.accentColor.opacity(0.12) : .clear, in: RoundedRectangle(cornerRadius: 8))
                 }
                 .buttonStyle(.plain)

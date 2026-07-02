@@ -7,7 +7,7 @@ struct ActiveSessionView: View {
     @State private var completionBounce = false
 
     private var elapsed: TimeInterval {
-        max(0, sessionManager.plannedDuration - sessionManager.remaining)
+        sessionManager.isStopwatch ? sessionManager.elapsed : max(0, sessionManager.plannedDuration - sessionManager.remaining)
     }
 
     var body: some View {
@@ -16,7 +16,9 @@ struct ActiveSessionView: View {
                 headerBlock
                 timingBlock
                 notesBlock
-                extendButtons
+                if !sessionManager.isStopwatch {
+                    extendButtons
+                }
                 controlButtons
             }
             .padding(16)
@@ -45,9 +47,15 @@ struct ActiveSessionView: View {
         }
     }
 
+    @ViewBuilder
     private var timingBlock: some View {
-        Group {
-            ZStack {
+        ZStack {
+            if sessionManager.isStopwatch {
+                Circle()
+                    .stroke(Color.accentColor.opacity(sessionManager.phase == .paused ? 0.25 : 0.5), lineWidth: 6)
+                    .frame(width: 120, height: 120)
+                    .opacity(sessionManager.phase == .paused ? 0.6 : 1)
+            } else {
                 ProgressRingView(
                     progress: sessionManager.progress,
                     lineWidth: 6,
@@ -57,27 +65,32 @@ struct ActiveSessionView: View {
                 .frame(width: 120, height: 120)
                 .scaleEffect(completionBounce ? 1.08 : 1)
                 .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.5), value: completionBounce)
-
-                VStack(spacing: 2) {
-                    Text(sessionManager.remainingText)
-                        .font(.system(size: 28, weight: .semibold).monospacedDigit())
-                        .contentTransition(.numericText())
-                        .animation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.9), value: sessionManager.remainingText)
-                    Text("remaining")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                }
             }
 
+            VStack(spacing: 2) {
+                Text(sessionManager.isStopwatch ? sessionManager.elapsedText : sessionManager.remainingText)
+                    .font(.system(size: 28, weight: .semibold).monospacedDigit())
+                    .contentTransition(.numericText())
+                Text(sessionManager.isStopwatch ? "elapsed" : "remaining")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+        }
+
+        if sessionManager.isStopwatch {
+            Text("Stopwatch · \(StudyFormatting.duration(elapsed))")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        } else {
             Text("Elapsed \(StudyFormatting.duration(elapsed)) · Planned \(StudyFormatting.duration(sessionManager.plannedDuration))")
                 .font(.caption)
                 .foregroundStyle(.secondary)
+        }
 
-            if sessionManager.phase == .paused {
-                Label("Paused", systemImage: "pause.circle.fill")
-                    .font(.caption)
-                    .foregroundStyle(.orange)
-            }
+        if sessionManager.phase == .paused {
+            Label("Paused", systemImage: "pause.circle.fill")
+                .font(.caption)
+                .foregroundStyle(.orange)
         }
     }
 

@@ -19,12 +19,14 @@ struct IdleView: View {
     private enum DurationChoice: Hashable {
         case preset(Int)
         case custom
+        case stopwatch
     }
 
     private var selectedMinutes: Int? {
         switch duration {
         case .preset(let minutes): return minutes
         case .custom: return Int(customMinutesText)
+        case .stopwatch: return nil
         }
     }
 
@@ -239,10 +241,17 @@ struct IdleView: View {
                 Text("25").tag(DurationChoice.preset(25))
                 Text("50").tag(DurationChoice.preset(50))
                 Text("90").tag(DurationChoice.preset(90))
+                Text("∞").tag(DurationChoice.stopwatch)
                 Text("Custom").tag(DurationChoice.custom)
             }
             .labelsHidden()
             .pickerStyle(.segmented)
+
+            if duration == .stopwatch {
+                Text("Open-ended stopwatch — stop when you're done.")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
 
             if duration == .custom {
                 TextField("Minutes", text: $customMinutesText)
@@ -261,11 +270,16 @@ struct IdleView: View {
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
         .keyboardShortcut(.return, modifiers: .command)
-        .disabled(selectedSubject == nil || (selectedMinutes ?? 0) <= 0)
+        .disabled(selectedSubject == nil || (duration != .stopwatch && (selectedMinutes ?? 0) <= 0))
     }
 
     private func startSession() {
-        guard let subject = selectedSubject, let minutes = selectedMinutes, minutes > 0 else { return }
+        guard let subject = selectedSubject else { return }
+        if duration == .stopwatch {
+            sessionManager.startStopwatch(subjectName: subject.name, topicName: selectedTopic?.name)
+            return
+        }
+        guard let minutes = selectedMinutes, minutes > 0 else { return }
         sessionManager.start(subjectName: subject.name, topicName: selectedTopic?.name, minutes: minutes)
     }
 

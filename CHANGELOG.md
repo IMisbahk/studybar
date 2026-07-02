@@ -2,6 +2,17 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] - 2026-07-02
+
+### Added
+- **Stopwatch mode** (∞ duration): open-ended study sessions that count up until you stop
+- **In-app updater**: downloads release DMG with progress, verifies SHA256, opens installer locally
+- Larger tab bar hit targets in the menu bar popover (full button area is clickable)
+
+### Changed
+- Menu bar and floating timer show elapsed time for stopwatch sessions
+- History distinguishes stopwatch sessions with a stopwatch icon
+
 ## [1.2.1] - 2026-07-02
 
 ### Fixed
@@ -76,6 +87,9 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.3.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.3.0
+[1.2.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.2.1
+[1.2.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.2.0
 [1.1.2]: https://github.com/IMisbahk/studybar/releases/tag/v1.1.2
 [1.1.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.1.1
 [1.1.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.1.0

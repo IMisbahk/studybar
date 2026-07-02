@@ -10,7 +10,7 @@ struct MenuBarLabelView: View {
     var body: some View {
         HStack(spacing: 4) {
             ZStack {
-                if sessionManager.phase != .idle {
+                if sessionManager.phase != .idle, !sessionManager.isStopwatch {
                     ProgressRingView(
                         progress: sessionManager.progress,
                         lineWidth: 1.5,
@@ -35,10 +35,10 @@ struct MenuBarLabelView: View {
             .animation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.55), value: completionBounce)
 
             if sessionManager.phase != .idle {
-                Text(sessionManager.remainingText)
+                Text(sessionManager.menuBarTimeText)
                     .font(.system(size: 12, weight: .medium).monospacedDigit())
                     .contentTransition(.numericText())
-                    .animation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.9), value: sessionManager.remainingText)
+                    .animation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.9), value: sessionManager.menuBarTimeText)
             }
         }
         .animation(reduceMotion ? nil : .easeInOut(duration: 0.3), value: sessionManager.phase)
@@ -51,7 +51,7 @@ struct MenuBarLabelView: View {
     private var iconName: String {
         switch sessionManager.phase {
         case .idle: "book"
-        case .running: "book.fill"
+        case .running: sessionManager.isStopwatch ? "stopwatch" : "book.fill"
         case .paused: "pause.fill"
         }
     }

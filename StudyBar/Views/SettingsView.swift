@@ -10,6 +10,10 @@ struct SettingsView: View {
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var updateStatus: UpdateChecker.Status = .idle
     @State private var updateTask: Task<Void, Never>?
+    @State private var pendingAsset: UpdateInstaller.ReleaseAsset?
+    @State private var downloadProgress: Double = 0
+    @State private var readyDmgPath: URL?
+    @State private var downloadError: String?
 
     private var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
@@ -157,15 +161,35 @@ struct SettingsView: View {
                     Label("You're up to date", systemImage: "checkmark.circle.fill")
                         .font(.subheadline)
                         .foregroundStyle(.green)
-                case .updateAvailable(let latest, let url):
-                    VStack(alignment: .leading, spacing: 6) {
+                case .updateAvailable(let latest, _):
+                    VStack(alignment: .leading, spacing: 8) {
                         Text("Version \(latest) is available")
                             .font(.subheadline)
-                        Button("Download Update") {
-                            NSWorkspace.shared.open(url)
+                        if let readyDmgPath {
+                            Button("Install Update") {
+                                UpdateInstaller.openInstaller(dmgPath: readyDmgPath)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.small)
+                            Text("Drag StudyBar to Applications, then reopen.")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        } else if let downloadError {
+                            Text(downloadError)
+                                .font(.caption)
+                                .foregroundStyle(.red)
+                            Button("Retry Download") { downloadUpdate() }
+                                .controlSize(.small)
+                        } else if downloadProgress > 0, downloadProgress < 1 {
+                            ProgressView(value: downloadProgress)
+                            Text("Downloading… \(Int(downloadProgress * 100))%")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        } else {
+                            Button("Download Update") { downloadUpdate() }
+                                .buttonStyle(.borderedProminent)
+                                .controlSize(.small)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.small)
                     }
                 case .failed:
                     HStack {
@@ -186,10 +210,41 @@ struct SettingsView: View {
     private func checkForUpdates() {
         updateTask?.cancel()
         updateStatus = .checking
+        readyDmgPath = nil
+        downloadError = nil
+        downloadProgress = 0
         updateTask = Task {
             let result = await UpdateChecker.check()
             guard !Task.isCancelled else { return }
             updateStatus = result
+            if case .updateAvailable(let latest, _) = result {
+                pendingAsset = await UpdateInstaller.fetchLatestAsset()
+                if pendingAsset?.version != latest {
+                    pendingAsset = await UpdateInstaller.fetchLatestAsset()
+                }
+            }
+        }
+    }
+
+    private func downloadUpdate() {
+        guard let asset = pendingAsset else { return }
+        downloadError = nil
+        downloadProgress = 0.01
+        updateTask?.cancel()
+        updateTask = Task {
+            do {
+                let path = try await UpdateInstaller.download(asset: asset) { progress in
+                    Task { @MainActor in
+                        downloadProgress = progress
+                    }
+                }
+                guard !Task.isCancelled else { return }
+                readyDmgPath = path
+                downloadProgress = 1
+            } catch {
+                downloadError = error.localizedDescription
+                downloadProgress = 0
+            }
         }
     }
 

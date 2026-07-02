@@ -73,6 +73,20 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         fire(content)
     }
 
+    func fireStopwatchStarted(subjectName: String, topicName: String?) {
+        let content = UNMutableNotificationContent()
+        content.title = "Stopwatch started"
+        if let topicName, !topicName.isEmpty {
+            content.subtitle = "\(subjectName) · \(topicName)"
+        } else {
+            content.subtitle = subjectName
+        }
+        content.body = "Study for as long as you need. Stop when you're done."
+        content.sound = .default
+        content.categoryIdentifier = NotificationCategoryId.active
+        fire(content)
+    }
+
     func fireSessionCompleted(subjectName: String, minutes: Int) {
         let content = UNMutableNotificationContent()
         content.title = "Session complete"

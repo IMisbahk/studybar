@@ -5,19 +5,26 @@ struct FloatingTimerView: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            ProgressRingView(
-                progress: sessionManager.progress,
-                lineWidth: 3,
-                isPaused: sessionManager.phase == .paused,
-                isUrgent: sessionManager.isUrgent
-            )
-            .frame(width: 36, height: 36)
+            if sessionManager.isStopwatch {
+                Image(systemName: "stopwatch")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 36, height: 36)
+            } else {
+                ProgressRingView(
+                    progress: sessionManager.progress,
+                    lineWidth: 3,
+                    isPaused: sessionManager.phase == .paused,
+                    isUrgent: sessionManager.isUrgent
+                )
+                .frame(width: 36, height: 36)
+            }
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(sessionManager.subjectName)
                     .font(.caption.weight(.semibold))
                     .lineLimit(1)
-                Text(sessionManager.remainingText)
+                Text(sessionManager.menuBarTimeText)
                     .font(.system(size: 18, weight: .semibold).monospacedDigit())
             }
 

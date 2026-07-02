@@ -154,11 +154,11 @@ struct HistoryView: View {
                                 .foregroundStyle(.secondary)
                         }
                         Spacer()
-                        if !session.completed {
-                            Image(systemName: "xmark.circle")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                        }
+                    if !session.completed {
+                        Image(systemName: session.openEnded ? "stopwatch" : "xmark.circle")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
                         Text(formatted(session.actualDuration))
                             .font(.caption.monospacedDigit())
                             .foregroundStyle(.secondary)
