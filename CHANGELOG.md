@@ -2,6 +2,12 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.6.1] - 2026-07-03
+
+### Added
+- `TimelineEngine` — groups sessions by day, positions blocks on a horizontal time axis
+- `TimelineDayRowView` — one row per day with hour grid
+
 ## [1.6.0] - 2026-07-03
 
 ### Added
