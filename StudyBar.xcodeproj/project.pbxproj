@@ -68,6 +68,11 @@
 		I0J1K2L3M4N50H123445678 /* InsightsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = J1K2L3M4N5O61I234556789 /* InsightsDashboardView.swift */; };
 		K2L3M4N5O6P72J345667890 /* StudyReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = L3M4N5O6P7Q83K456778901 /* StudyReminderScheduler.swift */; };
 		M4N5O6P7Q8R94L567889012 /* SessionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = N5O6P7Q8R9S05M678990123 /* SessionLogView.swift */; };
+		O6P7Q8R9S0T16N789001234 /* StudyGoalHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = P7Q8R9S0T1U27O890112345 /* StudyGoalHelper.swift */; };
+		Q8R9S0T1U2V38P901223456 /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = R9S0T1U2V3W49Q012334567 /* BackupService.swift */; };
+		S0T1U2V3W4X50R123445678 /* UpdateAutoMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = T1U2V3W4X5Y61S234556789 /* UpdateAutoMonitor.swift */; };
+		U2V3W4X5Y6Z72T345667890 /* StudyGoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = V3W4X5Y6Z7A83U456778901 /* StudyGoalProgressView.swift */; };
+		W4X5Y6Z7A8B94V567889012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +140,11 @@
 		J1K2L3M4N5O61I234556789 /* InsightsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsDashboardView.swift; sourceTree = "<group>"; };
 		L3M4N5O6P7Q83K456778901 /* StudyReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyReminderScheduler.swift; sourceTree = "<group>"; };
 		N5O6P7Q8R9S05M678990123 /* SessionLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLogView.swift; sourceTree = "<group>"; };
+		P7Q8R9S0T1U27O890112345 /* StudyGoalHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalHelper.swift; sourceTree = "<group>"; };
+		R9S0T1U2V3W49Q012334567 /* BackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupService.swift; sourceTree = "<group>"; };
+		T1U2V3W4X5Y61S234556789 /* UpdateAutoMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAutoMonitor.swift; sourceTree = "<group>"; };
+		V3W4X5Y6Z7A83U456778901 /* StudyGoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalProgressView.swift; sourceTree = "<group>"; };
+		X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +226,9 @@
 				R2F3A4B5C6D71C234455667 /* GamificationUnlockCenter.swift */,
 				H9I0J1K2L3M49G012334567 /* InsightsEngine.swift */,
 				L3M4N5O6P7Q83K456778901 /* StudyReminderScheduler.swift */,
+				P7Q8R9S0T1U27O890112345 /* StudyGoalHelper.swift */,
+				R9S0T1U2V3W49Q012334567 /* BackupService.swift */,
+				T1U2V3W4X5Y61S234556789 /* UpdateAutoMonitor.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -234,6 +247,8 @@
 				165117894DA8404A82C1CEDA /* AppLogoView.swift */,
 				C46C570557824E9A84AC03C0 /* StatPill.swift */,
 				B8C9D0E1F2A39456B7C8D9E0 /* FloatingTimerView.swift */,
+				V3W4X5Y6Z7A83U456778901 /* StudyGoalProgressView.swift */,
+				X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */,
 				C3D4E5F6A7B84901B2C3D4E5 /* Dashboard */,
 			);
 			path = Views;
@@ -394,6 +409,11 @@
 				I0J1K2L3M4N50H123445678 /* InsightsDashboardView.swift in Sources */,
 				K2L3M4N5O6P72J345667890 /* StudyReminderScheduler.swift in Sources */,
 				M4N5O6P7Q8R94L567889012 /* SessionLogView.swift in Sources */,
+				O6P7Q8R9S0T16N789001234 /* StudyGoalHelper.swift in Sources */,
+				Q8R9S0T1U2V38P901223456 /* BackupService.swift in Sources */,
+				S0T1U2V3W4X50R123445678 /* UpdateAutoMonitor.swift in Sources */,
+				U2V3W4X5Y6Z72T345667890 /* StudyGoalProgressView.swift in Sources */,
+				W4X5Y6Z7A8B94V567889012 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +542,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10801;
+				CURRENT_PROJECT_VERSION = 20000;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -532,7 +552,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.8.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -549,7 +569,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10801;
+				CURRENT_PROJECT_VERSION = 20000;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -559,7 +579,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.8.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

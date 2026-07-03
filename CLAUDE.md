@@ -67,8 +67,13 @@
 - `GamificationEngine` runs on session log + backfill on launch
 - Support link: https://rzp.io/rzp/studybar in Settings
 
-## Roadmap backlog (post v1.8.1)
-Phases 5-6 skip, 8-9 power user/customization.
+## Roadmap backlog (post v2.0.0)
+Phase 8 command palette/CLI/deep links, Phase 9 themes — optional v2.x+.
+
+## v2.0.0 (2026-07-03) — production ready
+- Suggested duration, pinned subjects, daily/weekly goals, onboarding
+- Pause nudge, Sunday recap, backup/restore, 6h auto-update
+- Public release notes: `RELEASE_NOTES_v2.0.0.md`
 
 ## v1.8.1 (2026-07-03) — shipped
 - Heatmap fix (removed `.drawingGroup()` on heatmap card)

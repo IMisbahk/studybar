@@ -5,6 +5,7 @@ import SwiftData
 enum StudyReminderId {
     static let peakHour = "studybar.reminder.peakHour"
     static let inactivity = "studybar.reminder.inactivity"
+    static let sundayRecap = "studybar.reminder.sundayRecap"
 }
 
 @MainActor
@@ -22,7 +23,8 @@ final class StudyReminderScheduler {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: [
             StudyReminderId.peakHour,
-            StudyReminderId.inactivity
+            StudyReminderId.inactivity,
+            StudyReminderId.sundayRecap
         ])
 
         guard UserDefaults.standard.bool(forKey: "studyRemindersEnabled") else { return }
@@ -32,6 +34,9 @@ final class StudyReminderScheduler {
         }
         if UserDefaults.standard.bool(forKey: "inactivityRemindersEnabled") {
             scheduleInactivityReminder(sessions: sessions, center: center)
+        }
+        if UserDefaults.standard.bool(forKey: "weeklyRecapRemindersEnabled") {
+            scheduleSundayRecap(sessions: sessions, center: center)
         }
     }
 
@@ -82,6 +87,23 @@ final class StudyReminderScheduler {
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         center.add(UNNotificationRequest(identifier: StudyReminderId.inactivity, content: content, trigger: trigger))
+    }
+
+    private func scheduleSundayRecap(sessions: [StudySession], center: UNUserNotificationCenter) {
+        guard !sessions.isEmpty else { return }
+        let summary = InsightsEngine.weeklySummary(from: sessions)
+        let content = UNMutableNotificationContent()
+        content.title = "Your week in StudyBar"
+        content.body = summary
+        content.sound = .default
+
+        var components = DateComponents()
+        components.weekday = 1
+        components.hour = 18
+        components.minute = 0
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        center.add(UNNotificationRequest(identifier: StudyReminderId.sundayRecap, content: content, trigger: trigger))
     }
 
     private func formatHour(_ hour: Int) -> String {

@@ -126,6 +126,16 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         fire(content)
     }
 
+    func firePauseTooLong(subjectName: String, minutes: Int) {
+        let content = UNMutableNotificationContent()
+        content.title = "Still paused?"
+        content.subtitle = subjectName
+        content.body = "You've been paused for \(minutes) minutes. Resume or stop the session."
+        content.sound = .default
+        content.categoryIdentifier = NotificationCategoryId.active
+        fire(content)
+    }
+
     private func fire(_ content: UNMutableNotificationContent) {
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)

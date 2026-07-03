@@ -19,7 +19,14 @@ struct StudyBarApp: App {
             "studyRemindersEnabled": true,
             "peakHourRemindersEnabled": true,
             "inactivityRemindersEnabled": true,
-            "inactivityReminderDays": 2
+            "inactivityReminderDays": 2,
+            "weeklyRecapRemindersEnabled": true,
+            "pauseNudgeEnabled": true,
+            "dailyGoalMinutes": 45,
+            "weeklyGoalMinutes": 300,
+            "autoUpdateEnabled": true,
+            "autoUpdateInstallEnabled": true,
+            "hasCompletedOnboarding": false
         ])
 
         let container: ModelContainer
@@ -53,6 +60,8 @@ struct StudyBarApp: App {
             floating.start()
             power.start()
             StudyReminderScheduler.shared.reschedule(in: container.mainContext)
+            UpdateAutoMonitor.shared.configure(sessionManager: manager)
+            UpdateAutoMonitor.shared.start()
         }
     }
 

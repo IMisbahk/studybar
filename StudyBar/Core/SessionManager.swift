@@ -60,6 +60,8 @@ final class SessionManager {
 
     private let modelContext: ModelContext
     private var timer: Timer?
+    private var pauseNudgeTimer: Timer?
+    private var pauseNudgeSent = false
     private var completionClearTask: Task<Void, Never>?
     private var segmentDrafts: [SegmentDraft] = []
 
@@ -156,6 +158,8 @@ final class SessionManager {
         beginSegment(.pause)
         phase = .paused
         stopTimer()
+        pauseNudgeSent = false
+        schedulePauseNudge()
         notifyPhaseChanged()
     }
 
@@ -166,12 +170,15 @@ final class SessionManager {
         beginSegment(.systemPause)
         phase = .paused
         stopTimer()
+        pauseNudgeSent = false
+        schedulePauseNudge()
         notifyPhaseChanged()
     }
 
     func resume() {
         guard phase == .paused else { return }
         autoPausedBySystem = false
+        cancelPauseNudge()
         endCurrentSegment()
         beginSegment(.active)
         phase = .running
@@ -309,6 +316,7 @@ final class SessionManager {
     }
 
     private func resetToIdle() {
+        cancelPauseNudge()
         phase = .idle
         timerMode = .countdown
         subjectName = ""
@@ -320,6 +328,35 @@ final class SessionManager {
         autoPausedBySystem = false
         segmentDrafts = []
         notifyPhaseChanged()
+        Task { @MainActor in
+            UpdateAutoMonitor.shared.applyPendingUpdateIfIdle()
+        }
+    }
+
+    private func schedulePauseNudge() {
+        cancelPauseNudge()
+        guard UserDefaults.standard.object(forKey: "pauseNudgeEnabled") == nil
+            || UserDefaults.standard.bool(forKey: "pauseNudgeEnabled") else { return }
+        let minutes = max(1, UserDefaults.standard.integer(forKey: "pauseNudgeMinutes") == 0
+            ? 10 : UserDefaults.standard.integer(forKey: "pauseNudgeMinutes"))
+        pauseNudgeTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(minutes * 60), repeats: false) { [weak self] _ in
+            Task { @MainActor in
+                self?.firePauseNudgeIfNeeded(minutes: minutes)
+            }
+        }
+    }
+
+    private func cancelPauseNudge() {
+        pauseNudgeTimer?.invalidate()
+        pauseNudgeTimer = nil
+        pauseNudgeSent = false
+    }
+
+    @MainActor
+    private func firePauseNudgeIfNeeded(minutes: Int) {
+        guard phase == .paused, !pauseNudgeSent else { return }
+        pauseNudgeSent = true
+        NotificationManager.shared.firePauseTooLong(subjectName: subjectName, minutes: minutes)
     }
 
     private func formatClock(_ totalSeconds: Int, allowHours: Bool = false) -> String {

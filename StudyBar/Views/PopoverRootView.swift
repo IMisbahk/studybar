@@ -1,8 +1,12 @@
 import SwiftUI
+import SwiftData
 
 struct PopoverRootView: View {
     @Environment(SessionManager.self) private var sessionManager
+    @Query(sort: \Subject.name) private var subjects: [Subject]
     @State private var tab: PopoverTab = .timer
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @State private var showOnboarding = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -15,6 +19,16 @@ struct PopoverRootView: View {
         .onAppear {
             tab = sessionManager.selectedTab
             NotificationCenter.default.post(name: .studyBarMenuPopoverVisible, object: true)
+            if !hasCompletedOnboarding {
+                if subjects.isEmpty {
+                    showOnboarding = true
+                } else {
+                    hasCompletedOnboarding = true
+                }
+            }
+        }
+        .sheet(isPresented: $showOnboarding) {
+            OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
         }
         .onDisappear {
             NotificationCenter.default.post(name: .studyBarMenuPopoverVisible, object: false)

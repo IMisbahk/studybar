@@ -2,6 +2,23 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.0.0] - 2026-07-03
+
+**Production-ready release.** See [RELEASE_NOTES_v2.0.0.md](RELEASE_NOTES_v2.0.0.md) for the public announcement.
+
+### Added
+- Suggested session duration on start screen (from Insights history)
+- Pin up to 3 favorite subjects (star in Manage Subjects)
+- Daily & weekly study goals with progress rings (timer + dashboard)
+- Pause-too-long notification (10 min default)
+- Sunday weekly recap notification
+- First-launch onboarding flow
+- Backup & restore (local zip of SwiftData store)
+- Automatic updates: check every 6 hours, install when idle
+
+### Changed
+- StudyBar 2.0 version bump — core product feature-complete
+
 ## [1.8.1] - 2026-07-03
 
 ### Fixed

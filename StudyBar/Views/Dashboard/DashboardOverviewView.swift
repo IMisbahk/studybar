@@ -11,6 +11,12 @@ struct DashboardOverviewView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 header
+                if let daily = StudyGoalHelper.dailyProgress(from: sessions) {
+                    StudyGoalProgressView(progress: daily)
+                }
+                if let weekly = StudyGoalHelper.weeklyProgress(from: sessions) {
+                    StudyGoalProgressView(progress: weekly)
+                }
                 statsGrid
                 if !subjectTotals.isEmpty {
                     subjectBreakdown

@@ -40,6 +40,7 @@ struct ManageSubjectsView: View {
 private struct SubjectRow: View {
     @Bindable var subject: Subject
     @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Subject.name) private var subjects: [Subject]
     @State private var newTopicName = ""
     @State private var expanded = false
 
@@ -63,6 +64,14 @@ private struct SubjectRow: View {
             HStack {
                 TextField("Subject", text: $subject.name)
                     .textFieldStyle(.plain)
+                Button {
+                    SubjectSorting.togglePin(subject, subjects: subjects, in: modelContext)
+                } label: {
+                    Image(systemName: subject.isPinned ? "star.fill" : "star")
+                        .foregroundStyle(subject.isPinned ? .yellow : .secondary)
+                }
+                .buttonStyle(.plain)
+                .help(subject.isPinned ? "Unpin" : "Pin (max 3)")
                 Spacer()
                 Button {
                     modelContext.delete(subject)

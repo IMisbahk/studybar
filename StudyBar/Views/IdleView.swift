@@ -34,6 +34,22 @@ struct IdleView: View {
         StudyFormatting.duration(StudyFormatting.todayTotal(from: sessions))
     }
 
+    private var sortedSubjects: [Subject] {
+        SubjectSorting.sorted(subjects)
+    }
+
+    private var pinnedSubjects: [Subject] {
+        sortedSubjects.filter(\.isPinned)
+    }
+
+    private var suggestedMinutes: Int? {
+        InsightsEngine.suggestedSessionMinutes(from: sessions)
+    }
+
+    private var dailyGoal: StudyGoalProgress? {
+        StudyGoalHelper.dailyProgress(from: sessions)
+    }
+
     private var recentSubjects: [String] {
         StudyFormatting.recentSubjectNames(from: sessions)
     }
@@ -41,9 +57,15 @@ struct IdleView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             header
+            if let dailyGoal {
+                StudyGoalProgressView(progress: dailyGoal, compact: true)
+            }
             if subjects.isEmpty {
                 emptyState
             } else {
+                if !pinnedSubjects.isEmpty {
+                    pinnedSection
+                }
                 if !recentSubjects.isEmpty {
                     recentSection
                 }
@@ -58,9 +80,20 @@ struct IdleView: View {
         .padding(16)
         .frame(width: 300)
         .onAppear {
+            applySuggestedDurationIfNeeded()
             if selectedSubject == nil {
-                selectedSubject = subjects.first
+                selectedSubject = sortedSubjects.first
             }
+        }
+        .onChange(of: sessions.count) { _, _ in
+            applySuggestedDurationIfNeeded()
+        }
+    }
+
+    private func applySuggestedDurationIfNeeded() {
+        guard let suggested = suggestedMinutes else { return }
+        if case .preset(25) = duration {
+            duration = .preset(suggested)
         }
     }
 
@@ -104,6 +137,29 @@ struct IdleView: View {
             Button("Add", action: addSubject)
                 .buttonStyle(.borderedProminent)
                 .disabled(trimmed(newSubjectName).isEmpty)
+        }
+    }
+
+    private var pinnedSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Pinned")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    ForEach(pinnedSubjects) { subject in
+                        Button {
+                            selectedSubject = subject
+                            selectedTopic = nil
+                        } label: {
+                            Label(subject.name, systemImage: "star.fill")
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        .tint(selectedSubject?.persistentModelID == subject.persistentModelID ? .accentColor : .secondary)
+                    }
+                }
+            }
         }
     }
 
@@ -154,8 +210,14 @@ struct IdleView: View {
                 HStack {
                     Picker("Subject", selection: $selectedSubject) {
                         Text("None").tag(nil as Subject?)
-                        ForEach(subjects) { subject in
-                            Text(subject.name).tag(subject as Subject?)
+                        ForEach(sortedSubjects) { subject in
+                            HStack {
+                                if subject.isPinned {
+                                    Image(systemName: "star.fill")
+                                }
+                                Text(subject.name)
+                            }
+                            .tag(subject as Subject?)
                         }
                     }
                     .labelsHidden()
@@ -236,6 +298,18 @@ struct IdleView: View {
             Text("Duration")
                 .font(.caption)
                 .foregroundStyle(.secondary)
+
+            if let suggested = suggestedMinutes {
+                Button {
+                    duration = .preset(suggested)
+                } label: {
+                    Label("\(suggested) min — suggested for you", systemImage: "sparkles")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .tint(duration == .preset(suggested) ? .accentColor : .secondary)
+            }
 
             Picker("Duration", selection: $duration) {
                 Text("25").tag(DurationChoice.preset(25))

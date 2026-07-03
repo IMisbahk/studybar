@@ -158,7 +158,7 @@ enum ExportService {
         NotificationManager.shared.fireExportSaved(fileURL: url)
     }
 
-    private static func uniqueDownloadsURL(preferredName: String) throws -> URL {
+    static func uniqueDownloadsURL(preferredName: String) throws -> URL {
         guard let downloads = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
             throw NSError(domain: "ExportService", code: 1, userInfo: [NSLocalizedDescriptionKey: "Downloads folder not found"])
         }

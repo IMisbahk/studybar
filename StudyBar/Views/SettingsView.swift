@@ -14,8 +14,15 @@ struct SettingsView: View {
     @AppStorage("peakHourRemindersEnabled") private var peakHourRemindersEnabled = true
     @AppStorage("inactivityRemindersEnabled") private var inactivityRemindersEnabled = true
     @AppStorage("inactivityReminderDays") private var inactivityReminderDays = 2
+    @AppStorage("weeklyRecapRemindersEnabled") private var weeklyRecapRemindersEnabled = true
+    @AppStorage("pauseNudgeEnabled") private var pauseNudgeEnabled = true
+    @AppStorage("dailyGoalMinutes") private var dailyGoalMinutes = 45
+    @AppStorage("weeklyGoalMinutes") private var weeklyGoalMinutes = 300
+    @AppStorage("autoUpdateEnabled") private var autoUpdateEnabled = true
+    @AppStorage("autoUpdateInstallEnabled") private var autoUpdateInstallEnabled = true
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var updateStatus: UpdateChecker.Status = .idle
+    @State private var backupMessage: String?
     @State private var updateTask: Task<Void, Never>?
     @State private var pendingAsset: UpdateInstaller.ReleaseAsset?
     @State private var downloadProgress: Double = 0
@@ -38,7 +45,9 @@ struct SettingsView: View {
                 }
                 updatesSection
                 generalSection
+                goalsSection
                 remindersSection
+                dataSection
                 floatingTimerSection
                 shortcutsSection
                 quitSection
@@ -55,6 +64,9 @@ struct SettingsView: View {
         .onChange(of: peakHourRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
         .onChange(of: inactivityRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
         .onChange(of: inactivityReminderDays) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
+        .onChange(of: weeklyRecapRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
+        .onChange(of: autoUpdateEnabled) { _, _ in UpdateAutoMonitor.shared.restartIfNeeded() }
+        .onChange(of: autoUpdateInstallEnabled) { _, _ in UpdateAutoMonitor.shared.restartIfNeeded() }
         .onDisappear { updateTask?.cancel() }
     }
 
@@ -96,6 +108,22 @@ struct SettingsView: View {
         }
     }
 
+    private var goalsSection: some View {
+        settingsSection(title: "Study Goals") {
+            Stepper(value: $dailyGoalMinutes, in: 0...480, step: 15) {
+                Text(dailyGoalMinutes == 0 ? "Daily goal: off" : "Daily goal: \(dailyGoalMinutes) min")
+                    .font(.subheadline)
+            }
+            Stepper(value: $weeklyGoalMinutes, in: 0...3000, step: 30) {
+                Text(weeklyGoalMinutes == 0 ? "Weekly goal: off" : "Weekly goal: \(weeklyGoalMinutes) min")
+                    .font(.subheadline)
+            }
+            Text("Goals appear on the timer screen and dashboard overview.")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+        }
+    }
+
     private var remindersSection: some View {
         settingsSection(title: "Study Reminders") {
             Toggle("Study Reminders", isOn: $studyRemindersEnabled)
@@ -103,6 +131,9 @@ struct SettingsView: View {
                 .disabled(!studyRemindersEnabled)
             Toggle("Inactivity Nudges", isOn: $inactivityRemindersEnabled)
                 .disabled(!studyRemindersEnabled)
+            Toggle("Sunday Week Recap", isOn: $weeklyRecapRemindersEnabled)
+                .disabled(!studyRemindersEnabled)
+            Toggle("Pause Too Long Nudge", isOn: $pauseNudgeEnabled)
             if studyRemindersEnabled && inactivityRemindersEnabled {
                 Stepper("Nudge after \(inactivityReminderDays) day\(inactivityReminderDays == 1 ? "" : "s")", value: $inactivityReminderDays, in: 1...14)
                     .font(.subheadline)
@@ -147,6 +178,31 @@ struct SettingsView: View {
     private var quitSection: some View {
         Button("Quit StudyBar") {
             NSApplication.shared.terminate(nil)
+        }
+    }
+
+    private var dataSection: some View {
+        settingsSection(title: "Backup & Restore") {
+            Button("Export Backup to Downloads") {
+                do {
+                    let url = try BackupService.exportBackup()
+                    backupMessage = "Saved \(url.lastPathComponent)"
+                } catch {
+                    backupMessage = error.localizedDescription
+                }
+            }
+            Button("Restore from Backup…") {
+                BackupService.pickAndRestore()
+            }
+            if let backupMessage {
+                Text(backupMessage)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Text("Backup includes all sessions, subjects, XP, and achievements.")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -250,6 +306,16 @@ struct SettingsView: View {
             }
             .padding(10)
             .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
+
+            settingsSection(title: "Automatic Updates") {
+                Toggle("Check every 6 hours", isOn: $autoUpdateEnabled)
+                Toggle("Install when idle", isOn: $autoUpdateInstallEnabled)
+                    .disabled(!autoUpdateEnabled)
+                Text("Downloads from GitHub releases. Installs only when no session is running.")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
 
             VStack(alignment: .leading, spacing: 10) {
                 Link(destination: URL(string: "https://rzp.io/rzp/studybar")!) {
