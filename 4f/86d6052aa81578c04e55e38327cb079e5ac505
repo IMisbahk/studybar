@@ -1,0 +1,93 @@
+StudyBar/Core/UpdateAutoMonitor.swift
+  s_ef133bb69a3d94::t_a4e256f5e6860d 1-97
+StudyBar/Models/Subject.swift
+  s_ef133bb69a3d94::t_0efe64850e4f1a 8,13,16
+CLAUDE.md
+  s_ef133bb69a3d94::t_b72bfa15523ca1 70-76
+StudyBar/Views/PopoverRootView.swift
+  s_ef133bb69a3d94::t_3b3391cba3d5b7 6
+  s_ef133bb69a3d94::t_03ffb583dd1c2e 23-27
+  s_ef133bb69a3d94::t_09d5cb103716e3 2
+  s_ef133bb69a3d94::t_df1f3ce401a8fb 8-9,22,28-31
+StudyBar/Core/ExportService.swift
+  s_ef133bb69a3d94::t_2aeef6c5f44dec 161
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_9127a14cdb7442 71-75
+  s_ef133bb69a3d94::t_63949753786374 229-231
+  s_ef133bb69a3d94::t_3a5d82669326c2 250-251
+  s_ef133bb69a3d94::t_d32d0b1d3e1ce5 143-147
+  s_ef133bb69a3d94::t_5e5a2f568bd4c9 412-416
+  s_ef133bb69a3d94::t_b9873df471744e 545,555,572,582
+StudyBar/Views/StudyGoalProgressView.swift
+  s_ef133bb69a3d94::t_cf0ad13948d87b 1-37
+CHANGELOG.md
+  s_ef133bb69a3d94::t_d1b2f36541e2d8 5-21
+StudyBar/Core/StudyReminderScheduler.swift
+  s_ef133bb69a3d94::t_7fd613aa82a612 8
+  s_ef133bb69a3d94::t_0c55b2b1065bf0 26-27,38-39
+  s_ef133bb69a3d94::t_cb4799a49da50d 92-108
+  s_ef133bb69a3d94::t_5de59f46800c64 40
+StudyBar/Core/StudyGoalHelper.swift
+  s_ef133bb69a3d94::t_59baf65bf29878 1,3-73
+  s_ef133bb69a3d94::t_49749a5ff71e12 2
+StudyBar/Core/SessionManager.swift
+  s_ef133bb69a3d94::t_27076bfa212475 161-162,173-174,181
+  s_ef133bb69a3d94::t_ce350d6d42fa21 331-359
+  s_ef133bb69a3d94::t_5590bd8eccb43a 63-64
+  s_ef133bb69a3d94::t_d7ac496a463c22 319
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_4c6e5a6f9e2c6b 310-319
+  s_ef133bb69a3d94::t_cc08bc49545786 17-22
+  s_ef133bb69a3d94::t_3104b08a88e23f 25
+  s_ef133bb69a3d94::t_dcb81958a50c63 111-126,134-136
+  s_ef133bb69a3d94::t_0ab906b2b035c6 184-208
+  s_ef133bb69a3d94::t_04f17a3a38d460 48,50
+  s_ef133bb69a3d94::t_395b9b20d2c199 67-69
+StudyBar/Views/IdleView.swift
+  s_ef133bb69a3d94::t_aa93793d9666d2 302-307,309-313
+  s_ef133bb69a3d94::t_694f5691361537 60-62,66-68,83,85,88-94,96
+  s_ef133bb69a3d94::t_78541faf139ef1 37-50
+  s_ef133bb69a3d94::t_503a480796f16e 95
+  s_ef133bb69a3d94::t_be553608e24a47 51,97,143-165
+  s_ef133bb69a3d94::t_1fb532f7968abe 213-220
+  s_ef133bb69a3d94::t_cc807c3c8945ce 308
+  s_ef133bb69a3d94::t_e3dc4c4fa18be2 52
+RELEASE_NOTES_v2.0.0.md
+  s_ef133bb69a3d94::t_0bda4e1fc3788b 1-53
+StudyBar/Views/Dashboard/DashboardOverviewView.swift
+  s_ef133bb69a3d94::t_bf42abcc1180a7 14-19
+StudyBar/StudyBarApp.swift
+  s_ef133bb69a3d94::t_6747551290cf8a 63-64
+  s_ef133bb69a3d94::t_eaa4510625e97a 22-29
+StudyBar/Core/NotificationManager.swift
+  s_ef133bb69a3d94::t_fb0b1a69eb529b 129-138
+StudyBar/Views/OnboardingView.swift
+  s_ef133bb69a3d94::t_f51a5de1b365da 1-23,25-168
+  s_ef133bb69a3d94::t_ee9036f435b0b3 24
+StudyBar/Views/ManageSubjectsView.swift
+  s_ef133bb69a3d94::t_043cb4ee6bbc9f 43
+  s_ef133bb69a3d94::t_8ce164db6f90bf 67-74
+StudyBar/Core/BackupService.swift
+  s_ef133bb69a3d94::t_8333401bd90f96 3
+  s_ef133bb69a3d94::t_14519d83d7cd5e 1-2,4-113
+VERSION
+  s_ef133bb69a3d94::t_ab6fb79b4e329d 1
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_6beb2c19f9927e 2,4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "4f86d6052aa81578c04e55e38327cb079e5ac505",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
