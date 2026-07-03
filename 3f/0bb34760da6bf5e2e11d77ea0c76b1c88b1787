@@ -1,0 +1,36 @@
+StudyBar/Views/OnboardingView.swift
+  s_ef133bb69a3d94::t_3371ab06cc4b50 7,114,156
+StudyBar/Views/PopoverRootView.swift
+  s_ef133bb69a3d94::t_118b51f408e2bb 9,12-15,17-30,32,36-38,52-64
+StudyBar/Core/AppNotifications.swift
+  s_ef133bb69a3d94::t_9b675fbbf895ae 8
+CHANGELOG.md
+  s_ef133bb69a3d94::t_534920bd113a2b 5-15
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_63772f3d11f99d 553,563,580,590
+VERSION
+  s_ef133bb69a3d94::t_63772f3d11f99d 1
+RELEASE_NOTES_v2.12.0.md
+  s_ef133bb69a3d94::t_9bcada77ef2e74 1-22
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_6f08350f33d538 23
+  s_ef133bb69a3d94::t_9ce7bd6fa9a3e2 110-115
+StudyBar/Views/Dashboard/SessionLogView.swift
+  s_ef133bb69a3d94::t_02001e7162cc90 8-9,22-25,30-33,36-37,53-55,65,68,71,81-92,99,107-111,113-122,125-133,135,140-171,174-175,177-182
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "3f0bb34760da6bf5e2e11d77ea0c76b1c88b1787",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
