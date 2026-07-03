@@ -2,6 +2,21 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.1.0] - 2026-07-03
+
+**Themes & appearance.** See [RELEASE_NOTES_v2.1.0.md](RELEASE_NOTES_v2.1.0.md) for the public announcement.
+
+### Added
+- **7 color themes** — Classic, Forest, Sunset, Lavender, Ocean, Rose, Monochrome
+- Settings → **Themes & Appearance** — theme picker with live ring preview
+- **Menu bar styles** — Standard, Compact, Minimal (timer-only when active)
+- **Rounded timer digits** toggle (menu bar, popover, floating timer)
+- **Themed floating timer border** toggle
+
+### Changed
+- Progress rings, goal rings, and accent highlights follow the selected theme
+- Dashboard window and floating timer pick up theme changes live
+
 ## [2.0.0] - 2026-07-03
 
 **Production-ready release.** See [RELEASE_NOTES_v2.0.0.md](RELEASE_NOTES_v2.0.0.md) for the public announcement.

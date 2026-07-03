@@ -29,6 +29,21 @@ final class FloatingTimerController {
             self?.menuPopoverIsOpen = (note.object as? Bool) ?? false
             self?.syncVisibility()
         })
+        observers.append(center.addObserver(
+            forName: .studyBarThemeChanged,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.refreshPanelContent()
+        })
+    }
+
+    private func refreshPanelContent() {
+        guard let sessionManager, let panel else { return }
+        let content = StudyThemeProvider {
+            FloatingTimerView(sessionManager: sessionManager)
+        }
+        panel.contentView = NSHostingView(rootView: content)
     }
 
     deinit {
@@ -61,7 +76,9 @@ final class FloatingTimerController {
         let opacity = UserDefaults.standard.object(forKey: "floatingTimerOpacity") as? Double ?? 0.9
 
         if panel == nil {
-            let content = FloatingTimerView(sessionManager: sessionManager)
+            let content = StudyThemeProvider {
+                FloatingTimerView(sessionManager: sessionManager)
+            }
             let hosting = NSHostingView(rootView: content)
             hosting.frame.size = NSSize(width: 200, height: 72)
 

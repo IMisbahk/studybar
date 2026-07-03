@@ -3,40 +3,63 @@ import SwiftUI
 struct MenuBarLabelView: View {
     var sessionManager: SessionManager
 
+    @AppStorage("selectedThemeId") private var selectedThemeId = StudyThemeId.classic
+    @AppStorage("menuBarStyle") private var menuBarStyleRaw = MenuBarStyle.standard.rawValue
+    @AppStorage("timerTypographyRounded") private var timerTypographyRounded = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var completionBounce = false
     @State private var showCheckmark = false
 
+    private var theme: StudyTheme {
+        StudyThemeCatalog.theme(for: selectedThemeId)
+    }
+
+    private var menuBarStyle: MenuBarStyle {
+        MenuBarStyle(rawValue: menuBarStyleRaw) ?? .standard
+    }
+
+    private var timerFont: Font {
+        Font.system(
+            size: menuBarStyle == .compact ? 11 : 12,
+            weight: .medium,
+            design: timerTypographyRounded ? .rounded : .default
+        ).monospacedDigit()
+    }
+
     var body: some View {
-        HStack(spacing: 4) {
-            ZStack {
-                if sessionManager.phase != .idle, !sessionManager.isStopwatch {
-                    ProgressRingView(
-                        progress: sessionManager.progress,
-                        lineWidth: 1.5,
-                        isPaused: sessionManager.phase == .paused,
-                        isUrgent: sessionManager.isUrgent
-                    )
-                }
-                Group {
-                    if showCheckmark {
-                        Image(systemName: "checkmark.circle.fill")
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(.green, .primary)
-                    } else {
-                        Image(systemName: iconName)
-                            .contentTransition(.symbolEffect(.replace))
+        HStack(spacing: menuBarStyle == .compact ? 2 : 4) {
+            if showMenuBarIcon {
+                ZStack {
+                    if sessionManager.phase != .idle, !sessionManager.isStopwatch {
+                        ProgressRingView(
+                            progress: sessionManager.progress,
+                            lineWidth: 1.5,
+                            isPaused: sessionManager.phase == .paused,
+                            isUrgent: sessionManager.isUrgent
+                        )
                     }
+                    Group {
+                        if showCheckmark {
+                            Image(systemName: "checkmark.circle.fill")
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(.green, .primary)
+                        } else {
+                            Image(systemName: iconName)
+                                .foregroundStyle(sessionManager.phase == .running ? theme.accent : .primary)
+                                .contentTransition(.symbolEffect(.replace))
+                        }
+                    }
+                    .font(.system(size: menuBarStyle == .minimal ? 10 : 11, weight: .medium))
                 }
-                .font(.system(size: 11, weight: .medium))
+                .frame(width: 16, height: 16)
+                .scaleEffect(completionBounce ? 1.2 : 1)
+                .animation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.55), value: completionBounce)
             }
-            .frame(width: 16, height: 16)
-            .scaleEffect(completionBounce ? 1.2 : 1)
-            .animation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.55), value: completionBounce)
 
             if sessionManager.phase != .idle {
                 Text(sessionManager.menuBarTimeText)
-                    .font(.system(size: 12, weight: .medium).monospacedDigit())
+                    .font(timerFont)
+                    .foregroundStyle(theme.accent)
                     .contentTransition(.numericText())
                     .animation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.9), value: sessionManager.menuBarTimeText)
             }
@@ -46,6 +69,11 @@ struct MenuBarLabelView: View {
             guard token != nil else { return }
             triggerCompletionAnimation()
         }
+    }
+
+    private var showMenuBarIcon: Bool {
+        if menuBarStyle == .minimal, sessionManager.phase != .idle { return false }
+        return true
     }
 
     private var iconName: String {

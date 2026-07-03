@@ -23,9 +23,11 @@ final class DashboardWindowController {
         guard let sessionManager, let modelContainer else { return }
 
         if window == nil {
-            let root = DashboardView(initialSection: section)
-                .environment(sessionManager)
-                .modelContainer(modelContainer)
+            let root = StudyThemeProvider {
+                DashboardView(initialSection: section)
+                    .environment(sessionManager)
+            }
+            .modelContainer(modelContainer)
             let hosting = NSHostingView(rootView: root)
             hosting.frame = NSRect(x: 0, y: 0, width: 920, height: 640)
 

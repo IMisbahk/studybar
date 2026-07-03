@@ -26,7 +26,11 @@ struct StudyBarApp: App {
             "weeklyGoalMinutes": 300,
             "autoUpdateEnabled": true,
             "autoUpdateInstallEnabled": true,
-            "hasCompletedOnboarding": false
+            "hasCompletedOnboarding": false,
+            "selectedThemeId": StudyThemeId.classic,
+            "menuBarStyle": MenuBarStyle.standard.rawValue,
+            "timerTypographyRounded": false,
+            "floatingTimerThemedBorder": true
         ])
 
         let container: ModelContainer
@@ -67,10 +71,14 @@ struct StudyBarApp: App {
 
     var body: some Scene {
         MenuBarExtra {
-            PopoverRootView()
-                .environment(sessionManager)
+            StudyThemeProvider {
+                PopoverRootView()
+                    .environment(sessionManager)
+            }
         } label: {
-            MenuBarLabelView(sessionManager: sessionManager)
+            StudyThemeProvider {
+                MenuBarLabelView(sessionManager: sessionManager)
+            }
         }
         .menuBarExtraStyle(.window)
         .modelContainer(modelContainer)

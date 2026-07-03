@@ -73,6 +73,8 @@
 		S0T1U2V3W4X50R123445678 /* UpdateAutoMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = T1U2V3W4X5Y61S234556789 /* UpdateAutoMonitor.swift */; };
 		U2V3W4X5Y6Z72T345667890 /* StudyGoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = V3W4X5Y6Z7A83U456778901 /* StudyGoalProgressView.swift */; };
 		W4X5Y6Z7A8B94V567889012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */; };
+		Y6Z7A8B9C0D16X789012345 /* StudyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */; };
+		Z7A8B9C0D1E27Y890123456 /* ThemesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0D1E2F3A49A012345678 /* ThemesSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,6 +147,8 @@
 		T1U2V3W4X5Y61S234556789 /* UpdateAutoMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAutoMonitor.swift; sourceTree = "<group>"; };
 		V3W4X5Y6Z7A83U456778901 /* StudyGoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalProgressView.swift; sourceTree = "<group>"; };
 		X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTheme.swift; sourceTree = "<group>"; };
+		B9C0D1E2F3A49A012345678 /* ThemesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +233,7 @@
 				P7Q8R9S0T1U27O890112345 /* StudyGoalHelper.swift */,
 				R9S0T1U2V3W49Q012334567 /* BackupService.swift */,
 				T1U2V3W4X5Y61S234556789 /* UpdateAutoMonitor.swift */,
+				A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 				B8C9D0E1F2A39456B7C8D9E0 /* FloatingTimerView.swift */,
 				V3W4X5Y6Z7A83U456778901 /* StudyGoalProgressView.swift */,
 				X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */,
+				B9C0D1E2F3A49A012345678 /* ThemesSettingsView.swift */,
 				C3D4E5F6A7B84901B2C3D4E5 /* Dashboard */,
 			);
 			path = Views;
@@ -414,6 +420,8 @@
 				S0T1U2V3W4X50R123445678 /* UpdateAutoMonitor.swift in Sources */,
 				U2V3W4X5Y6Z72T345667890 /* StudyGoalProgressView.swift in Sources */,
 				W4X5Y6Z7A8B94V567889012 /* OnboardingView.swift in Sources */,
+				Y6Z7A8B9C0D16X789012345 /* StudyTheme.swift in Sources */,
+				Z7A8B9C0D1E27Y890123456 /* ThemesSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,7 +550,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 20000;
+				CURRENT_PROJECT_VERSION = 20100;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -552,7 +560,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -569,7 +577,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 20000;
+				CURRENT_PROJECT_VERSION = 20100;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -579,7 +587,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

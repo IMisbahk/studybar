@@ -7,6 +7,7 @@ struct ProgressRingView: View {
     var isPaused: Bool = false
     var isUrgent: Bool = false
 
+    @Environment(\.studyTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var breathe = false
     @State private var pulse = false
@@ -16,9 +17,7 @@ struct ProgressRingView: View {
     }
 
     private var ringColor: Color {
-        if isPaused { return .orange }
-        if isUrgent { return .red }
-        return .accentColor
+        theme.ringColor(isPaused: isPaused, isUrgent: isUrgent)
     }
 
     var body: some View {

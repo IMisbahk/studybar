@@ -3,6 +3,7 @@ import SwiftUI
 struct StudyGoalProgressView: View {
     let progress: StudyGoalProgress
     var compact: Bool = false
+    @Environment(\.studyTheme) private var theme
 
     var body: some View {
         HStack(spacing: compact ? 8 : 10) {
@@ -11,7 +12,7 @@ struct StudyGoalProgressView: View {
                     .stroke(Color.primary.opacity(0.08), lineWidth: compact ? 3 : 4)
                 Circle()
                     .trim(from: 0, to: progress.fraction)
-                    .stroke(progress.isComplete ? Color.green : Color.accentColor, style: StrokeStyle(lineWidth: compact ? 3 : 4, lineCap: .round))
+                    .stroke(progress.isComplete ? Color.green : theme.accent, style: StrokeStyle(lineWidth: compact ? 3 : 4, lineCap: .round))
                     .rotationEffect(.degrees(-90))
                     .animation(.easeOut(duration: 0.35), value: progress.fraction)
                 if compact {

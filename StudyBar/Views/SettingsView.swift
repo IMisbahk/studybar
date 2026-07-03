@@ -46,6 +46,7 @@ struct SettingsView: View {
                 updatesSection
                 generalSection
                 goalsSection
+                themesSection
                 remindersSection
                 dataSection
                 floatingTimerSection
@@ -104,6 +105,22 @@ struct SettingsView: View {
                 ManageSubjectsView()
             } label: {
                 Label("Manage Subjects", systemImage: "books.vertical")
+            }
+        }
+    }
+
+    private var themesSection: some View {
+        Group {
+            if compact {
+                NavigationLink {
+                    ThemesSettingsView(compact: true)
+                } label: {
+                    Label("Themes & Appearance", systemImage: "paintpalette.fill")
+                }
+            } else {
+                settingsSection(title: "Themes") {
+                    ThemesSettingsView(compact: true)
+                }
             }
         }
     }

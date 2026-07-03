@@ -3,12 +3,20 @@ import SwiftUI
 struct FloatingTimerView: View {
     var sessionManager: SessionManager
 
+    @Environment(\.studyTheme) private var theme
+    @AppStorage("timerTypographyRounded") private var timerTypographyRounded = false
+    @AppStorage("floatingTimerThemedBorder") private var floatingTimerThemedBorder = true
+
+    private var timerFont: Font {
+        Font.system(size: 18, weight: .semibold, design: timerTypographyRounded ? .rounded : .default).monospacedDigit()
+    }
+
     var body: some View {
         HStack(spacing: 10) {
             if sessionManager.isStopwatch {
                 Image(systemName: "stopwatch")
                     .font(.system(size: 20, weight: .semibold))
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(theme.accent)
                     .frame(width: 36, height: 36)
             } else {
                 ProgressRingView(
@@ -25,7 +33,7 @@ struct FloatingTimerView: View {
                     .font(.caption.weight(.semibold))
                     .lineLimit(1)
                 Text(sessionManager.menuBarTimeText)
-                    .font(.system(size: 18, weight: .semibold).monospacedDigit())
+                    .font(timerFont)
             }
 
             Spacer(minLength: 0)
@@ -39,6 +47,7 @@ struct FloatingTimerView: View {
             } label: {
                 Image(systemName: sessionManager.phase == .paused ? "play.fill" : "pause.fill")
                     .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(theme.accent)
             }
             .buttonStyle(.plain)
             .help(sessionManager.phase == .paused ? "Resume" : "Pause")
@@ -48,7 +57,7 @@ struct FloatingTimerView: View {
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(.quaternary, lineWidth: 0.5)
+                .strokeBorder(floatingTimerThemedBorder ? theme.accent.opacity(0.35) : Color.primary.opacity(0.1), lineWidth: floatingTimerThemedBorder ? 1 : 0.5)
         )
         .frame(width: 200, height: 72)
     }

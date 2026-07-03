@@ -2,7 +2,9 @@ import SwiftUI
 
 struct ActiveSessionView: View {
     @Environment(SessionManager.self) private var sessionManager
+    @Environment(\.studyTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @AppStorage("timerTypographyRounded") private var timerTypographyRounded = false
 
     @State private var completionBounce = false
 
@@ -52,7 +54,7 @@ struct ActiveSessionView: View {
         ZStack {
             if sessionManager.isStopwatch {
                 Circle()
-                    .stroke(Color.accentColor.opacity(sessionManager.phase == .paused ? 0.25 : 0.5), lineWidth: 6)
+                    .stroke(theme.accent.opacity(sessionManager.phase == .paused ? 0.25 : 0.5), lineWidth: 6)
                     .frame(width: 120, height: 120)
                     .opacity(sessionManager.phase == .paused ? 0.6 : 1)
             } else {
@@ -69,7 +71,8 @@ struct ActiveSessionView: View {
 
             VStack(spacing: 2) {
                 Text(sessionManager.isStopwatch ? sessionManager.elapsedText : sessionManager.remainingText)
-                    .font(.system(size: 28, weight: .semibold).monospacedDigit())
+                    .font(.system(size: 28, weight: .semibold, design: timerTypographyRounded ? .rounded : .default).monospacedDigit())
+                    .foregroundStyle(theme.accent)
                     .contentTransition(.numericText())
                 Text(sessionManager.isStopwatch ? "elapsed" : "remaining")
                     .font(.caption2)
