@@ -1,7 +1,7 @@
 # StudyBar — session notes
 
-## Environment (updated 2026-07-02)
-- **Xcode 26.6** — `xcodebuild -scheme StudyBar build` verified through v1.5.0.
+## Environment (updated 2026-07-03)
+- **Xcode 26.6** — `xcodebuild -scheme StudyBar build` verified through v1.6.5.
 - The `.xcodeproj` was hand-written (no `xcodegen`). New Swift files must be added to
   `project.pbxproj` PBXFileReference + PBXBuildFile + group + Sources phase manually.
 
@@ -20,14 +20,12 @@
 - Skipped the right-click/secondary-menu nice-to-have - not trivial with
   `.menuBarExtraStyle(.window)` (would need to drop to raw NSStatusItem/AppKit).
   Spec said skip if non-trivial.
-- **⌥⌘H (Open History)** cannot force-open the MenuBarExtra popover — `MenuBarExtra`
-  has no public API for that. Hotkey activates the app and queues History tab for
-  the next time the user clicks the menu bar icon. Fully global hotkeys for session
-  control (start/pause/resume/extend) work without opening the popover.
+- **⌥⌘H** opens dashboard **Timeline** directly (popover tab also switches to compact timeline).
 
 ## Architecture
-- `Core/SessionManager.swift` - state machine (idle/running/paused), countdown + **stopwatch**
-  (`SessionTimerMode`), 1s `Timer`, logs `StudySession` on completion/stop.
+- `Core/SessionManager.swift` - state machine; logs `StudySession` + **`SessionSegment`** pause intervals.
+- `Core/TimelineEngine.swift` - day grouping, block positioning, filters, subject colors.
+- `Models/SessionSegment.swift` - `active` / `pause` / `systemPause` per session.
 - `Core/DashboardWindowController.swift` + `Core/AppDelegate.swift` - full `NSWindow` dashboard;
   **⌘Q closes dashboard only** when open (`applicationShouldTerminate` → `.terminateCancel`).
 - `Core/UpdateInstaller.swift` - fetches GitHub release DMG + sha256, downloads with progress,
@@ -36,8 +34,8 @@
 - `Core/GlobalHotkeyManager.swift` - NSEvent global+local monitors for ⌥⌘ shortcuts.
 - `Core/FloatingTimerController.swift` - `NSPanel`; only during active sessions, hidden when idle
   and while menu popover is open.
-- `Views/Dashboard/` - `NavigationSplitView` sidebar: Overview, Analytics, Notes, History, Settings.
-  Gear icon in popover header opens dashboard.
+- `Views/Dashboard/` - sidebar: Overview, Analytics, Notes, **Timeline**, Settings.
+  `TimelineView` + `TimelineDayRowView` + `TimelineSessionTooltip`.
 - `Views/PopoverRootView.swift` - compact timer popover; tab bar uses `contentShape(Rectangle())`
   for full-width hit targets. **Never wrap in outer ScrollView** — kills clicks on macOS.
 
@@ -56,9 +54,16 @@
 - [ ] Notification actions: Pause, +10 min, Stop work from banner
 - [ ] Reduced Motion in Accessibility → animations respect setting
 
-## Roadmap backlog (post v1.5.0)
-Phases 3-9 from product spec: Timeline, Gamification/Galaxy, Apple integration,
-White noise, Smart insights, Command palette/deep links, Customization themes.
+## Phase 3 Timeline (v1.6.0–1.6.5) — shipped 2026-07-03
+- Segments, engine, tooltips, dashboard timeline, zoom, filters/popover compact view
+- Pre-1.6.0 sessions lack segments — shown as single blocks (fine)
+
+## Roadmap backlog (post v1.6.5)
+Phases 4-9: Gamification/Galaxy, Apple integration, White noise, Smart insights,
+Command palette/deep links, Customization themes.
+
+## Releases shipped 2026-07-03
+- **v1.6.0–1.6.5** — Phase 3 Timeline
 
 ## Releases shipped 2026-07-02
 - **v1.3.0** — stopwatch mode, in-app updater, tab hit targets

@@ -198,8 +198,10 @@ final class SessionManager {
         remaining += seconds
     }
 
+    @MainActor
     func requestOpenHistory() {
         selectedTab = .history
+        DashboardWindowController.shared.show(section: .timeline)
     }
 
     private func notifyPhaseChanged() {

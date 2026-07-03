@@ -43,7 +43,7 @@ final class GlobalHotkeyManager {
         case "e":
             sessionManager?.extend(byMinutes: 10)
         case "h":
-            sessionManager?.requestOpenHistory()
+            Task { @MainActor in sessionManager?.requestOpenHistory() }
         default:
             break
         }

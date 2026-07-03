@@ -1,9 +1,11 @@
 import SwiftUI
 import SwiftData
 
+// compact timeline for menu-bar popover — full replay lives in dashboard
 struct HistoryView: View {
     @Query(sort: \StudySession.startedAt, order: .reverse) private var sessions: [StudySession]
     @State private var searchText = ""
+    @State private var hoveredSessionId: PersistentIdentifier?
 
     private var calendar: Calendar { .current }
 
@@ -17,46 +19,50 @@ struct HistoryView: View {
         }
     }
 
+    private var recentSessions: [StudySession] {
+        guard let cutoff = calendar.date(byAdding: .day, value: -13, to: calendar.startOfDay(for: Date())) else {
+            return filteredSessions
+        }
+        return filteredSessions.filter { $0.startedAt >= cutoff }
+    }
+
+    private var days: [TimelineDayRow] {
+        TimelineEngine.buildDays(from: recentSessions, zoom: .compact)
+    }
+
     private var todayTotal: TimeInterval {
-        total(for: filteredSessions.filter { calendar.isDateInToday($0.startedAt) })
+        filteredSessions
+            .filter { calendar.isDateInToday($0.startedAt) }
+            .reduce(0) { $0 + $1.actualDuration }
     }
 
     private var weekTotal: TimeInterval {
         guard let weekStart = calendar.dateInterval(of: .weekOfYear, for: Date())?.start else { return 0 }
-        return total(for: filteredSessions.filter { $0.startedAt >= weekStart })
+        return filteredSessions.filter { $0.startedAt >= weekStart }.reduce(0) { $0 + $1.actualDuration }
     }
 
-    private var monthTotal: TimeInterval {
-        guard let monthStart = calendar.dateInterval(of: .month, for: Date())?.start else { return 0 }
-        return total(for: filteredSessions.filter { $0.startedAt >= monthStart })
-    }
-
-    private var dailyAverage: TimeInterval {
-        guard let firstDate = filteredSessions.map(\.startedAt).min() else { return 0 }
-        let dayCount = calendar.dateComponents(
-            [.day],
-            from: calendar.startOfDay(for: firstDate),
-            to: calendar.startOfDay(for: Date())
-        ).day ?? 0
-        return total(for: filteredSessions) / Double(max(1, dayCount + 1))
-    }
-
-    private var subjectTotals: [(name: String, duration: TimeInterval)] {
-        Dictionary(grouping: filteredSessions, by: \.subjectName)
-            .map { (name: $0.key, duration: total(for: $0.value)) }
-            .sorted { $0.duration > $1.duration }
-    }
-
-    private var groupedByDay: [(day: Date, sessions: [StudySession])] {
-        Dictionary(grouping: filteredSessions) { calendar.startOfDay(for: $0.startedAt) }
-            .map { (day: $0.key, sessions: $0.value.sorted { $0.startedAt > $1.startedAt }) }
-            .sorted { $0.day > $1.day }
+    private var hoveredItem: TimelineSessionItem? {
+        guard let hoveredSessionId else { return nil }
+        for day in days {
+            if let item = day.sessions.first(where: { $0.id == hoveredSessionId }) {
+                return item
+            }
+        }
+        return nil
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("History")
-                .font(.title3.bold())
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("Timeline")
+                    .font(.title3.bold())
+                Spacer()
+                Button("Open full") {
+                    DashboardWindowController.shared.show(section: .timeline)
+                }
+                .font(.caption)
+                .buttonStyle(.link)
+            }
 
             if sessions.isEmpty {
                 Text("No sessions yet")
@@ -65,26 +71,41 @@ struct HistoryView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 20)
             } else {
-                TextField("Search subjects or notes", text: $searchText)
+                HStack(spacing: 8) {
+                    miniStat("Today", todayTotal)
+                    miniStat("Week", weekTotal)
+                }
+
+                TextField("Search", text: $searchText)
                     .textFieldStyle(.roundedBorder)
 
-                statsGrid
+                if let hoveredItem {
+                    TimelineSessionTooltip(item: hoveredItem)
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(.quaternary, lineWidth: 1))
+                }
 
-                if filteredSessions.isEmpty {
+                if days.isEmpty {
                     Text("No matches")
                         .font(.callout)
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, 8)
                 } else {
                     ScrollView {
-                        VStack(alignment: .leading, spacing: 10) {
-                            ForEach(groupedByDay, id: \.day) { group in
-                                dayGroup(group)
+                        LazyVStack(alignment: .leading, spacing: 0) {
+                            ForEach(Array(days.enumerated()), id: \.element.id) { index, day in
+                                TimelineDayRowView(
+                                    day: day,
+                                    zoom: .compact,
+                                    isFirst: index == 0,
+                                    isLast: index == days.count - 1,
+                                    hoveredSessionId: $hoveredSessionId
+                                )
+                                .padding(.vertical, 4)
                             }
                         }
                     }
-                    .frame(maxHeight: 200)
+                    .frame(maxHeight: 220)
                 }
             }
         }
@@ -92,101 +113,16 @@ struct HistoryView: View {
         .frame(width: 300)
     }
 
-    private var statsGrid: some View {
-        VStack(spacing: 8) {
-            HStack(spacing: 8) {
-                statCard(title: "Today", value: todayTotal)
-                statCard(title: "Week", value: weekTotal)
-            }
-            HStack(spacing: 8) {
-                statCard(title: "Month", value: monthTotal)
-                statCard(title: "Daily avg", value: dailyAverage)
-            }
-
-            if !subjectTotals.isEmpty {
-                Divider().padding(.vertical, 2)
-                ForEach(subjectTotals, id: \.name) { entry in
-                    statRow(title: entry.name, value: entry.duration, secondary: true)
-                }
-            }
-        }
-    }
-
-    private func statCard(title: String, value: TimeInterval) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
+    private func miniStat(_ title: String, _ value: TimeInterval) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
             Text(title)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
-            Text(formatted(value))
-                .font(.subheadline.weight(.semibold).monospacedDigit())
+            Text(StudyFormatting.duration(value))
+                .font(.caption.weight(.semibold).monospacedDigit())
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(10)
-        .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
-    }
-
-    private func statRow(title: String, value: TimeInterval, secondary: Bool = false) -> some View {
-        HStack {
-            Text(title)
-                .font(secondary ? .caption : .subheadline)
-                .foregroundStyle(secondary ? .secondary : .primary)
-            Spacer()
-            Text(formatted(value))
-                .font((secondary ? Font.caption : Font.subheadline).monospacedDigit())
-                .foregroundStyle(secondary ? .secondary : .primary)
-        }
-    }
-
-    private func dayGroup(_ group: (day: Date, sessions: [StudySession])) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(dayLabel(group.day))
-                .font(.caption.bold())
-                .foregroundStyle(.secondary)
-
-            ForEach(group.sessions) { session in
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 1) {
-                            Text(session.topicName.map { "\(session.subjectName) — \($0)" } ?? session.subjectName)
-                                .font(.callout)
-                            Text(session.startedAt, style: .time)
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                    if !session.completed {
-                        Image(systemName: session.openEnded ? "stopwatch" : "xmark.circle")
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                    }
-                        Text(formatted(session.actualDuration))
-                            .font(.caption.monospacedDigit())
-                            .foregroundStyle(.secondary)
-                    }
-                    if let notes = session.notes, !notes.isEmpty {
-                        Text(notes)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(2)
-                    }
-                }
-            }
-        }
-    }
-
-    private func total(for sessions: [StudySession]) -> TimeInterval {
-        sessions.reduce(0) { $0 + $1.actualDuration }
-    }
-
-    private func formatted(_ interval: TimeInterval) -> String {
-        StudyFormatting.duration(interval)
-    }
-
-    private func dayLabel(_ day: Date) -> String {
-        if calendar.isDateInToday(day) { return "Today" }
-        if calendar.isDateInYesterday(day) { return "Yesterday" }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMM d"
-        return formatter.string(from: day)
+        .padding(8)
+        .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 8))
     }
 }

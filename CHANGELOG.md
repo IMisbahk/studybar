@@ -2,6 +2,16 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.6.5] - 2026-07-03
+
+### Added
+- Timeline **filters**: subject chips, date range (7/30/90 days), completed-only toggle, search
+- Popover History tab renamed to **Timeline** with compact 14-day preview + **Open full** link
+- ⌥⌘H opens dashboard directly on Timeline
+
+### Changed
+- Dashboard **History** sidebar replaced by **Timeline**
+
 ## [1.6.4] - 2026-07-03
 
 ### Added
