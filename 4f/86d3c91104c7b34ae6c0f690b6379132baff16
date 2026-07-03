@@ -1,0 +1,45 @@
+CHANGELOG.md
+  s_ef133bb69a3d94::t_9867a58e80ec09 5-39
+StudyBar/Views/Dashboard/ChartHoverCard.swift
+  s_ef133bb69a3d94::t_e13e966f25962a 1-25
+StudyBar/Core/ExportService.swift
+  s_ef133bb69a3d94::t_f9489d76f3a72f 58-146
+  s_ef133bb69a3d94::t_4e45b8777a5320 147
+StudyBar/Views/Dashboard/MonthlyReportView.swift
+  s_ef133bb69a3d94::t_3e77ba05b1636f 1-113
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_b5fe1a1fea8934 128-129
+  s_ef133bb69a3d94::t_bc51a5f7f62420 251-252
+  s_ef133bb69a3d94::t_44c94da630ab42 379-380
+  s_ef133bb69a3d94::t_90f324a0f15b47 65-66
+  s_ef133bb69a3d94::t_e7b6394e15d076 509,519,536,546
+StudyBar/Views/Dashboard/AnalyticsDashboardView.swift
+  s_ef133bb69a3d94::t_20326690f07d96 3,7,10-13,15-22,27-29,31,33-34,36-37,39,49-63,65-68,72-81,107-132,137-144,152,160-212,229-239,241-263,269-316,335-348,370-405
+  s_ef133bb69a3d94::t_0f6b9b65d46a9c 406
+StudyBar/Core/AnalyticsEngine.swift
+  s_ef133bb69a3d94::t_c7e960edf2408d 270-435
+  s_ef133bb69a3d94::t_561c39729f1a74 83-125
+CLAUDE.md
+  s_ef133bb69a3d94::t_8f8d6ab6c7d087 61-64
+  s_ef133bb69a3d94::t_a9c3beb6189627 70-71
+VERSION
+  s_ef133bb69a3d94::t_7c287480e5414e 1
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_ac308ad0a7fcc0 2,4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "4f86d3c91104c7b34ae6c0f690b6379132baff16",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
