@@ -1,0 +1,72 @@
+CHANGELOG.md
+  s_ef133bb69a3d94::t_e4a2c2887ca67d 5-19
+StudyBar/Core/FloatingTimerController.swift
+  s_ef133bb69a3d94::t_325d580eb673fd 79-81
+  s_ef133bb69a3d94::t_e149e79f31ffb2 32-46
+StudyBar/Views/ThemesSettingsView.swift
+  s_ef133bb69a3d94::t_1b91cf894b7e77 1-39,46-115,117-121
+  s_ef133bb69a3d94::t_f8faa648670331 116
+  s_ef133bb69a3d94::t_10b1e3b9c7701d 40-45
+StudyBar/Views/Dashboard/DashboardSettingsView.swift
+  s_ef133bb69a3d94::t_4aa7a4340d638c 5-8
+StudyBar/Views/ActiveSessionView.swift
+  s_ef133bb69a3d94::t_b95a237268d211 75
+  s_ef133bb69a3d94::t_6b2f3d21f3fbf5 57
+  s_ef133bb69a3d94::t_681cdbefa9cc6e 74
+  s_ef133bb69a3d94::t_8499581b2c41a7 5,7
+StudyBar/Views/FloatingTimerView.swift
+  s_ef133bb69a3d94::t_f18806612ab0c8 11
+  s_ef133bb69a3d94::t_28988a9b3b55d1 60
+  s_ef133bb69a3d94::t_704369455b58ac 36,50
+  s_ef133bb69a3d94::t_38db206dc9403e 6-10,12-13,19
+StudyBar/Core/DashboardWindowController.swift
+  s_ef133bb69a3d94::t_41ca6d7f049c7c 26-30
+StudyBar/Views/ProgressRingView.swift
+  s_ef133bb69a3d94::t_50ce176e318872 20
+  s_ef133bb69a3d94::t_73790ff5372b35 10
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_477266324a8efb 257
+  s_ef133bb69a3d94::t_9aa4391f7074d7 553,563,580,590
+  s_ef133bb69a3d94::t_e29b6004a2d20c 423-424
+  s_ef133bb69a3d94::t_71131bbbfc14f7 76-77
+  s_ef133bb69a3d94::t_b12dbd2b53da21 236
+  s_ef133bb69a3d94::t_022f7568af9e74 150-151
+RELEASE_NOTES_v2.1.0.md
+  s_ef133bb69a3d94::t_7cc6523e8e515c 1-33
+StudyBar/Views/StudyGoalProgressView.swift
+  s_ef133bb69a3d94::t_8b25d57aa9ab66 6
+  s_ef133bb69a3d94::t_6a3beac8ba4357 15
+StudyBar/Core/AppNotifications.swift
+  s_ef133bb69a3d94::t_20c5948175dacd 7
+StudyBar/StudyBarApp.swift
+  s_ef133bb69a3d94::t_04bae305ff3b66 29-33
+  s_ef133bb69a3d94::t_002c8719eb7c28 74-77,79-81
+StudyBar/Views/MenuBarLabelView.swift
+  s_ef133bb69a3d94::t_5128adbf3deaf4 13-21,27-28,30-50,52,54-56,61-62
+  s_ef133bb69a3d94::t_3bb2885e4a422d 22-26
+  s_ef133bb69a3d94::t_dc71a80727bb5e 74-78
+  s_ef133bb69a3d94::t_fe8c4e34996eec 6-8
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_9f6a5928b6531a 112-127
+  s_ef133bb69a3d94::t_5a5fbe717741a1 49
+StudyBar/Core/StudyTheme.swift
+  s_ef133bb69a3d94::t_9ada64be0724a6 1-143
+VERSION
+  s_ef133bb69a3d94::t_9aa4391f7074d7 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "6597627ba5b2fa12e9460a8a8c560a1b3754cc7b",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
