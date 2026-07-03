@@ -2,6 +2,11 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.6.51] - 2026-07-03
+
+### Fixed
+- **Restart to Update** from dashboard Settings now quits the app (was blocked by ⌘Q dashboard-close handler)
+
 ## [1.6.5] - 2026-07-03
 
 ### Added

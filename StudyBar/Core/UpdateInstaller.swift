@@ -5,6 +5,8 @@ import Foundation
 enum UpdateInstaller {
     private static let repo = "IMisbahk/studybar"
     private static let apiUrl = URL(string: "https://api.github.com/repos/\(repo)/releases/latest")!
+    // dashboard ⌘Q intercept blocks terminate — relauncher needs a real quit
+    static var isRelaunchPending = false
 
     struct ReleaseAsset {
         let version: String
@@ -146,6 +148,7 @@ enum UpdateInstaller {
             throw NSError(domain: "UpdateInstaller", code: 6, userInfo: [NSLocalizedDescriptionKey: "Could not start update installer"])
         }
 
+        isRelaunchPending = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             NSApp.terminate(nil)
         }
