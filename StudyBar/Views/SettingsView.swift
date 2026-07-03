@@ -118,7 +118,6 @@ struct SettingsView: View {
             Link(destination: URL(string: "https://github.com/IMisbahk/studybar")!) {
                 Label("GitHub Repository", systemImage: "link")
             }
-            FeedbackRatingView()
         }
     }
 

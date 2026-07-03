@@ -2,6 +2,16 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.5.33] - 2026-07-03
+
+### Added
+- Exports (heatmap PNG, sessions CSV) save directly to **Downloads**
+- macOS notification on export with **Show in Finder** action
+- In-app green confirmation banner with **Show in Finder** button
+
+### Removed
+- Star rating feedback UI from Settings
+
 ## [1.5.32] - 2026-07-03
 
 ### Added
@@ -152,6 +162,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.5.33]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.33
 [1.5.32]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.32
 [1.5.31]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.31
 [1.5.3]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.3

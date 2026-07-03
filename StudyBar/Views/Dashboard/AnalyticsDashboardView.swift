@@ -5,6 +5,7 @@ import SwiftData
 struct AnalyticsDashboardView: View {
     @Query(sort: \StudySession.startedAt, order: .reverse) private var sessions: [StudySession]
     @State private var heatmapRange: HeatmapRange = .annual
+    @State private var exportToast: ExportResult?
 
     private var dailyTotals: [DayStudyTotal] {
         AnalyticsEngine.dailyTotals(from: sessions, range: heatmapRange)
@@ -32,6 +33,9 @@ struct AnalyticsDashboardView: View {
                     subjectChartCard
                 }
                 exportRow
+                if let exportToast {
+                    exportToastBanner(exportToast)
+                }
             }
             .padding(24)
         }
@@ -120,19 +124,52 @@ struct AnalyticsDashboardView: View {
     private var exportRow: some View {
         HStack(spacing: 10) {
             Button("Export Heatmap PNG") {
-                let exportView = VStack(alignment: .leading, spacing: 8) {
-                    Text("StudyBar Study Heatmap — \(heatmapRange.title)")
-                        .font(.headline)
-                    StudyHeatmapView(days: dailyTotals, dayDetails: heatmapDayDetails, range: heatmapRange, showLegend: true)
-                }
-                .padding(16)
-                .background(Color.white)
-                let width: CGFloat = heatmapRange == .weekly ? 360 : 900
-                ExportService.savePNG(from: exportView, size: CGSize(width: width, height: 180), defaultName: "studybar-heatmap-\(heatmapRange.rawValue).png")
+                exportHeatmapPNG()
             }
             Button("Export Sessions CSV") {
-                ExportService.exportSessionsCSV(sessions)
+                if let result = ExportService.exportSessionsCSV(sessions) {
+                    exportToast = result
+                }
             }
         }
+    }
+
+    private func exportHeatmapPNG() {
+        let exportView = VStack(alignment: .leading, spacing: 8) {
+            Text("StudyBar Study Heatmap — \(heatmapRange.title)")
+                .font(.headline)
+            StudyHeatmapView(days: dailyTotals, dayDetails: heatmapDayDetails, range: heatmapRange, showLegend: true)
+        }
+        .padding(16)
+        .background(Color.white)
+        let width: CGFloat = heatmapRange == .weekly ? 360 : 900
+        if let result = ExportService.savePNG(
+            from: exportView,
+            size: CGSize(width: width, height: 180),
+            defaultName: "studybar-heatmap-\(heatmapRange.rawValue).png"
+        ) {
+            exportToast = result
+        }
+    }
+
+    private func exportToastBanner(_ result: ExportResult) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundStyle(.green)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Saved to Downloads")
+                    .font(.subheadline.weight(.medium))
+                Text(result.fileName)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+            Button("Show in Finder") {
+                ExportService.revealInFinder(result.url)
+            }
+            .controlSize(.small)
+        }
+        .padding(12)
+        .background(.green.opacity(0.12), in: RoundedRectangle(cornerRadius: 10))
     }
 }

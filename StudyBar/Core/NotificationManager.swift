@@ -6,11 +6,17 @@ enum NotificationActionId {
     static let resume = "RESUME_SESSION"
     static let extend = "EXTEND_SESSION"
     static let stop = "STOP_SESSION"
+    static let showInFinder = "SHOW_IN_FINDER"
 }
 
 enum NotificationCategoryId {
     static let active = "SESSION_ACTIVE"
     static let complete = "SESSION_COMPLETE"
+    static let export = "EXPORT_SAVED"
+}
+
+enum NotificationUserInfoKey {
+    static let exportPath = "exportPath"
 }
 
 final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
@@ -56,7 +62,19 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             options: []
         )
 
-        UNUserNotificationCenter.current().setNotificationCategories([activeCategory, completeCategory])
+        let showInFinder = UNNotificationAction(
+            identifier: NotificationActionId.showInFinder,
+            title: "Show in Finder",
+            options: []
+        )
+        let exportCategory = UNNotificationCategory(
+            identifier: NotificationCategoryId.export,
+            actions: [showInFinder],
+            intentIdentifiers: [],
+            options: []
+        )
+
+        UNUserNotificationCenter.current().setNotificationCategories([activeCategory, completeCategory, exportCategory])
     }
 
     func fireSessionStarted(subjectName: String, topicName: String?, minutes: Int) {
@@ -97,6 +115,17 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         fire(content)
     }
 
+    func fireExportSaved(fileURL: URL) {
+        let content = UNMutableNotificationContent()
+        content.title = "Export saved"
+        content.subtitle = fileURL.lastPathComponent
+        content.body = "Saved to your Downloads folder. Tap to show in Finder."
+        content.sound = .default
+        content.categoryIdentifier = NotificationCategoryId.export
+        content.userInfo = [NotificationUserInfoKey.exportPath: fileURL.path]
+        fire(content)
+    }
+
     private func fire(_ content: UNMutableNotificationContent) {
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
@@ -114,8 +143,21 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse
     ) async {
         await MainActor.run {
+            if response.notification.request.content.categoryIdentifier == NotificationCategoryId.export {
+                revealExportIfNeeded(from: response)
+                return
+            }
             handleAction(response.actionIdentifier)
         }
+    }
+
+    @MainActor
+    private func revealExportIfNeeded(from response: UNNotificationResponse) {
+        let showFinder = response.actionIdentifier == NotificationActionId.showInFinder
+            || response.actionIdentifier == UNNotificationDefaultActionIdentifier
+        guard showFinder,
+              let path = response.notification.request.content.userInfo[NotificationUserInfoKey.exportPath] as? String else { return }
+        ExportService.revealInFinder(URL(fileURLWithPath: path))
     }
 
     @MainActor
