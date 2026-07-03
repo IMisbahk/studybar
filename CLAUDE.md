@@ -67,14 +67,16 @@
 - `GamificationEngine` runs on session log + backfill on launch
 - Support link: https://rzp.io/rzp/studybar in Settings
 
-## Roadmap backlog (post v1.8.0)
+## Roadmap backlog (post v1.8.1)
 Phases 5-6 skip, 8-9 power user/customization.
 
-## v1.8.0 (branch `release/1.8.0` — local only, not pushed)
-- `InsightsEngine` + **Insights** dashboard tab (Phase 7 Smart Insights)
-- Peak focus window, weekday/subject patterns, consistency trend, session length suggestion
-- Burnout + break warnings, weekly/monthly narrative summaries
-- All local stats — no cloud, no LLM
+## v1.8.1 (2026-07-03) — shipped
+- Heatmap fix (removed `.drawingGroup()` on heatmap card)
+- Session log with delete + bulk delete under 5 min; gamification rebuild on delete
+- Study reminders: peak hour daily + inactivity nudges (Settings)
+
+## v1.8.0 (2026-07-03) — shipped
+- Phase 7 Smart Insights tab (`InsightsEngine`)
 
 ## Releases shipped 2026-07-03
 - **v1.6.0–1.6.5** — Phase 3 Timeline

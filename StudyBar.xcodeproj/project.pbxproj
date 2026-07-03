@@ -66,6 +66,8 @@
 		E6A7B8C9D0E14D567788901 /* ChartHoverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */; };
 		G8H9I0J1K2L38F901223456 /* InsightsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = H9I0J1K2L3M49G012334567 /* InsightsEngine.swift */; };
 		I0J1K2L3M4N50H123445678 /* InsightsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = J1K2L3M4N5O61I234556789 /* InsightsDashboardView.swift */; };
+		K2L3M4N5O6P72J345667890 /* StudyReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = L3M4N5O6P7Q83K456778901 /* StudyReminderScheduler.swift */; };
+		M4N5O6P7Q8R94L567889012 /* SessionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = N5O6P7Q8R9S05M678990123 /* SessionLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +133,8 @@
 		F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHoverCard.swift; sourceTree = "<group>"; };
 		H9I0J1K2L3M49G012334567 /* InsightsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsEngine.swift; sourceTree = "<group>"; };
 		J1K2L3M4N5O61I234556789 /* InsightsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsDashboardView.swift; sourceTree = "<group>"; };
+		L3M4N5O6P7Q83K456778901 /* StudyReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyReminderScheduler.swift; sourceTree = "<group>"; };
+		N5O6P7Q8R9S05M678990123 /* SessionLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 				P0D1E2F3A4B59A012233445 /* AchievementCatalog.swift */,
 				R2F3A4B5C6D71C234455667 /* GamificationUnlockCenter.swift */,
 				H9I0J1K2L3M49G012334567 /* InsightsEngine.swift */,
+				L3M4N5O6P7Q83K456778901 /* StudyReminderScheduler.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				D5F6A7B8C9D03C456677890 /* MonthlyReportView.swift */,
 				F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */,
 				J1K2L3M4N5O61I234556789 /* InsightsDashboardView.swift */,
+				N5O6P7Q8R9S05M678990123 /* SessionLogView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -386,6 +392,8 @@
 				E6A7B8C9D0E14D567788901 /* ChartHoverCard.swift in Sources */,
 				G8H9I0J1K2L38F901223456 /* InsightsEngine.swift in Sources */,
 				I0J1K2L3M4N50H123445678 /* InsightsDashboardView.swift in Sources */,
+				K2L3M4N5O6P72J345667890 /* StudyReminderScheduler.swift in Sources */,
+				M4N5O6P7Q8R94L567889012 /* SessionLogView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +522,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10800;
+				CURRENT_PROJECT_VERSION = 10801;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -524,7 +532,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.8.0;
+				MARKETING_VERSION = 1.8.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -541,7 +549,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10800;
+				CURRENT_PROJECT_VERSION = 10801;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -551,7 +559,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.8.0;
+				MARKETING_VERSION = 1.8.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

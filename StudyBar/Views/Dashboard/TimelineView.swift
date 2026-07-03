@@ -40,40 +40,42 @@ struct TimelineView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            toolbar
-            if let hoveredItem {
-                TimelineSessionTooltip(item: hoveredItem)
-                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(.quaternary, lineWidth: 1))
-            }
-            if days.isEmpty {
-                ContentUnavailableView(
-                    sessions.isEmpty ? "No Sessions Yet" : "No Matches",
-                    systemImage: "timeline.selection",
-                    description: Text(sessions.isEmpty ? "Start a session to build your timeline." : "Try different filters.")
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 0) {
-                        ForEach(Array(days.enumerated()), id: \.element.id) { index, day in
-                            TimelineDayRowView(
-                                day: day,
-                                zoom: zoom,
-                                isFirst: index == 0,
-                                isLast: index == days.count - 1,
-                                hoveredSessionId: $hoveredSessionId
-                            )
-                            .padding(.vertical, 8)
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 16) {
+                toolbar
+                if let hoveredItem {
+                    TimelineSessionTooltip(item: hoveredItem)
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.quaternary, lineWidth: 1))
+                }
+                if days.isEmpty {
+                    ContentUnavailableView(
+                        sessions.isEmpty ? "No Sessions Yet" : "No Matches",
+                        systemImage: "timeline.selection",
+                        description: Text(sessions.isEmpty ? "Start a session to build your timeline." : "Try different filters.")
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 0) {
+                            ForEach(Array(days.enumerated()), id: \.element.id) { index, day in
+                                TimelineDayRowView(
+                                    day: day,
+                                    zoom: zoom,
+                                    isFirst: index == 0,
+                                    isLast: index == days.count - 1,
+                                    hoveredSessionId: $hoveredSessionId
+                                )
+                                .padding(.vertical, 8)
+                            }
                         }
+                        .padding(.horizontal, 4)
                     }
-                    .padding(.horizontal, 4)
                 }
             }
+            .padding(24)
+            .navigationTitle("Timeline")
         }
-        .padding(24)
-        .navigationTitle("Timeline")
     }
 
     private var toolbar: some View {
@@ -124,6 +126,12 @@ struct TimelineView: View {
                         selectedSubjects.isEmpty ? "All subjects" : "\(selectedSubjects.count) subject\(selectedSubjects.count == 1 ? "" : "s")",
                         systemImage: "line.3.horizontal.decrease.circle"
                     )
+                }
+
+                NavigationLink {
+                    SessionLogView()
+                } label: {
+                    Label("Session log", systemImage: "list.bullet")
                 }
             }
 

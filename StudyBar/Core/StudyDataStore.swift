@@ -9,6 +9,22 @@ enum StudyDataStore {
     ])
     private static let storeFileName = "studybar.store"
 
+    @MainActor
+    static func deleteSession(_ session: StudySession, in context: ModelContext) {
+        context.delete(session)
+        try? context.save()
+        GamificationEngine.rebuildAll(in: context)
+        StudyReminderScheduler.shared.reschedule(in: context)
+    }
+
+    @MainActor
+    static func deleteSessions(_ sessions: [StudySession], in context: ModelContext) {
+        for session in sessions { context.delete(session) }
+        try? context.save()
+        GamificationEngine.rebuildAll(in: context)
+        StudyReminderScheduler.shared.reschedule(in: context)
+    }
+
     static func makeContainer() throws -> ModelContainer {
         let storeURL = canonicalStoreURL()
         try FileManager.default.createDirectory(
@@ -37,9 +53,7 @@ enum StudyDataStore {
     private static func legacyStoreCandidates() -> [URL] {
         let home = FileManager.default.homeDirectoryForCurrentUser
         return [
-            // sandboxed builds (v1.0 – v1.5.2)
             home.appendingPathComponent("Library/Containers/com.misbah.studybar/Data/Library/Application Support/default.store"),
-            // v1.5.3 accidentally used the global default name
             home.appendingPathComponent("Library/Application Support/default.store"),
         ]
     }

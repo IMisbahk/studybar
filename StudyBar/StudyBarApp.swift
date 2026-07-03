@@ -15,7 +15,11 @@ struct StudyBarApp: App {
             "soundOnSessionEnd": true,
             "floatingTimerEnabled": true,
             "floatingTimerOpacity": 0.9,
-            "floatingTimerAutoHide": true
+            "floatingTimerAutoHide": true,
+            "studyRemindersEnabled": true,
+            "peakHourRemindersEnabled": true,
+            "inactivityRemindersEnabled": true,
+            "inactivityReminderDays": 2
         ])
 
         let container: ModelContainer
@@ -48,6 +52,7 @@ struct StudyBarApp: App {
             hotkeys.start()
             floating.start()
             power.start()
+            StudyReminderScheduler.shared.reschedule(in: container.mainContext)
         }
     }
 

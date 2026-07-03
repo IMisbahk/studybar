@@ -2,6 +2,16 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.8.1] - 2026-07-03
+
+### Fixed
+- Study heatmap rendering on Analytics (removed rasterization that broke the grid)
+
+### Added
+- **Session log** — delete individual sessions or bulk-delete under 5 min (Timeline → Session log)
+- **Study reminders** — daily peak-focus-time notification + inactivity nudges (Settings)
+- XP/achievements recalculate after session deletion
+
 ## [1.8.0] - 2026-07-03
 
 ### Added

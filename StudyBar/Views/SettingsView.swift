@@ -1,13 +1,19 @@
 import SwiftUI
 import ServiceManagement
 import AppKit
+import SwiftData
 
 struct SettingsView: View {
     var compact: Bool = true
+    @Environment(\.modelContext) private var modelContext
     @AppStorage("soundOnSessionEnd") private var soundOnSessionEnd = true
     @AppStorage("floatingTimerEnabled") private var floatingTimerEnabled = true
     @AppStorage("floatingTimerOpacity") private var floatingTimerOpacity = 0.9
     @AppStorage("floatingTimerAutoHide") private var floatingTimerAutoHide = true
+    @AppStorage("studyRemindersEnabled") private var studyRemindersEnabled = true
+    @AppStorage("peakHourRemindersEnabled") private var peakHourRemindersEnabled = true
+    @AppStorage("inactivityRemindersEnabled") private var inactivityRemindersEnabled = true
+    @AppStorage("inactivityReminderDays") private var inactivityReminderDays = 2
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var updateStatus: UpdateChecker.Status = .idle
     @State private var updateTask: Task<Void, Never>?
@@ -32,6 +38,7 @@ struct SettingsView: View {
                 }
                 updatesSection
                 generalSection
+                remindersSection
                 floatingTimerSection
                 shortcutsSection
                 quitSection
@@ -40,7 +47,14 @@ struct SettingsView: View {
         }
         .frame(width: compact ? 300 : nil)
         .frame(maxWidth: compact ? 300 : .infinity, alignment: .leading)
-        .onAppear { checkForUpdates() }
+        .onAppear {
+            checkForUpdates()
+            StudyReminderScheduler.shared.reschedule(in: modelContext)
+        }
+        .onChange(of: studyRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
+        .onChange(of: peakHourRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
+        .onChange(of: inactivityRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
+        .onChange(of: inactivityReminderDays) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
         .onDisappear { updateTask?.cancel() }
     }
 
@@ -79,6 +93,24 @@ struct SettingsView: View {
             } label: {
                 Label("Manage Subjects", systemImage: "books.vertical")
             }
+        }
+    }
+
+    private var remindersSection: some View {
+        settingsSection(title: "Study Reminders") {
+            Toggle("Study Reminders", isOn: $studyRemindersEnabled)
+            Toggle("Peak Focus Time", isOn: $peakHourRemindersEnabled)
+                .disabled(!studyRemindersEnabled)
+            Toggle("Inactivity Nudges", isOn: $inactivityRemindersEnabled)
+                .disabled(!studyRemindersEnabled)
+            if studyRemindersEnabled && inactivityRemindersEnabled {
+                Stepper("Nudge after \(inactivityReminderDays) day\(inactivityReminderDays == 1 ? "" : "s")", value: $inactivityReminderDays, in: 1...14)
+                    .font(.subheadline)
+            }
+            Text("Peak time uses your most productive hour from session history. Inactivity reminders fire if you haven't studied recently.")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 

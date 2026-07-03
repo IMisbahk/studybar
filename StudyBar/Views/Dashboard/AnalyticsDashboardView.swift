@@ -116,7 +116,6 @@ struct AnalyticsDashboardView: View {
         }
         .padding(14)
         .background(.quaternary.opacity(0.2), in: RoundedRectangle(cornerRadius: 12))
-        .drawingGroup()
     }
 
     private var dailyChartCard: some View {
