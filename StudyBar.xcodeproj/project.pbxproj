@@ -62,6 +62,8 @@
 		W7E8F9A0B1C26B789900123 /* GalaxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = X8F9A0B1C2D37C890011234 /* GalaxyView.swift */; };
 		Y9A0B1C2D3E48D901122345 /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z0B1C2D3E4F59E012233456 /* PlanetView.swift */; };
 		A2C3D4E5F6A70F123344567 /* AchievementUnlockBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */; };
+		C4E5F6A7B8C92B345566789 /* MonthlyReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6A7B8C9D03C456677890 /* MonthlyReportView.swift */; };
+		E6A7B8C9D0E14D567788901 /* ChartHoverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +125,8 @@
 		X8F9A0B1C2D37C890011234 /* GalaxyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyView.swift; sourceTree = "<group>"; };
 		Z0B1C2D3E4F59E012233456 /* PlanetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetView.swift; sourceTree = "<group>"; };
 		B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementUnlockBanner.swift; sourceTree = "<group>"; };
+		D5F6A7B8C9D03C456677890 /* MonthlyReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReportView.swift; sourceTree = "<group>"; };
+		F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHoverCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +248,8 @@
 				X8F9A0B1C2D37C890011234 /* GalaxyView.swift */,
 				Z0B1C2D3E4F59E012233456 /* PlanetView.swift */,
 				B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */,
+				D5F6A7B8C9D03C456677890 /* MonthlyReportView.swift */,
+				F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -370,6 +376,8 @@
 				W7E8F9A0B1C26B789900123 /* GalaxyView.swift in Sources */,
 				Y9A0B1C2D3E48D901122345 /* PlanetView.swift in Sources */,
 				A2C3D4E5F6A70F123344567 /* AchievementUnlockBanner.swift in Sources */,
+				C4E5F6A7B8C92B345566789 /* MonthlyReportView.swift in Sources */,
+				E6A7B8C9D0E14D567788901 /* ChartHoverCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,7 +506,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10705;
+				CURRENT_PROJECT_VERSION = 10757;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -508,7 +516,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.7.5;
+				MARKETING_VERSION = 1.7.57;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -525,7 +533,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10705;
+				CURRENT_PROJECT_VERSION = 10757;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -535,7 +543,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.7.5;
+				MARKETING_VERSION = 1.7.57;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

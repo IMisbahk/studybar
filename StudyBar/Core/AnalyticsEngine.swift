@@ -80,6 +80,49 @@ struct SubjectStudyTotal: Identifiable, Hashable {
     var id: String { name }
 }
 
+struct MonthStudyTotal: Identifiable, Hashable {
+    let monthStart: Date
+    let totalSeconds: TimeInterval
+
+    var id: Date { monthStart }
+}
+
+struct HourStudyTotal: Identifiable, Hashable {
+    let hour: Int
+    let totalSeconds: TimeInterval
+
+    var id: Int { hour }
+}
+
+struct AnalyticsOverview: Hashable {
+    let totalStudySeconds: TimeInterval
+    let totalSessions: Int
+    let averageSessionLength: TimeInterval
+    let longestSessionSeconds: TimeInterval
+    let shortestSessionSeconds: TimeInterval
+    let mostProductiveWeekday: String
+    let mostProductiveHour: Int
+    let averageDailyStudy: TimeInterval
+    let longestUninterruptedSessionSeconds: TimeInterval
+    let consistencyScore: Int
+    let focusScore: Int
+    let rolling7DayAverage: TimeInterval
+    let rolling30DayAverage: TimeInterval
+    let previousWeekChangePercent: Double?
+    let previousMonthChangePercent: Double?
+    let yearToDateSeconds: TimeInterval
+}
+
+struct PeriodComparison: Hashable {
+    let currentSeconds: TimeInterval
+    let previousSeconds: TimeInterval
+
+    var changePercent: Double? {
+        guard previousSeconds > 0 else { return currentSeconds > 0 ? 100 : nil }
+        return ((currentSeconds - previousSeconds) / previousSeconds) * 100
+    }
+}
+
 enum AnalyticsEngine {
     private static var calendar: Calendar { .current }
 
@@ -223,5 +266,171 @@ enum AnalyticsEngine {
         if minutes < 60 { return 3 }
         if max > 0, total >= max * 0.9 { return 4 }
         return 4
+    }
+
+    static func overview(from sessions: [StudySession]) -> AnalyticsOverview {
+        let totalSeconds = total(for: sessions)
+        let count = sessions.count
+        let durations = sessions.map(\.actualDuration).filter { $0 > 0 }
+        let avg = count > 0 ? totalSeconds / Double(count) : 0
+        let longest = durations.max() ?? 0
+        let shortest = durations.min() ?? 0
+        let weekday = mostProductiveWeekday(from: sessions)
+        let hour = mostProductiveHour(from: sessions)
+        let avgDaily = averageDailyStudy(from: sessions)
+        let longestSession = durations.max() ?? 0
+
+        return AnalyticsOverview(
+            totalStudySeconds: totalSeconds,
+            totalSessions: count,
+            averageSessionLength: avg,
+            longestSessionSeconds: longest,
+            shortestSessionSeconds: shortest,
+            mostProductiveWeekday: weekday,
+            mostProductiveHour: hour,
+            averageDailyStudy: avgDaily,
+            longestUninterruptedSessionSeconds: longestSession,
+            consistencyScore: consistencyScore(from: sessions),
+            focusScore: focusScore(from: sessions),
+            rolling7DayAverage: rollingAverage(from: sessions, days: 7),
+            rolling30DayAverage: rollingAverage(from: sessions, days: 30),
+            previousWeekChangePercent: weekComparison(from: sessions).changePercent,
+            previousMonthChangePercent: monthComparison(from: sessions).changePercent,
+            yearToDateSeconds: yearToDateTotal(from: sessions)
+        )
+    }
+
+    static func monthlyTotals(from sessions: [StudySession], trailingMonths: Int = 12) -> [MonthStudyTotal] {
+        guard let thisMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: Date())) else { return [] }
+        var result: [MonthStudyTotal] = []
+        for offset in stride(from: trailingMonths - 1, through: 0, by: -1) {
+            guard let monthStart = calendar.date(byAdding: .month, value: -offset, to: thisMonth),
+                  let monthEnd = calendar.date(byAdding: .month, value: 1, to: monthStart) else { continue }
+            let monthSessions = sessions.filter { $0.startedAt >= monthStart && $0.startedAt < monthEnd }
+            result.append(MonthStudyTotal(monthStart: monthStart, totalSeconds: total(for: monthSessions)))
+        }
+        return result
+    }
+
+    static func hourOfDayTotals(from sessions: [StudySession]) -> [HourStudyTotal] {
+        var buckets = Array(repeating: TimeInterval(0), count: 24)
+        for session in sessions {
+            let hour = calendar.component(.hour, from: session.startedAt)
+            buckets[hour] += session.actualDuration
+        }
+        return buckets.enumerated().map { HourStudyTotal(hour: $0.offset, totalSeconds: $0.element) }
+    }
+
+    static func dailyTotalsTrailing(days: Int, from sessions: [StudySession]) -> [DayStudyTotal] {
+        dailyTotals(from: sessions, trailingDays: days)
+    }
+
+    static func weekComparison(from sessions: [StudySession]) -> PeriodComparison {
+        guard let thisWeek = calendar.dateInterval(of: .weekOfYear, for: Date()),
+              let lastWeekStart = calendar.date(byAdding: .weekOfYear, value: -1, to: thisWeek.start),
+              let lastWeekEnd = calendar.date(byAdding: .weekOfYear, value: -1, to: thisWeek.end) else {
+            return PeriodComparison(currentSeconds: 0, previousSeconds: 0)
+        }
+        let current = total(for: sessions.filter { thisWeek.contains($0.startedAt) })
+        let previous = total(for: sessions.filter { $0.startedAt >= lastWeekStart && $0.startedAt < lastWeekEnd })
+        return PeriodComparison(currentSeconds: current, previousSeconds: previous)
+    }
+
+    static func monthComparison(from sessions: [StudySession]) -> PeriodComparison {
+        let now = Date()
+        guard let thisMonth = calendar.dateInterval(of: .month, for: now),
+              let lastMonthStart = calendar.date(byAdding: .month, value: -1, to: thisMonth.start),
+              let lastMonthEnd = calendar.date(byAdding: .month, value: -1, to: thisMonth.end) else {
+            return PeriodComparison(currentSeconds: 0, previousSeconds: 0)
+        }
+        let current = total(for: sessions.filter { thisMonth.contains($0.startedAt) })
+        let previous = total(for: sessions.filter { $0.startedAt >= lastMonthStart && $0.startedAt < lastMonthEnd })
+        return PeriodComparison(currentSeconds: current, previousSeconds: previous)
+    }
+
+    static func subjectTrends(from sessions: [StudySession], trailingWeeks: Int = 8) -> [String: [WeekStudyTotal]] {
+        let names = Set(sessions.map(\.subjectName))
+        var result: [String: [WeekStudyTotal]] = [:]
+        for name in names {
+            let subjectSessions = sessions.filter { $0.subjectName == name }
+            result[name] = weeklyTotals(from: subjectSessions, trailingWeeks: trailingWeeks)
+        }
+        return result
+    }
+
+    private static func yearToDateTotal(from sessions: [StudySession]) -> TimeInterval {
+        let interval = HeatmapRange.ytd.interval()
+        return total(for: sessions.filter { $0.startedAt >= interval.start })
+    }
+
+    private static func rollingAverage(from sessions: [StudySession], days: Int) -> TimeInterval {
+        let today = calendar.startOfDay(for: Date())
+        guard let start = calendar.date(byAdding: .day, value: -(days - 1), to: today) else { return 0 }
+        let windowSessions = sessions.filter { $0.startedAt >= start }
+        guard !windowSessions.isEmpty else { return 0 }
+        return total(for: windowSessions) / Double(days)
+    }
+
+    private static func averageDailyStudy(from sessions: [StudySession]) -> TimeInterval {
+        guard let first = sessions.map(\.startedAt).min() else { return 0 }
+        let start = calendar.startOfDay(for: first)
+        let end = calendar.startOfDay(for: Date())
+        let dayCount = max(1, (calendar.dateComponents([.day], from: start, to: end).day ?? 0) + 1)
+        return total(for: sessions) / Double(dayCount)
+    }
+
+    private static func mostProductiveWeekday(from sessions: [StudySession]) -> String {
+        var totals: [Int: TimeInterval] = [:]
+        for session in sessions {
+            let wd = calendar.component(.weekday, from: session.startedAt)
+            totals[wd, default: 0] += session.actualDuration
+        }
+        guard let best = totals.max(by: { $0.value < $1.value })?.key else { return "—" }
+        return calendar.weekdaySymbols[best - 1]
+    }
+
+    private static func mostProductiveHour(from sessions: [StudySession]) -> Int {
+        var totals = Array(repeating: TimeInterval(0), count: 24)
+        for session in sessions {
+            let hour = calendar.component(.hour, from: session.startedAt)
+            totals[hour] += session.actualDuration
+        }
+        return totals.enumerated().max(by: { $0.element < $1.element })?.offset ?? 0
+    }
+
+    // active study days / span — simple consistency metric
+    private static func consistencyScore(from sessions: [StudySession]) -> Int {
+        guard let first = sessions.map(\.startedAt).min() else { return 0 }
+        let start = calendar.startOfDay(for: first)
+        let end = calendar.startOfDay(for: Date())
+        let span = max(1, (calendar.dateComponents([.day], from: start, to: end).day ?? 0) + 1)
+        let activeDays = Set(sessions.map { calendar.startOfDay(for: $0.startedAt) }).count
+        let streakBoost = min(20, longestStreak(from: sessions) * 2)
+        let base = Int((Double(activeDays) / Double(span)) * 80)
+        return min(100, base + streakBoost)
+    }
+
+    // completion + low pause time = focus
+    private static func focusScore(from sessions: [StudySession]) -> Int {
+        guard !sessions.isEmpty else { return 0 }
+        let completedRatio = Double(sessions.filter(\.completed).count) / Double(sessions.count)
+        var pauseSeconds: TimeInterval = 0
+        var activeSeconds: TimeInterval = 0
+        for session in sessions {
+            for segment in session.segments {
+                let duration = segment.endedAt.timeIntervalSince(segment.startedAt)
+                if segment.kind == .active {
+                    activeSeconds += duration
+                } else {
+                    pauseSeconds += duration
+                }
+            }
+            if session.segments.isEmpty {
+                activeSeconds += session.actualDuration
+            }
+        }
+        let pauseRatio = activeSeconds > 0 ? pauseSeconds / (activeSeconds + pauseSeconds) : 0
+        let raw = completedRatio * 70 + (1 - min(1, pauseRatio)) * 30
+        return min(100, max(0, Int(raw.rounded())))
     }
 }

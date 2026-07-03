@@ -58,13 +58,17 @@
 - Segments, engine, tooltips, dashboard timeline, zoom, filters/popover compact view
 - Pre-1.6.0 sessions lack segments — shown as single blocks (fine)
 
+## Phase 2 Analytics (v1.7.52–1.7.57) — shipped 2026-07-03
+- Full analytics dashboard: stats, scores, daily/monthly/time-of-day charts, pie chart
+- Exports: JSON, Markdown, monthly PDF report
+
 ## Phase 4 Gamification (v1.7.0–1.7.5) — shipped 2026-07-03
 - XP/levels, ~83 global + 8 per-subject achievement templates, galaxy planets
 - `GamificationEngine` runs on session log + backfill on launch
 - Support link: https://rzp.io/rzp/studybar in Settings
 
-## Roadmap backlog (post v1.7.5)
-Phases 5-9: Apple integration, White noise, Smart insights, Command palette, Customization.
+## Roadmap backlog (post v1.7.57)
+Phase 7 Smart Insights (v1.8.0+), then Phases 5-6 skip, 8-9 power user/customization.
 
 ## Releases shipped 2026-07-03
 - **v1.6.0–1.6.5** — Phase 3 Timeline

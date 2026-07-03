@@ -55,6 +55,96 @@ enum ExportService {
         }
     }
 
+    static func exportSessionsJSON(_ sessions: [StudySession]) -> ExportResult? {
+        let formatter = ISO8601DateFormatter()
+        let payload: [[String: Any]] = sessions.sorted { $0.startedAt > $1.startedAt }.map { session in
+            [
+                "startedAt": formatter.string(from: session.startedAt),
+                "endedAt": formatter.string(from: session.endedAt),
+                "subject": session.subjectName,
+                "topic": session.topicName as Any,
+                "minutes": Int(session.actualDuration / 60),
+                "completed": session.completed,
+                "openEnded": session.openEnded,
+                "notes": session.notes as Any
+            ]
+        }
+        guard JSONSerialization.isValidJSONObject(payload),
+              let data = try? JSONSerialization.data(withJSONObject: payload, options: [.prettyPrinted, .sortedKeys]) else {
+            return nil
+        }
+        do {
+            let url = try uniqueDownloadsURL(preferredName: "studybar-sessions.json")
+            try data.write(to: url)
+            finishExport(url)
+            return ExportResult(url: url, fileName: url.lastPathComponent)
+        } catch {
+            return nil
+        }
+    }
+
+    static func exportSessionsMarkdown(_ sessions: [StudySession]) -> ExportResult? {
+        let overview = AnalyticsEngine.overview(from: sessions)
+        var lines: [String] = [
+            "# StudyBar Session Export",
+            "",
+            "## Summary",
+            "",
+            "| Metric | Value |",
+            "|--------|-------|",
+            "| Total hours | \(StudyFormatting.duration(overview.totalStudySeconds)) |",
+            "| Sessions | \(overview.totalSessions) |",
+            "| Avg session | \(StudyFormatting.duration(overview.averageSessionLength)) |",
+            "| Consistency | \(overview.consistencyScore)/100 |",
+            "| Focus | \(overview.focusScore)/100 |",
+            "",
+            "## Sessions",
+            ""
+        ]
+        let formatter = ISO8601DateFormatter()
+        for session in sessions.sorted(by: { $0.startedAt > $1.startedAt }) {
+            let topic = session.topicName.map { " — \($0)" } ?? ""
+            lines.append("- **\(session.subjectName)\(topic)** · \(StudyFormatting.duration(session.actualDuration)) · \(formatter.string(from: session.startedAt))")
+            if let notes = session.notes, !notes.isEmpty {
+                lines.append("  - \(notes)")
+            }
+        }
+        do {
+            let url = try uniqueDownloadsURL(preferredName: "studybar-sessions.md")
+            try lines.joined(separator: "\n").write(to: url, atomically: true, encoding: .utf8)
+            finishExport(url)
+            return ExportResult(url: url, fileName: url.lastPathComponent)
+        } catch {
+            return nil
+        }
+    }
+
+    static func savePDF<V: View>(from view: V, size: CGSize, defaultName: String) -> ExportResult? {
+        let renderer = ImageRenderer(content: view.frame(width: size.width, height: size.height))
+        renderer.scale = 2
+        guard let image = renderer.nsImage else { return nil }
+
+        let pdfData = NSMutableData()
+        var mediaBox = CGRect(origin: .zero, size: size)
+        guard let consumer = CGDataConsumer(data: pdfData as CFMutableData),
+              let ctx = CGContext(consumer: consumer, mediaBox: &mediaBox, nil) else { return nil }
+        ctx.beginPDFPage(nil)
+        if let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) {
+            ctx.draw(cgImage, in: mediaBox)
+        }
+        ctx.endPDFPage()
+        ctx.closePDF()
+
+        do {
+            let url = try uniqueDownloadsURL(preferredName: defaultName)
+            try pdfData.write(to: url)
+            finishExport(url)
+            return ExportResult(url: url, fileName: url.lastPathComponent)
+        } catch {
+            return nil
+        }
+    }
+
     static func revealInFinder(_ url: URL) {
         NSWorkspace.shared.activateFileViewerSelecting([url])
     }

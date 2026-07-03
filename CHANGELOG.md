@@ -2,6 +2,41 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.7.57] - 2026-07-03
+
+### Added
+- **Monthly report PDF** — current month summary with achievements earned
+- Export from Analytics → Downloads
+
+## [1.7.56] - 2026-07-03
+
+### Added
+- **JSON** and **Markdown** session exports
+
+## [1.7.55] - 2026-07-03
+
+### Added
+- **Consistency score** and **Focus score** on Analytics dashboard
+
+## [1.7.54] - 2026-07-03
+
+### Added
+- Rolling 7-day / 30-day averages
+- Week-over-week and month-over-month comparison stats
+- **Time-of-day** chart with hover
+
+## [1.7.53] - 2026-07-03
+
+### Added
+- **Daily** (30-day) and **monthly** study charts
+- Interactive chart hover cards on daily / weekly / monthly charts
+
+## [1.7.52] - 2026-07-03
+
+### Added
+- Analytics overview stats: total hours, avg/longest/shortest session, peak weekday/hour, YTD
+- Subject pie chart
+
 ## [1.7.5] - 2026-07-03
 
 ### Added
