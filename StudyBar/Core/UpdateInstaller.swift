@@ -63,6 +63,10 @@ enum UpdateInstaller {
         return dir
     }
 
+    static func installLogURL() throws -> URL {
+        try updatesDirectory().appendingPathComponent("install.log")
+    }
+
     static func download(asset: ReleaseAsset, onProgress: @escaping (Double) -> Void) async throws -> URL {
         let dest = try updatesDirectory().appendingPathComponent("StudyBar-\(asset.version).dmg")
         try? FileManager.default.removeItem(at: dest)
@@ -124,14 +128,27 @@ enum UpdateInstaller {
         }
 
         let targetPath = installTargetPath()
-        let scriptURL = try writeRelauncherScript(sourceApp: sourceApp.path, targetApp: targetPath, mountPoint: mountPoint.path)
+        let logPath = try installLogURL().path
+        let scriptURL = try writeRelauncherScript(
+            sourceApp: sourceApp.path,
+            targetApp: targetPath,
+            mountPoint: mountPoint.path,
+            logPath: logPath
+        )
 
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/bin/bash")
-        process.arguments = [scriptURL.path]
-        try process.run()
+        // detach from parent — otherwise macOS kills the script when we quit
+        let launcher = Process()
+        launcher.executableURL = URL(fileURLWithPath: "/bin/bash")
+        launcher.arguments = ["-c", "nohup \"\(scriptURL.path)\" >> \"\(logPath)\" 2>&1 &"]
+        try launcher.run()
+        launcher.waitUntilExit()
+        guard launcher.terminationStatus == 0 else {
+            throw NSError(domain: "UpdateInstaller", code: 6, userInfo: [NSLocalizedDescriptionKey: "Could not start update installer"])
+        }
 
-        NSApp.terminate(nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            NSApp.terminate(nil)
+        }
     }
 
     private static func installTargetPath() -> String {
@@ -149,20 +166,28 @@ enum UpdateInstaller {
     private static func mountDmg(at dmgPath: URL) throws -> URL {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/hdiutil")
-        process.arguments = ["attach", dmgPath.path, "-nobrowse", "-quiet"]
+        process.arguments = ["attach", dmgPath.path, "-nobrowse", "-plist"]
         let pipe = Pipe()
         process.standardOutput = pipe
+        process.standardError = Pipe()
         try process.run()
         process.waitUntilExit()
         guard process.terminationStatus == 0 else {
             throw NSError(domain: "UpdateInstaller", code: 4, userInfo: [NSLocalizedDescriptionKey: "Could not mount update image"])
         }
-        let output = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
-        guard let lastLine = output.split(separator: "\n").last,
-              let mountPoint = lastLine.split(separator: "\t").last else {
+
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        guard let plist = try PropertyListSerialization.propertyList(from: data, format: nil) as? [String: Any],
+              let entities = plist["system-entities"] as? [[String: Any]] else {
             throw NSError(domain: "UpdateInstaller", code: 5, userInfo: [NSLocalizedDescriptionKey: "Could not read mount point"])
         }
-        return URL(fileURLWithPath: String(mountPoint))
+
+        for entity in entities {
+            if let mountPoint = entity["mount-point"] as? String {
+                return URL(fileURLWithPath: mountPoint)
+            }
+        }
+        throw NSError(domain: "UpdateInstaller", code: 5, userInfo: [NSLocalizedDescriptionKey: "Could not read mount point"])
     }
 
     private static func detachDmg(_ mountPoint: URL) throws {
@@ -173,17 +198,18 @@ enum UpdateInstaller {
         process.waitUntilExit()
     }
 
-    private static func writeRelauncherScript(sourceApp: String, targetApp: String, mountPoint: String) throws -> URL {
-        let scriptURL = try updatesDirectory().appendingPathComponent("relaunch-\(UUID().uuidString).sh")
+    private static func writeRelauncherScript(sourceApp: String, targetApp: String, mountPoint: String, logPath: String) throws -> URL {
+        let scriptURL = try updatesDirectory().appendingPathComponent("relaunch.sh")
         let script = """
         #!/bin/bash
         set -e
         SOURCE="\(sourceApp)"
         TARGET="\(targetApp)"
         MOUNT="\(mountPoint)"
-        SCRIPT="\(scriptURL.path)"
 
-        for _ in $(seq 1 40); do
+        echo "[$(date)] update started" >> "\(logPath)"
+
+        for _ in $(seq 1 60); do
           pgrep -x StudyBar >/dev/null || break
           sleep 0.25
         done
@@ -192,7 +218,7 @@ enum UpdateInstaller {
         xattr -cr "$TARGET" 2>/dev/null || true
         /usr/bin/hdiutil detach "$MOUNT" -quiet 2>/dev/null || true
         /usr/bin/open "$TARGET"
-        rm -f "$SCRIPT"
+        echo "[$(date)] update finished" >> "\(logPath)"
         """
         try script.write(to: scriptURL, atomically: true, encoding: .utf8)
         try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: scriptURL.path)

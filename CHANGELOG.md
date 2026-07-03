@@ -2,6 +2,16 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.5.32] - 2026-07-03
+
+### Added
+- 5-star feedback row in Settings (below GitHub link); shows GitHub star count
+
+### Fixed
+- **Restart to Update** actually works: `hdiutil -quiet` returned no mount path (broken since v1.5.3)
+- Relauncher now runs detached with `nohup` so it survives app quit
+- Update errors show log path at `~/Library/Application Support/StudyBar/Updates/install.log`
+
 ## [1.5.31] - 2026-07-03
 
 ### Fixed
@@ -142,6 +152,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.5.32]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.32
 [1.5.31]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.31
 [1.5.3]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.3
 [1.5.2]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.2

@@ -118,6 +118,7 @@ struct SettingsView: View {
             Link(destination: URL(string: "https://github.com/IMisbahk/studybar")!) {
                 Label("GitHub Repository", systemImage: "link")
             }
+            FeedbackRatingView()
         }
     }
 
@@ -195,6 +196,12 @@ struct SettingsView: View {
                             Text(downloadError)
                                 .font(.caption)
                                 .foregroundStyle(.red)
+                            if !updateLogPath.isEmpty {
+                                Text("Log: \(updateLogPath)")
+                                    .font(.caption2)
+                                    .foregroundStyle(.tertiary)
+                                    .textSelection(.enabled)
+                            }
                             Button("Retry Download") { downloadUpdate() }
                                 .controlSize(.small)
                         } else if downloadProgress > 0, downloadProgress < 1 {
@@ -222,6 +229,10 @@ struct SettingsView: View {
             .padding(10)
             .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
         }
+    }
+
+    private var updateLogPath: String {
+        (try? UpdateInstaller.installLogURL().path) ?? ""
     }
 
     private func checkForUpdates() {
