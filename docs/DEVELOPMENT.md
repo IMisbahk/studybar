@@ -64,7 +64,7 @@ To use a Development Team, open the project in Xcode → **StudyBar** target →
 
 ## Data location
 
-SwiftData stores data in the app’s Application Support container. It persists across rebuilds as long as the bundle identifier (`com.misbah.studybar`) stays the same.
+SwiftData stores data at `~/Library/Application Support/StudyBar/studybar.store`. It persists across rebuilds and updates. Legacy sandbox data (`~/Library/Containers/com.misbah.studybar/...`) is auto-migrated on first launch.
 
 ## CI
 

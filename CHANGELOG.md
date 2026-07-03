@@ -2,6 +2,13 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.5.31] - 2026-07-03
+
+### Fixed
+- **Data loss after update**: v1.5.3 sandbox removal moved SwiftData to a new empty path
+- App now uses a fixed store at `~/Library/Application Support/StudyBar/studybar.store`
+- Automatically migrates sessions from the old sandbox container on first launch
+
 ## [1.5.3] - 2026-07-03
 
 ### Added
@@ -135,6 +142,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.5.31]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.31
 [1.5.3]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.3
 [1.5.2]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.2
 [1.5.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.1
