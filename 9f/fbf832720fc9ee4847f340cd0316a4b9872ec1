@@ -1,0 +1,35 @@
+StudyBar/Views/Dashboard/DashboardHistoryView.swift
+  s_ef133bb69a3d94::t_1f770357be647c 3,6
+StudyBar/Views/Dashboard/DashboardView.swift
+  s_ef133bb69a3d94::t_1f770357be647c 7,17,27,81-82
+CHANGELOG.md
+  s_ef133bb69a3d94::t_96b7fe9ac68f8a 5-10
+StudyBar/Views/Dashboard/TimelineView.swift
+  s_ef133bb69a3d94::t_62b3ec93463ddc 1-169
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_98deb4faa62627 53
+  s_ef133bb69a3d94::t_75c4f0a2513180 213
+  s_ef133bb69a3d94::t_dd0f9a6067b272 103
+  s_ef133bb69a3d94::t_b02a18cb50de0f 328
+  s_ef133bb69a3d94::t_c24f849c26e34b 457,467,484,494
+VERSION
+  s_ef133bb69a3d94::t_819e418ff0bbde 1
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_63d0df3664c62d 2,4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "9ffbf832720fc9ee4847f340cd0316a4b9872ec1",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
