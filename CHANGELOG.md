@@ -2,6 +2,17 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.8.0] - 2026-07-03
+
+### Added
+- **Smart Insights** dashboard tab — local pattern detection, no cloud
+- Peak focus window, strongest weekday, subject duration comparisons
+- Consistency trend (two-week comparison)
+- Typical session length + suggested preset (25/45/50/90 min)
+- Burnout warnings: long days, late-night study, heavy 3-day stretches
+- Break suggestions from pause patterns
+- Weekly and monthly narrative summaries
+
 ## [1.7.58] - 2026-07-03
 
 ### Fixed

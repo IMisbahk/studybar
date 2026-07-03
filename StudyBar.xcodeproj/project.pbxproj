@@ -64,6 +64,8 @@
 		A2C3D4E5F6A70F123344567 /* AchievementUnlockBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */; };
 		C4E5F6A7B8C92B345566789 /* MonthlyReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6A7B8C9D03C456677890 /* MonthlyReportView.swift */; };
 		E6A7B8C9D0E14D567788901 /* ChartHoverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */; };
+		G8H9I0J1K2L38F901223456 /* InsightsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = H9I0J1K2L3M49G012334567 /* InsightsEngine.swift */; };
+		I0J1K2L3M4N50H123445678 /* InsightsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = J1K2L3M4N5O61I234556789 /* InsightsDashboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +129,8 @@
 		B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementUnlockBanner.swift; sourceTree = "<group>"; };
 		D5F6A7B8C9D03C456677890 /* MonthlyReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReportView.swift; sourceTree = "<group>"; };
 		F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHoverCard.swift; sourceTree = "<group>"; };
+		H9I0J1K2L3M49G012334567 /* InsightsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsEngine.swift; sourceTree = "<group>"; };
+		J1K2L3M4N5O61I234556789 /* InsightsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsDashboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +210,7 @@
 				N8B9C0D1E2F37E8F9011223 /* GamificationEngine.swift */,
 				P0D1E2F3A4B59A012233445 /* AchievementCatalog.swift */,
 				R2F3A4B5C6D71C234455667 /* GamificationUnlockCenter.swift */,
+				H9I0J1K2L3M49G012334567 /* InsightsEngine.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */,
 				D5F6A7B8C9D03C456677890 /* MonthlyReportView.swift */,
 				F7B8C9D0E1F25E678899012 /* ChartHoverCard.swift */,
+				J1K2L3M4N5O61I234556789 /* InsightsDashboardView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -378,6 +384,8 @@
 				A2C3D4E5F6A70F123344567 /* AchievementUnlockBanner.swift in Sources */,
 				C4E5F6A7B8C92B345566789 /* MonthlyReportView.swift in Sources */,
 				E6A7B8C9D0E14D567788901 /* ChartHoverCard.swift in Sources */,
+				G8H9I0J1K2L38F901223456 /* InsightsEngine.swift in Sources */,
+				I0J1K2L3M4N50H123445678 /* InsightsDashboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,7 +514,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10758;
+				CURRENT_PROJECT_VERSION = 10800;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -516,7 +524,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.7.58;
+				MARKETING_VERSION = 1.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -533,7 +541,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10758;
+				CURRENT_PROJECT_VERSION = 10800;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -543,7 +551,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.7.58;
+				MARKETING_VERSION = 1.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

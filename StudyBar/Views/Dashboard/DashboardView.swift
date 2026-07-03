@@ -6,6 +6,7 @@ enum DashboardSection: String, CaseIterable, Identifiable {
     case galaxy
     case achievements
     case analytics
+    case insights
     case notes
     case timeline
     case settings
@@ -19,6 +20,7 @@ enum DashboardSection: String, CaseIterable, Identifiable {
         case .galaxy: "Galaxy"
         case .achievements: "Achievements"
         case .analytics: "Analytics"
+        case .insights: "Insights"
         case .notes: "Notes"
         case .timeline: "Timeline"
         case .settings: "Settings"
@@ -32,6 +34,7 @@ enum DashboardSection: String, CaseIterable, Identifiable {
         case .galaxy: "globe.americas.fill"
         case .achievements: "medal.fill"
         case .analytics: "square.grid.3x3.fill"
+        case .insights: "sparkles"
         case .notes: "note.text"
         case .timeline: "timeline.selection"
         case .settings: "gearshape.fill"
@@ -96,6 +99,8 @@ struct DashboardView: View {
             AchievementsView()
         case .analytics:
             AnalyticsDashboardView()
+        case .insights:
+            InsightsDashboardView()
         case .notes:
             NotesBrowserView()
         case .timeline:
