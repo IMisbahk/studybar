@@ -51,6 +51,21 @@ struct DayStudyTotal: Identifiable, Hashable {
     var id: Date { date }
 }
 
+struct DaySessionSummary: Identifiable, Hashable {
+    let subjectName: String
+    let topicName: String?
+    let duration: TimeInterval
+    let startedAt: Date
+
+    var id: Date { startedAt }
+}
+
+struct DayStudyDetail: Hashable {
+    let date: Date
+    let totalSeconds: TimeInterval
+    let sessions: [DaySessionSummary]
+}
+
 struct WeekStudyTotal: Identifiable, Hashable {
     let weekStart: Date
     let totalSeconds: TimeInterval
@@ -148,6 +163,39 @@ enum AnalyticsEngine {
             guard let notes = session.notes else { return false }
             return !notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }
+    }
+
+    static func dayDetails(from sessions: [StudySession], range: HeatmapRange = .annual) -> [Date: DayStudyDetail] {
+        let interval = range.interval()
+        let rangeStart = calendar.startOfDay(for: interval.start)
+        let rangeEnd = calendar.startOfDay(for: interval.end)
+        var grouped: [Date: [StudySession]] = [:]
+
+        for session in sessions {
+            let day = calendar.startOfDay(for: session.startedAt)
+            guard day >= rangeStart, day <= rangeEnd else { continue }
+            grouped[day, default: []].append(session)
+        }
+
+        var result: [Date: DayStudyDetail] = [:]
+        for (day, daySessions) in grouped {
+            let summaries = daySessions
+                .sorted { $0.startedAt < $1.startedAt }
+                .map {
+                    DaySessionSummary(
+                        subjectName: $0.subjectName,
+                        topicName: $0.topicName,
+                        duration: $0.actualDuration,
+                        startedAt: $0.startedAt
+                    )
+                }
+            result[day] = DayStudyDetail(
+                date: day,
+                totalSeconds: total(for: daySessions),
+                sessions: summaries
+            )
+        }
+        return result
     }
 
     private static func streakCount(from sessions: [StudySession], endingAt date: Date) -> Int {

@@ -10,6 +10,10 @@ struct AnalyticsDashboardView: View {
         AnalyticsEngine.dailyTotals(from: sessions, range: heatmapRange)
     }
 
+    private var heatmapDayDetails: [Date: DayStudyDetail] {
+        AnalyticsEngine.dayDetails(from: sessions, range: heatmapRange)
+    }
+
     private var weeklyTotals: [WeekStudyTotal] {
         AnalyticsEngine.weeklyTotals(from: sessions, trailingWeeks: 12)
     }
@@ -58,24 +62,21 @@ struct AnalyticsDashboardView: View {
 
     private var heatmapCard: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Study Heatmap")
-                        .font(.headline)
-                    Text(heatmapRange.subtitle)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-                Picker("Range", selection: $heatmapRange) {
-                    ForEach(HeatmapRange.allCases) { range in
-                        Text(range.title).tag(range)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .frame(maxWidth: 280)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Study Heatmap")
+                    .font(.headline)
+                Text(heatmapRange.subtitle)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
-            StudyHeatmapView(days: dailyTotals, range: heatmapRange)
+            Picker(selection: $heatmapRange) {
+                ForEach(HeatmapRange.allCases) { range in
+                    Text(range.title).tag(range)
+                }
+            } label: { EmptyView() }
+            .labelsHidden()
+            .pickerStyle(.segmented)
+            StudyHeatmapView(days: dailyTotals, dayDetails: heatmapDayDetails, range: heatmapRange)
         }
         .padding(14)
         .background(.quaternary.opacity(0.2), in: RoundedRectangle(cornerRadius: 12))
@@ -122,7 +123,7 @@ struct AnalyticsDashboardView: View {
                 let exportView = VStack(alignment: .leading, spacing: 8) {
                     Text("StudyBar Study Heatmap — \(heatmapRange.title)")
                         .font(.headline)
-                    StudyHeatmapView(days: dailyTotals, range: heatmapRange, showLegend: true)
+                    StudyHeatmapView(days: dailyTotals, dayDetails: heatmapDayDetails, range: heatmapRange, showLegend: true)
                 }
                 .padding(16)
                 .background(Color.white)

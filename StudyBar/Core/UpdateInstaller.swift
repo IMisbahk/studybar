@@ -113,4 +113,89 @@ enum UpdateInstaller {
     static func openInstaller(dmgPath: URL) {
         NSWorkspace.shared.open(dmgPath)
     }
+
+    @MainActor
+    static func installAndRelaunch(dmgPath: URL) throws {
+        let mountPoint = try mountDmg(at: dmgPath)
+        let sourceApp = mountPoint.appendingPathComponent("StudyBar.app")
+        guard FileManager.default.fileExists(atPath: sourceApp.path) else {
+            try? detachDmg(mountPoint)
+            throw NSError(domain: "UpdateInstaller", code: 3, userInfo: [NSLocalizedDescriptionKey: "StudyBar.app not found in update image"])
+        }
+
+        let targetPath = installTargetPath()
+        let scriptURL = try writeRelauncherScript(sourceApp: sourceApp.path, targetApp: targetPath, mountPoint: mountPoint.path)
+
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/bin/bash")
+        process.arguments = [scriptURL.path]
+        try process.run()
+
+        NSApp.terminate(nil)
+    }
+
+    private static func installTargetPath() -> String {
+        let applications = "/Applications/StudyBar.app"
+        let current = Bundle.main.bundlePath
+        if current.hasPrefix("/Applications/") {
+            return current
+        }
+        if FileManager.default.fileExists(atPath: applications) {
+            return applications
+        }
+        return current
+    }
+
+    private static func mountDmg(at dmgPath: URL) throws -> URL {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/hdiutil")
+        process.arguments = ["attach", dmgPath.path, "-nobrowse", "-quiet"]
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        try process.run()
+        process.waitUntilExit()
+        guard process.terminationStatus == 0 else {
+            throw NSError(domain: "UpdateInstaller", code: 4, userInfo: [NSLocalizedDescriptionKey: "Could not mount update image"])
+        }
+        let output = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
+        guard let lastLine = output.split(separator: "\n").last,
+              let mountPoint = lastLine.split(separator: "\t").last else {
+            throw NSError(domain: "UpdateInstaller", code: 5, userInfo: [NSLocalizedDescriptionKey: "Could not read mount point"])
+        }
+        return URL(fileURLWithPath: String(mountPoint))
+    }
+
+    private static func detachDmg(_ mountPoint: URL) throws {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/hdiutil")
+        process.arguments = ["detach", mountPoint.path, "-quiet"]
+        try process.run()
+        process.waitUntilExit()
+    }
+
+    private static func writeRelauncherScript(sourceApp: String, targetApp: String, mountPoint: String) throws -> URL {
+        let scriptURL = try updatesDirectory().appendingPathComponent("relaunch-\(UUID().uuidString).sh")
+        let script = """
+        #!/bin/bash
+        set -e
+        SOURCE="\(sourceApp)"
+        TARGET="\(targetApp)"
+        MOUNT="\(mountPoint)"
+        SCRIPT="\(scriptURL.path)"
+
+        for _ in $(seq 1 40); do
+          pgrep -x StudyBar >/dev/null || break
+          sleep 0.25
+        done
+
+        ditto "$SOURCE" "$TARGET"
+        xattr -cr "$TARGET" 2>/dev/null || true
+        /usr/bin/hdiutil detach "$MOUNT" -quiet 2>/dev/null || true
+        /usr/bin/open "$TARGET"
+        rm -f "$SCRIPT"
+        """
+        try script.write(to: scriptURL, atomically: true, encoding: .utf8)
+        try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: scriptURL.path)
+        return scriptURL
+    }
 }

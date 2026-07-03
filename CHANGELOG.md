@@ -2,6 +2,19 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.5.3] - 2026-07-03
+
+### Added
+- Heatmap hover card: date, total time, per-subject breakdown when hovering green cells
+- **Restart to Update**: one-click install — quits, replaces the app, and relaunches automatically
+
+### Fixed
+- Heatmap range picker layout (no more vertical "Range" label)
+- Removed app sandbox so in-place updates can write to `/Applications`
+
+### Changed
+- Update flow no longer opens a DMG for manual drag-and-drop
+
 ## [1.5.2] - 2026-07-02
 
 ### Added
@@ -122,6 +135,7 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+[1.5.3]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.3
 [1.5.2]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.2
 [1.5.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.1
 [1.5.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.0

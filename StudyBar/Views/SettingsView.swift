@@ -15,6 +15,7 @@ struct SettingsView: View {
     @State private var downloadProgress: Double = 0
     @State private var readyDmgPath: URL?
     @State private var downloadError: String?
+    @State private var isInstalling = false
 
     private var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
@@ -181,12 +182,13 @@ struct SettingsView: View {
                         Text("Version \(latest) is available")
                             .font(.subheadline)
                         if let readyDmgPath {
-                            Button("Install Update") {
-                                UpdateInstaller.openInstaller(dmgPath: readyDmgPath)
+                            Button(isInstalling ? "Installing…" : "Restart to Update") {
+                                installAndRestart()
                             }
                             .buttonStyle(.borderedProminent)
                             .controlSize(.small)
-                            Text("Drag StudyBar to Applications, then reopen.")
+                            .disabled(isInstalling)
+                            Text("StudyBar will quit, install the update, and reopen automatically.")
                                 .font(.caption2)
                                 .foregroundStyle(.secondary)
                         } else if let downloadError {
@@ -260,6 +262,18 @@ struct SettingsView: View {
                 downloadError = error.localizedDescription
                 downloadProgress = 0
             }
+        }
+    }
+
+    private func installAndRestart() {
+        guard let path = readyDmgPath else { return }
+        isInstalling = true
+        downloadError = nil
+        do {
+            try UpdateInstaller.installAndRelaunch(dmgPath: path)
+        } catch {
+            downloadError = error.localizedDescription
+            isInstalling = false
         }
     }
 

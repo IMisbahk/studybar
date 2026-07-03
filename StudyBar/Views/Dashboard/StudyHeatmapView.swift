@@ -2,8 +2,11 @@ import SwiftUI
 
 struct StudyHeatmapView: View {
     let days: [DayStudyTotal]
+    var dayDetails: [Date: DayStudyDetail] = [:]
     var range: HeatmapRange = .annual
     var showLegend: Bool = true
+
+    @State private var hoveredDay: Date?
 
     private let cellSpacing: CGFloat = 3
     private var calendar: Calendar { .current }
@@ -36,6 +39,12 @@ struct StudyHeatmapView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
+            if let hoveredDay, let detail = dayDetails[hoveredDay], detail.totalSeconds > 0 {
+                HeatmapDayTooltip(detail: detail)
+                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(.quaternary, lineWidth: 1))
+            }
+
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: cellSpacing) {
@@ -53,16 +62,10 @@ struct StudyHeatmapView: View {
                     }
                     .padding(.vertical, 2)
                 }
-                .onAppear {
-                    scrollToLatest(proxy)
-                }
-                .onChange(of: days.count) { _, _ in
-                    scrollToLatest(proxy)
-                }
+                .onAppear { scrollToLatest(proxy) }
+                .onChange(of: days.count) { _, _ in scrollToLatest(proxy) }
             }
-            if showLegend {
-                legend
-            }
+            if showLegend { legend }
         }
     }
 
@@ -83,17 +86,13 @@ struct StudyHeatmapView: View {
 
     private var legend: some View {
         HStack(spacing: 6) {
-            Text("Less")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            Text("Less").font(.caption2).foregroundStyle(.secondary)
             ForEach(0..<5, id: \.self) { level in
                 RoundedRectangle(cornerRadius: 2)
                     .fill(color(for: level))
                     .frame(width: 12, height: 12)
             }
-            Text("More")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            Text("More").font(.caption2).foregroundStyle(.secondary)
         }
     }
 
@@ -110,7 +109,16 @@ struct StudyHeatmapView: View {
                             .foregroundStyle(day.level > 1 ? .white : .secondary)
                     }
                 }
-                .help("\(day.date.formatted(date: .abbreviated, time: .omitted)): \(StudyFormatting.duration(day.totalSeconds))")
+                .onContinuousHover { phase in
+                    switch phase {
+                    case .active where day.level > 0:
+                        hoveredDay = day.date
+                    case .ended:
+                        if hoveredDay == day.date { hoveredDay = nil }
+                    default:
+                        break
+                    }
+                }
         } else {
             RoundedRectangle(cornerRadius: 3)
                 .fill(Color.primary.opacity(0.04))
@@ -120,8 +128,7 @@ struct StudyHeatmapView: View {
 
     private func shortDayLabel(_ date: Date) -> String {
         let weekday = calendar.component(.weekday, from: date)
-        let symbols = calendar.shortWeekdaySymbols
-        return String(symbols[weekday - 1].prefix(1))
+        return String(calendar.shortWeekdaySymbols[weekday - 1].prefix(1))
     }
 
     private func scrollToLatest(_ proxy: ScrollViewProxy) {

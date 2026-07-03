@@ -42,6 +42,8 @@ On first launch, macOS may block the app because it is ad-hoc signed (not notari
 - Or **System Settings → Privacy & Security** → allow StudyBar
 - Or in Terminal: `xattr -cr /Applications/StudyBar.app`
 
+**In-app updates (v1.5.3+):** Settings → Download Update → **Restart to Update**. StudyBar quits, installs, and reopens automatically. Install to `/Applications` for this to work.
+
 You can also download `StudyBar-x.y.z.dmg` directly from Releases if you prefer to skip the zip step.
 
 Verify checksum (optional):
