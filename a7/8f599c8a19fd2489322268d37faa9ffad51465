@@ -1,0 +1,28 @@
+docs/DEVELOPMENT.md
+  s_ef133bb69a3d94::t_221b70e3815950 67
+StudyBar/Core/StudyDataStore.swift
+  s_ef133bb69a3d94::t_d963563ccc403e 2,7,10-17,21,26-82,88
+CHANGELOG.md
+  s_ef133bb69a3d94::t_c0585e008e4d8b 145
+  s_ef133bb69a3d94::t_6bd6a28b9ac6f8 5-11
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_ca0e55bac03519 437,447,464,474
+VERSION
+  s_ef133bb69a3d94::t_d8481bebe37947 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "a78f599c8a19fd2489322268d37faa9ffad51465",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
