@@ -3,8 +3,8 @@ import SwiftData
 
 struct OnboardingView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.dismiss) private var dismiss
     @Binding var hasCompletedOnboarding: Bool
+    var onFinish: () -> Void = {}
 
     @State private var step = 0
     @State private var subjectName = ""
@@ -26,7 +26,6 @@ struct OnboardingView: View {
             Divider()
             footer
         }
-        .frame(width: 360)
     }
 
     private var header: some View {
@@ -112,7 +111,7 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("You're all set")
                 .font(.title3.bold())
-            Text("Open the dashboard for analytics, insights, and your study galaxy.")
+            Text("Open the dashboard for analytics and insights. Pick a color theme in Settings → Themes.")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -154,7 +153,7 @@ struct OnboardingView: View {
         }
         hasCompletedOnboarding = true
         StudyReminderScheduler.shared.reschedule(in: modelContext)
-        dismiss()
+        onFinish()
     }
 
     private func addSubjectIfNeeded() {

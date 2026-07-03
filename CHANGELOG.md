@@ -2,6 +2,17 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.12.0] - 2026-07-03
+
+### Fixed
+- **Onboarding** — welcome tour renders inline in the menu bar popover (sheets are unreliable inside `MenuBarExtra`)
+- First launch with no subjects shows onboarding automatically again
+
+### Added
+- Settings → **Show Welcome Tour** — replay onboarding anytime
+- **Session log** — multi-select rows (click / ⌘-click), Select All, Delete Selected
+- Bulk "delete under 5 min" kept as a shortcut alongside per-session control
+
 ## [2.1.0] - 2026-07-03
 
 **Themes & appearance.** See [RELEASE_NOTES_v2.1.0.md](RELEASE_NOTES_v2.1.0.md) for the public announcement.

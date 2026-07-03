@@ -6,20 +6,36 @@ struct PopoverRootView: View {
     @Query(sort: \Subject.name) private var subjects: [Subject]
     @State private var tab: PopoverTab = .timer
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @AppStorage("showOnboardingNow") private var showOnboardingNow = false
     @State private var showOnboarding = false
 
+    private var showingOnboarding: Bool {
+        showOnboarding || showOnboardingNow
+    }
+
     var body: some View {
-        VStack(spacing: 0) {
-            popoverHeader
-            content
-            Divider()
-            tabBar
+        Group {
+            if showingOnboarding {
+                OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding) {
+                    showOnboarding = false
+                    showOnboardingNow = false
+                }
+            } else {
+                VStack(spacing: 0) {
+                    popoverHeader
+                    content
+                    Divider()
+                    tabBar
+                }
+            }
         }
-        .frame(width: 300)
+        .frame(width: showingOnboarding ? 360 : 300)
         .onAppear {
             tab = sessionManager.selectedTab
             NotificationCenter.default.post(name: .studyBarMenuPopoverVisible, object: true)
-            if !hasCompletedOnboarding {
+            if showOnboardingNow {
+                showOnboarding = true
+            } else if !hasCompletedOnboarding {
                 if subjects.isEmpty {
                     showOnboarding = true
                 } else {
@@ -27,14 +43,24 @@ struct PopoverRootView: View {
                 }
             }
         }
-        .sheet(isPresented: $showOnboarding) {
-            OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
-        }
         .onDisappear {
             NotificationCenter.default.post(name: .studyBarMenuPopoverVisible, object: false)
         }
         .onChange(of: sessionManager.selectedTab) { _, newTab in
             tab = newTab
+        }
+        .onChange(of: showOnboardingNow) { _, requested in
+            if requested { showOnboarding = true }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .studyBarShowOnboarding)) { _ in
+            showOnboarding = true
+            showOnboardingNow = true
+        }
+        .onChange(of: hasCompletedOnboarding) { _, done in
+            if done {
+                showOnboarding = false
+                showOnboardingNow = false
+            }
         }
     }
 

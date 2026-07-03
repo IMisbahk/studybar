@@ -5,4 +5,5 @@ extension Notification.Name {
     static let studyBarMenuPopoverVisible = Notification.Name("studyBarMenuPopoverVisible")
     static let studyBarOpenDashboard = Notification.Name("studyBarOpenDashboard")
     static let studyBarThemeChanged = Notification.Name("studyBarThemeChanged")
+    static let studyBarShowOnboarding = Notification.Name("studyBarShowOnboarding")
 }

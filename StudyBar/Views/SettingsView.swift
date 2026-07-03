@@ -20,6 +20,7 @@ struct SettingsView: View {
     @AppStorage("weeklyGoalMinutes") private var weeklyGoalMinutes = 300
     @AppStorage("autoUpdateEnabled") private var autoUpdateEnabled = true
     @AppStorage("autoUpdateInstallEnabled") private var autoUpdateInstallEnabled = true
+    @AppStorage("showOnboardingNow") private var showOnboardingNow = false
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var updateStatus: UpdateChecker.Status = .idle
     @State private var backupMessage: String?
@@ -105,6 +106,12 @@ struct SettingsView: View {
                 ManageSubjectsView()
             } label: {
                 Label("Manage Subjects", systemImage: "books.vertical")
+            }
+            Button {
+                showOnboardingNow = true
+                NotificationCenter.default.post(name: .studyBarShowOnboarding, object: nil)
+            } label: {
+                Label("Show Welcome Tour", systemImage: "hand.wave.fill")
             }
         }
     }
