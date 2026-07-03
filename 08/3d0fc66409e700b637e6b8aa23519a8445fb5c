@@ -1,0 +1,61 @@
+StudyBar/Models/ProfileProgress.swift
+  s_ef133bb69a3d94::t_c70e6bfc96387e 1-25
+StudyBar/Models/AchievementUnlock.swift
+  s_ef133bb69a3d94::t_081e8bb79c4563 1-15
+StudyBar/Core/AchievementCatalog.swift
+  s_ef133bb69a3d94::t_9107e68e496e81 222
+  s_ef133bb69a3d94::t_753c6d901a4d1e 1-221,223-305
+StudyBar/Views/Dashboard/DashboardView.swift
+  s_ef133bb69a3d94::t_7346e941c1abd3 5-7,18-20,31-33,54-61,91-96
+StudyBar/Core/GamificationEngine.swift
+  s_ef133bb69a3d94::t_c6d26b8d37a539 1-201
+CLAUDE.md
+  s_ef133bb69a3d94::t_d5bdc323965883 61-67
+StudyBar/Models/SubjectProgress.swift
+  s_ef133bb69a3d94::t_e0399aca50174d 1-25
+StudyBar/Core/SessionManager.swift
+  s_ef133bb69a3d94::t_7346e941c1abd3 275
+StudyBar/Views/Dashboard/ProfileDashboardView.swift
+  s_ef133bb69a3d94::t_eeb151d88749cd 1-120
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_7346e941c1abd3 118-120
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_8cfd554ba4e6d1 2,4
+CHANGELOG.md
+  s_ef133bb69a3d94::t_4b143fbb3ca4b9 5-40
+StudyBar/Views/Dashboard/AchievementUnlockBanner.swift
+  s_ef133bb69a3d94::t_4a5e93afc038e6 1-51
+StudyBar/Core/GamificationUnlockCenter.swift
+  s_ef133bb69a3d94::t_36a476f19c783a 1-52
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_7346e941c1abd3 54-64,115-125,177-179,202-204,242-246,362-372
+  s_ef133bb69a3d94::t_0c46b1779ac9fb 501,511,528,538
+StudyBar/StudyBarApp.swift
+  s_ef133bb69a3d94::t_7346e941c1abd3 32-33
+StudyBar/Views/Dashboard/AchievementsView.swift
+  s_ef133bb69a3d94::t_e6ec14ee422766 1-149
+StudyBar/Views/Dashboard/GalaxyView.swift
+  s_ef133bb69a3d94::t_f9a60ab32bba73 1-57
+StudyBar/Views/Dashboard/PlanetView.swift
+  s_ef133bb69a3d94::t_9d9c91f0df0bc5 1-83
+StudyBar/Core/StudyDataStore.swift
+  s_ef133bb69a3d94::t_7346e941c1abd3 6-9
+VERSION
+  s_ef133bb69a3d94::t_9cf4e6862955bc 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "083d0fc66409e700b637e6b8aa23519a8445fb5c",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
