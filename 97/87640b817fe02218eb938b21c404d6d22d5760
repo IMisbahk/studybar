@@ -1,0 +1,37 @@
+StudyBar/Core/AnalyticsEngine.swift
+  s_ef133bb69a3d94::t_388124fba438cd 126-153
+StudyBar/Views/Dashboard/AnalyticsDashboardView.swift
+  s_ef133bb69a3d94::t_aabfeb0d9983fa 14,16-19,22-37,39,43-60,65-73,79-82,88-90,93,115,119,123-130,139-140,146-154,163-164,170-180,189-190,196-204,213-214,220-221,228-229,234-235,245-254,257,261,263-278,336
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_1df8808e4ec390 221-231
+CHANGELOG.md
+  s_ef133bb69a3d94::t_6ad051df064246 5-13
+  h_b8c068798e4e71 289-292
+VERSION
+  s_ef133bb69a3d94::t_2eb1ae1b5d9751 1
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_2eb1ae1b5d9751 509,519,536,546
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_3f882beb61b14a 2,4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "9787640b817fe02218eb938b21c404d6d22d5760",
+  "prompts": {},
+  "humans": {
+    "h_b8c068798e4e71": {
+      "author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
