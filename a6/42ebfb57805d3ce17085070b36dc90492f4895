@@ -1,0 +1,40 @@
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_b2c878dec9195a 121
+  s_ef133bb69a3d94::t_8b7e96fdf06585 199-200
+  s_ef133bb69a3d94::t_cdfd1d8b947821 234-237
+  s_ef133bb69a3d94::t_515cfa81b52dbd 201-204
+CHANGELOG.md
+  s_ef133bb69a3d94::t_dc1390485eeb33 155
+  s_ef133bb69a3d94::t_a3737cb5600a21 5-14
+StudyBar/Views/FeedbackRatingView.swift
+  s_ef133bb69a3d94::t_e465438f39b6b3 1-64
+StudyBar/Core/FeedbackService.swift
+  s_ef133bb69a3d94::t_687a4ccce29a4a 1-60
+StudyBar/Core/UpdateInstaller.swift
+  s_ef133bb69a3d94::t_e0da843c1427e9 66-69,131-147,149-151,169,172,178-181,184-190,201-202,210-212,221
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_7c39b2eb284ff5 188
+  s_ef133bb69a3d94::t_19b6db699fc3d3 315-316
+  s_ef133bb69a3d94::t_9fd18a728c0b50 169
+  s_ef133bb69a3d94::t_7a220fc07b71fd 96-97
+  s_ef133bb69a3d94::t_519aee8a195b34 49-50
+  s_ef133bb69a3d94::t_f850a8e8bc0a4a 445,455,472,482
+VERSION
+  s_ef133bb69a3d94::t_75db32931e4343 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "a642ebfb57805d3ce17085070b36dc90492f4895",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
