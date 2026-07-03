@@ -1,0 +1,39 @@
+StudyBar/Core/GlobalHotkeyManager.swift
+  s_ef133bb69a3d94::t_9947502eeb153a 46
+StudyBar/Views/HistoryView.swift
+  s_ef133bb69a3d94::t_9947502eeb153a 4,8,22-26,29-30,33-36,39-41,44-51,55-65,74-79,82-86,88,95-104,108,116-117,121-122,125-126
+CLAUDE.md
+  s_ef133bb69a3d94::t_d977efab575b1b 26-28
+  s_ef133bb69a3d94::t_45f92a73ba86f1 37-38
+  s_ef133bb69a3d94::t_0ff47a2147ce5f 3-4
+  s_ef133bb69a3d94::t_94b61a1a44b1ad 23
+  s_ef133bb69a3d94::t_01287e1f24ef9d 57-66
+StudyBar/Core/SessionManager.swift
+  s_ef133bb69a3d94::t_0d1ebbde877ef7 201,204
+CHANGELOG.md
+  s_ef133bb69a3d94::t_b53d82295cb148 5-14
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_9947502eeb153a 107,109
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_5d8a7866a501cb 457,467,484,494
+VERSION
+  s_ef133bb69a3d94::t_cd0639442adea5 1
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_3236011a7c8032 2,4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "5ed5ff19e225a0cff5e546669cbc162e7cde48e0",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
