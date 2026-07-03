@@ -4,7 +4,7 @@ enum DashboardSection: String, CaseIterable, Identifiable {
     case overview
     case analytics
     case notes
-    case history
+    case timeline
     case settings
 
     var id: String { rawValue }
@@ -14,7 +14,7 @@ enum DashboardSection: String, CaseIterable, Identifiable {
         case .overview: "Overview"
         case .analytics: "Analytics"
         case .notes: "Notes"
-        case .history: "History"
+        case .timeline: "Timeline"
         case .settings: "Settings"
         }
     }
@@ -24,7 +24,7 @@ enum DashboardSection: String, CaseIterable, Identifiable {
         case .overview: "chart.bar.fill"
         case .analytics: "square.grid.3x3.fill"
         case .notes: "note.text"
-        case .history: "clock.arrow.circlepath"
+        case .timeline: "timeline.selection"
         case .settings: "gearshape.fill"
         }
     }
@@ -78,8 +78,8 @@ struct DashboardView: View {
             AnalyticsDashboardView()
         case .notes:
             NotesBrowserView()
-        case .history:
-            DashboardHistoryView()
+        case .timeline:
+            TimelineView()
         case .settings:
             DashboardSettingsView()
         }

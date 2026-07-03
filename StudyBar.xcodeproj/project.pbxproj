@@ -50,6 +50,7 @@
 		D5E6F7A8B9C03D456677890 /* TimelineEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A8B9C0D14E567788901 /* TimelineEngine.swift */; };
 		B9C0D1E2F3A471890011234 /* TimelineDayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1E2F3A4B582901122345 /* TimelineDayRowView.swift */; };
 		D1E2F3A4B5C693012233456 /* TimelineSessionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3A4B5C6D704123344567 /* TimelineSessionTooltip.swift */; };
+		F7A8B9C0D1E25F678899012 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B9C0D1E2F360789900123 /* TimelineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		E6F7A8B9C0D14E567788901 /* TimelineEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineEngine.swift; sourceTree = "<group>"; };
 		C0D1E2F3A4B582901122345 /* TimelineDayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDayRowView.swift; sourceTree = "<group>"; };
 		E2F3A4B5C6D704123344567 /* TimelineSessionTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSessionTooltip.swift; sourceTree = "<group>"; };
+		A8B9C0D1E2F360789900123 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 				F9A0B1C2D3E48F90122334 /* NotesBrowserView.swift */,
 				C0D1E2F3A4B582901122345 /* TimelineDayRowView.swift */,
 				E2F3A4B5C6D704123344567 /* TimelineSessionTooltip.swift */,
+				A8B9C0D1E2F360789900123 /* TimelineView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				D5E6F7A8B9C03D456677890 /* TimelineEngine.swift in Sources */,
 				B9C0D1E2F3A471890011234 /* TimelineDayRowView.swift in Sources */,
 				D1E2F3A4B5C693012233456 /* TimelineSessionTooltip.swift in Sources */,
+				F7A8B9C0D1E25F678899012 /* TimelineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +454,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10602;
+				CURRENT_PROJECT_VERSION = 10603;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -460,7 +464,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -477,7 +481,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10602;
+				CURRENT_PROJECT_VERSION = 10603;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -487,7 +491,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

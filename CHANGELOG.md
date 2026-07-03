@@ -2,6 +2,12 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.6.3] - 2026-07-03
+
+### Added
+- Git-style vertical scroll through study days (rail + dots, newest first)
+- Dashboard **Timeline** section
+
 ## [1.6.2] - 2026-07-03
 
 ### Added
