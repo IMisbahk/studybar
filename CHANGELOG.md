@@ -2,6 +2,12 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.6.2] - 2026-07-03
+
+### Added
+- Colored session blocks per subject
+- Hover card: start/end, duration, subject, notes, pauses, resume points, breaks between sessions
+
 ## [1.6.1] - 2026-07-03
 
 ### Added
