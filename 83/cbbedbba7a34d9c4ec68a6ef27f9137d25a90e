@@ -1,0 +1,47 @@
+StudyBar/Views/Dashboard/HeatmapDayTooltip.swift
+  s_ef133bb69a3d94::t_18face60422195 1-38
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_e793c0630a388a 45
+  s_ef133bb69a3d94::t_eaec961130b7c2 197
+  s_ef133bb69a3d94::t_0f7ce41ec3f027 305
+  s_ef133bb69a3d94::t_ac84bb0f865148 90
+  s_ef133bb69a3d94::t_d82dad2f64376d 437,447,464,474
+StudyBar/Core/UpdateInstaller.swift
+  s_ef133bb69a3d94::t_23f9c6dc39bb20 116-200
+StudyBar/Views/Dashboard/StudyHeatmapView.swift
+  s_ef133bb69a3d94::t_c2ad5a370631d7 5,9-10,42-47,65-66,68,89,95,112-121,131
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_41b38294990cde 185-186,190-191
+  s_ef133bb69a3d94::t_51993caf66cb24 268-279
+  s_ef133bb69a3d94::t_197bab113a9ab5 18
+CHANGELOG.md
+  s_ef133bb69a3d94::t_78f5091e52019b 5-17
+  s_ef133bb69a3d94::t_712dbf5b9eb4e9 138
+StudyBar/Views/Dashboard/AnalyticsDashboardView.swift
+  s_ef133bb69a3d94::t_c88f46da498bc1 126
+  s_ef133bb69a3d94::t_37d878e95101a0 13-16
+  s_ef133bb69a3d94::t_0ab7cea8ea2247 65-70,72-79
+README.md
+  s_ef133bb69a3d94::t_3239d7ca5d5df3 45-46
+StudyBar/Core/AnalyticsEngine.swift
+  s_ef133bb69a3d94::t_93e4b1cea39a85 168-200
+  s_ef133bb69a3d94::t_20578438eb990f 54-68
+VERSION
+  s_ef133bb69a3d94::t_d7233c3d773ab3 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "83cbbedbba7a34d9c4ec68a6ef27f9137d25a90e",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
