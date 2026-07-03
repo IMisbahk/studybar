@@ -2,6 +2,19 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.12.1] - 2026-07-03
+
+See [release/RELEASE_NOTES_v2.12.1.md](release/RELEASE_NOTES_v2.12.1.md).
+
+### Changed
+- **No notification prompt on app launch** — only when you enable notifications or reminders
+- **Global shortcuts opt-in** — off by default; work in popover without Accessibility
+- Onboarding permissions step is optional with **Skip for Now**
+
+### Added
+- Settings toggle + status for global shortcuts; guided Accessibility link only when needed
+- Install docs: clear **right-click → Open** first-launch instructions
+
 ## [2.12.0] - 2026-07-03
 
 ### Fixed
@@ -15,7 +28,7 @@ All notable changes to StudyBar are documented here. Versioning follows [Semanti
 
 ## [2.1.0] - 2026-07-03
 
-**Themes & appearance.** See [RELEASE_NOTES_v2.1.0.md](RELEASE_NOTES_v2.1.0.md) for the public announcement.
+**Themes & appearance.** See [release/RELEASE_NOTES_v2.1.0.md](release/RELEASE_NOTES_v2.1.0.md) for the public announcement.
 
 ### Added
 - **7 color themes** — Classic, Forest, Sunset, Lavender, Ocean, Rose, Monochrome
@@ -30,7 +43,7 @@ All notable changes to StudyBar are documented here. Versioning follows [Semanti
 
 ## [2.0.0] - 2026-07-03
 
-**Production-ready release.** See [RELEASE_NOTES_v2.0.0.md](RELEASE_NOTES_v2.0.0.md) for the public announcement.
+**Production-ready release.** See [release/RELEASE_NOTES_v2.0.0.md](release/RELEASE_NOTES_v2.0.0.md) for the public announcement.
 
 ### Added
 - Suggested session duration on start screen (from Insights history)

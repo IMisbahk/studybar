@@ -49,6 +49,8 @@ struct StudyBarApp: App {
         NotificationManager.shared.configure(sessionManager: manager)
         DashboardWindowController.shared.configure(sessionManager: manager, modelContainer: container)
 
+        PermissionsHelper.migrateGlobalHotkeysDefaultIfNeeded()
+
         let hotkeys = GlobalHotkeyManager(sessionManager: manager)
         let floating = FloatingTimerController(sessionManager: manager)
         let power = PowerEventsMonitor(sessionManager: manager)
@@ -59,7 +61,6 @@ struct StudyBarApp: App {
 
         // defer so MenuBarExtra can register before any NSPanel/orderFront runs
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            NotificationManager.shared.requestAuthorization()
             hotkeys.start()
             floating.start()
             power.start()

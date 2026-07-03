@@ -1,6 +1,8 @@
 import AppKit
 
 final class GlobalHotkeyManager {
+    static weak var shared: GlobalHotkeyManager?
+
     private weak var sessionManager: SessionManager?
     private var globalMonitor: Any?
     private var localMonitor: Any?
@@ -10,12 +12,28 @@ final class GlobalHotkeyManager {
     }
 
     func start() {
-        let handler: (NSEvent) -> Void = { [weak self] event in
+        Self.shared = self
+        startLocalMonitor()
+        refreshGlobalMonitor()
+    }
+
+    func refreshGlobalMonitor() {
+        if let globalMonitor {
+            NSEvent.removeMonitor(globalMonitor)
+            self.globalMonitor = nil
+        }
+        guard UserDefaults.standard.bool(forKey: "globalHotkeysEnabled"),
+              PermissionsHelper.hasAccessibility else { return }
+
+        globalMonitor = NSEvent.addGlobalMonitorForEvents(matching: .keyDown) { [weak self] event in
             self?.handle(event)
         }
-        globalMonitor = NSEvent.addGlobalMonitorForEvents(matching: .keyDown, handler: handler)
-        localMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
-            handler(event)
+    }
+
+    private func startLocalMonitor() {
+        guard localMonitor == nil else { return }
+        localMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            self?.handle(event)
             return event
         }
     }

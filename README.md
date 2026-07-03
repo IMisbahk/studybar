@@ -36,11 +36,25 @@ A native macOS menu bar study timer. Pick a subject, start a session, and the me
 4. Drag **StudyBar.app** to your **Applications** folder
 5. Launch StudyBar — click the **book icon in the menu bar** (top right). There is **no Dock icon**; the app only lives in the menu bar.
 
-On first launch, macOS may block the app because it is ad-hoc signed (not notarized). Fix it one of these ways:
+### First launch — macOS may block the app (one time)
 
-- **Right-click** `StudyBar.app` in Applications → **Open** → confirm Open
-- Or **System Settings → Privacy & Security** → allow StudyBar
-- Or in Terminal: `xattr -cr /Applications/StudyBar.app`
+StudyBar isn't notarized (that costs $99/year). macOS may warn that the app "can't be checked for malicious software." **Normal for indie Mac apps.**
+
+**Do this once:**
+
+1. In Finder, go to **Applications**
+2. **Right-click** `StudyBar.app` → **Open**
+3. Click **Open** in the dialog
+
+After that, double-click works. You don't need System Settings unless you want **Privacy & Security → Open Anyway** instead.
+
+**Or use the install script** — it strips quarantine for you:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/install-release.sh | bash
+```
+
+**Or Terminal:** `xattr -cr /Applications/StudyBar.app`
 
 **In-app updates (v1.5.3+):** Settings → Download Update → **Restart to Update**. StudyBar quits, installs, and reopens automatically. Install to `/Applications` for this to work.
 

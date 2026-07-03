@@ -27,6 +27,15 @@ jobs:
       - name: Package app
         run: ./scripts/package.sh Release
 
+      - name: Sign and notarize (optional)
+        if: ${{ secrets.APPLE_ID != '' && secrets.APPLE_APP_SPECIFIC_PASSWORD != '' && secrets.TEAM_ID != '' && secrets.DEVELOPER_ID_APPLICATION != '' }}
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          DEVELOPER_ID_APPLICATION: ${{ secrets.DEVELOPER_ID_APPLICATION }}
+        run: chmod +x ./scripts/sign-and-notarize.sh && ./scripts/sign-and-notarize.sh Release
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:

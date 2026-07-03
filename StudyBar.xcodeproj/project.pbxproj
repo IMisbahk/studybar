@@ -75,6 +75,7 @@
 		W4X5Y6Z7A8B94V567889012 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */; };
 		Y6Z7A8B9C0D16X789012345 /* StudyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */; };
 		Z7A8B9C0D1E27Y890123456 /* ThemesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0D1E2F3A49A012345678 /* ThemesSettingsView.swift */; };
+		A1B2C3D4E5F72B901234567 /* PermissionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D3E4F5A6B83C012345678 /* PermissionsHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +150,7 @@
 		X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTheme.swift; sourceTree = "<group>"; };
 		B9C0D1E2F3A49A012345678 /* ThemesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesSettingsView.swift; sourceTree = "<group>"; };
+		C2D3E4F5A6B83C012345678 /* PermissionsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 				R9S0T1U2V3W49Q012334567 /* BackupService.swift */,
 				T1U2V3W4X5Y61S234556789 /* UpdateAutoMonitor.swift */,
 				A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */,
+				C2D3E4F5A6B83C012345678 /* PermissionsHelper.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				W4X5Y6Z7A8B94V567889012 /* OnboardingView.swift in Sources */,
 				Y6Z7A8B9C0D16X789012345 /* StudyTheme.swift in Sources */,
 				Z7A8B9C0D1E27Y890123456 /* ThemesSettingsView.swift in Sources */,
+				A1B2C3D4E5F72B901234567 /* PermissionsHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +554,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 21200;
+				CURRENT_PROJECT_VERSION = 21201;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -560,7 +564,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.12.0;
+				MARKETING_VERSION = 2.12.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -577,7 +581,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 21200;
+				CURRENT_PROJECT_VERSION = 21201;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -587,7 +591,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 2.12.0;
+				MARKETING_VERSION = 2.12.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

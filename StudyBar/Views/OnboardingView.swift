@@ -6,8 +6,11 @@ struct OnboardingView: View {
     @Binding var hasCompletedOnboarding: Bool
     var onFinish: () -> Void = {}
 
+    @AppStorage("globalHotkeysEnabled") private var globalHotkeysEnabled = false
     @State private var step = 0
     @State private var subjectName = ""
+    @State private var notificationsGranted = false
+    @State private var shortcutsGranted = PermissionsHelper.hasAccessibility
 
     var body: some View {
         VStack(spacing: 0) {
@@ -16,15 +19,25 @@ struct OnboardingView: View {
             TabView(selection: $step) {
                 welcomeStep.tag(0)
                 subjectStep.tag(1)
-                notificationsStep.tag(2)
+                permissionsStep.tag(2)
                 goalsStep.tag(3)
                 finishStep.tag(4)
             }
             .tabViewStyle(.automatic)
             .labelsHidden()
-            .frame(height: 280)
+            .frame(height: 300)
             Divider()
             footer
+        }
+        .task {
+            notificationsGranted = await PermissionsHelper.notificationsAuthorized()
+            shortcutsGranted = PermissionsHelper.hasAccessibility
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            shortcutsGranted = PermissionsHelper.hasAccessibility
+            if shortcutsGranted && globalHotkeysEnabled {
+                GlobalHotkeyManager.shared?.refreshGlobalMonitor()
+            }
         }
     }
 
@@ -51,6 +64,10 @@ struct OnboardingView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            Text("StudyBar lives in the menu bar (book icon). There is no Dock icon.")
+                .font(.caption)
+                .foregroundStyle(.tertiary)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -70,18 +87,60 @@ struct OnboardingView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private var notificationsStep: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Stay on track")
+    private var permissionsStep: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text("Optional permissions")
                 .font(.title3.bold())
-            Text("Allow notifications for session alerts, study reminders, and weekly recaps.")
+            Text("Everything works without these. Enable only what you want — you can change them later in Settings.")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            Button("Enable Notifications") {
-                NotificationManager.shared.requestAuthorization()
+
+            VStack(alignment: .leading, spacing: 8) {
+                Label("Notifications", systemImage: "bell.badge")
+                    .font(.subheadline.weight(.semibold))
+                Text("One-tap Allow on the macOS dialog. No System Settings unless you previously denied.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                if notificationsGranted {
+                    Label("Enabled", systemImage: "checkmark.circle.fill")
+                        .font(.caption)
+                        .foregroundStyle(.green)
+                } else {
+                    Button("Enable Notifications") {
+                        Task {
+                            notificationsGranted = await PermissionsHelper.requestNotificationsIfNeeded()
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
+                }
             }
-            .buttonStyle(.borderedProminent)
+
+            Divider()
+
+            VStack(alignment: .leading, spacing: 8) {
+                Label("Global keyboard shortcuts", systemImage: "keyboard")
+                    .font(.subheadline.weight(.semibold))
+                Text("⌥⌘S/P/R/E from any app. Skip this to use shortcuts only while the menu bar popover is open.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                if shortcutsGranted && globalHotkeysEnabled {
+                    Label("Enabled", systemImage: "checkmark.circle.fill")
+                        .font(.caption)
+                        .foregroundStyle(.green)
+                } else {
+                    Button("Enable Global Shortcuts") {
+                        globalHotkeysEnabled = true
+                        shortcutsGranted = PermissionsHelper.requestAccessibility(prompt: true)
+                        GlobalHotkeyManager.shared?.refreshGlobalMonitor()
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                }
+            }
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -131,7 +190,7 @@ struct OnboardingView: View {
             }
             Spacer()
             if step < 4 {
-                Button("Next") { advance() }
+                Button(step == 2 ? "Skip for Now" : "Next") { advance() }
                     .buttonStyle(.borderedProminent)
             } else {
                 Button("Get Started") { complete() }

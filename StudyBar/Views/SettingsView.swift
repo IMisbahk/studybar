@@ -21,7 +21,10 @@ struct SettingsView: View {
     @AppStorage("autoUpdateEnabled") private var autoUpdateEnabled = true
     @AppStorage("autoUpdateInstallEnabled") private var autoUpdateInstallEnabled = true
     @AppStorage("showOnboardingNow") private var showOnboardingNow = false
+    @AppStorage("globalHotkeysEnabled") private var globalHotkeysEnabled = false
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
+    @State private var notificationsAuthorized = false
+    @State private var accessibilityGranted = PermissionsHelper.hasAccessibility
     @State private var updateStatus: UpdateChecker.Status = .idle
     @State private var backupMessage: String?
     @State private var updateTask: Task<Void, Never>?
@@ -61,8 +64,12 @@ struct SettingsView: View {
         .onAppear {
             checkForUpdates()
             StudyReminderScheduler.shared.reschedule(in: modelContext)
+            refreshPermissionStatus()
         }
-        .onChange(of: studyRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            refreshPermissionStatus()
+            GlobalHotkeyManager.shared?.refreshGlobalMonitor()
+        }
         .onChange(of: peakHourRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
         .onChange(of: inactivityRemindersEnabled) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
         .onChange(of: inactivityReminderDays) { _, _ in StudyReminderScheduler.shared.reschedule(in: modelContext) }
@@ -151,6 +158,28 @@ struct SettingsView: View {
     private var remindersSection: some View {
         settingsSection(title: "Study Reminders") {
             Toggle("Study Reminders", isOn: $studyRemindersEnabled)
+                .onChange(of: studyRemindersEnabled) { _, enabled in
+                    if enabled {
+                        Task {
+                            _ = await PermissionsHelper.requestNotificationsIfNeeded()
+                            await MainActor.run { refreshPermissionStatus() }
+                        }
+                    }
+                    StudyReminderScheduler.shared.reschedule(in: modelContext)
+                }
+            if studyRemindersEnabled && !notificationsAuthorized {
+                Text("Tap Allow on the macOS prompt to receive reminders. No System Settings needed unless you previously denied.")
+                    .font(.caption2)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+                Button("Request Notification Access") {
+                    Task {
+                        _ = await PermissionsHelper.requestNotificationsIfNeeded()
+                        await MainActor.run { refreshPermissionStatus() }
+                    }
+                }
+                .controlSize(.small)
+            }
             Toggle("Peak Focus Time", isOn: $peakHourRemindersEnabled)
                 .disabled(!studyRemindersEnabled)
             Toggle("Inactivity Nudges", isOn: $inactivityRemindersEnabled)
@@ -158,6 +187,14 @@ struct SettingsView: View {
             Toggle("Sunday Week Recap", isOn: $weeklyRecapRemindersEnabled)
                 .disabled(!studyRemindersEnabled)
             Toggle("Pause Too Long Nudge", isOn: $pauseNudgeEnabled)
+                .onChange(of: pauseNudgeEnabled) { _, enabled in
+                    if enabled {
+                        Task {
+                            _ = await PermissionsHelper.requestNotificationsIfNeeded()
+                            await MainActor.run { refreshPermissionStatus() }
+                        }
+                    }
+                }
             if studyRemindersEnabled && inactivityRemindersEnabled {
                 Stepper("Nudge after \(inactivityReminderDays) day\(inactivityReminderDays == 1 ? "" : "s")", value: $inactivityReminderDays, in: 1...14)
                     .font(.subheadline)
@@ -186,16 +223,50 @@ struct SettingsView: View {
 
     private var shortcutsSection: some View {
         settingsSection(title: "Keyboard Shortcuts") {
+            Toggle("Global shortcuts (⌥⌘ from any app)", isOn: $globalHotkeysEnabled)
+                .onChange(of: globalHotkeysEnabled) { _, enabled in
+                    if enabled {
+                        accessibilityGranted = PermissionsHelper.requestAccessibility(prompt: true)
+                    }
+                    GlobalHotkeyManager.shared?.refreshGlobalMonitor()
+                }
+            if globalHotkeysEnabled && !accessibilityGranted {
+                HStack(spacing: 8) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.orange)
+                        .font(.caption)
+                    Text("Turn on StudyBar in Accessibility to use shortcuts outside the menu bar.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Button("Open Accessibility Settings") {
+                    PermissionsHelper.openAccessibilitySettings()
+                }
+                .controlSize(.small)
+            } else if globalHotkeysEnabled {
+                Label("Global shortcuts active", systemImage: "checkmark.circle.fill")
+                    .font(.caption)
+                    .foregroundStyle(.green)
+            } else {
+                Text("Shortcuts still work while the menu bar popover is open.")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             shortcutRow("Start Last Session", "⌥⌘S")
             shortcutRow("Pause", "⌥⌘P")
             shortcutRow("Resume", "⌥⌘R")
             shortcutRow("Extend 10 Minutes", "⌥⌘E")
             shortcutRow("Open Timeline", "⌥⌘H")
             shortcutRow("Start Session", "⌘↩")
-            Text("Global shortcuts work system-wide. ⌥⌘H opens the dashboard Timeline.")
-                .font(.caption2)
-                .foregroundStyle(.tertiary)
-                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private func refreshPermissionStatus() {
+        accessibilityGranted = PermissionsHelper.hasAccessibility
+        Task {
+            notificationsAuthorized = await PermissionsHelper.notificationsAuthorized()
         }
     }
 

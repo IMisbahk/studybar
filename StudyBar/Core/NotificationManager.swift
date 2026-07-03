@@ -35,10 +35,14 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     }
 
     func requestAuthorization() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, error in
-            if let error {
-                print("Notification authorization error: \(error)")
-            }
+        Task {
+            _ = await PermissionsHelper.requestNotificationsIfNeeded()
+        }
+    }
+
+    func requestAuthorizationIfNeeded() {
+        Task {
+            _ = await PermissionsHelper.requestNotificationsIfNeeded()
         }
     }
 

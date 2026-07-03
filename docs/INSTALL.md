@@ -5,12 +5,11 @@
 - macOS **14.0 (Sonoma)** or later
 - For building from source: **Xcode** with Command Line Tools (`xcodebuild -runFirstLaunch` once after install)
 
-StudyBar is ad-hoc signed (“Sign to Run Locally”). On first launch, macOS may show an unidentified-developer warning:
+StudyBar is ad-hoc signed (“Sign to Run Locally”). On first launch, macOS may show an unidentified-developer warning. **This is normal** for open-source Mac apps outside the App Store.
 
-1. **System Settings → Privacy & Security → Open Anyway**, or
-2. Right-click **StudyBar.app → Open** in Finder
+**Recommended (one time only):** Right-click **StudyBar.app** in Applications → **Open** → confirm **Open**. After that, double-click works.
 
-This is normal for open-source macOS apps distributed outside the App Store.
+Alternatives: **System Settings → Privacy & Security → Open Anyway**, or `xattr -cr /Applications/StudyBar.app`, or use the [install script](#method-2-install-script) below.
 
 ---
 
