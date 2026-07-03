@@ -2,6 +2,11 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.6.4] - 2026-07-03
+
+### Added
+- Timeline **zoom** modes: **Day** (24h), **Focus** (6am–11pm), **Compact** (dense rows)
+
 ## [1.6.3] - 2026-07-03
 
 ### Added
