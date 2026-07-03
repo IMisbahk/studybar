@@ -1,0 +1,36 @@
+StudyBar/Core/NotificationManager.swift
+  s_ef133bb69a3d94::t_dd26dce6428a16 65-77
+  s_ef133bb69a3d94::t_f724aa6d9eb101 146-149,154-160
+  s_ef133bb69a3d94::t_e249ab365f5d9e 118-128,161
+  s_ef133bb69a3d94::t_42dbd49b31bdba 9,15-19
+  s_ef133bb69a3d94::t_cbe797f3999db1 162
+StudyBar/Views/Dashboard/AnalyticsDashboardView.swift
+  s_ef133bb69a3d94::t_a7688d1523f62f 36-38
+  s_ef133bb69a3d94::t_26191014ca641c 127,130-164,166-170,172-173
+  s_ef133bb69a3d94::t_f968b61f906687 8
+StudyBar/Core/ExportService.swift
+  s_ef133bb69a3d94::t_8e4717dde5666f 5-9,12,18-27,30,48-84
+CHANGELOG.md
+  s_ef133bb69a3d94::t_9c65ea11de2ac7 5-14
+  s_ef133bb69a3d94::t_01385c4a00c093 165
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_5dfaa8d5637965 437,447,464,474
+VERSION
+  s_ef133bb69a3d94::t_3c857cca3259f7 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "7d5ec5025c8aa57feb73ec5d2f90bb6ab9d3455f",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
