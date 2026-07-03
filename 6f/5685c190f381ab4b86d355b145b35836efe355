@@ -1,0 +1,31 @@
+StudyBar/Views/Dashboard/TimelineSessionTooltip.swift
+  s_ef133bb69a3d94::t_fe3eb022e34248 1-113
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_5494deae65e9c7 210
+  s_ef133bb69a3d94::t_b36783d53d5e4c 324
+  s_ef133bb69a3d94::t_259f90aa1bcc5f 101
+  s_ef133bb69a3d94::t_b6d75fdb3b8620 52
+  s_ef133bb69a3d94::t_3b127c5748ffb7 453,463,480,490
+CHANGELOG.md
+  s_ef133bb69a3d94::t_49c7fd575d771e 5-10
+VERSION
+  s_ef133bb69a3d94::t_013b4ced79e28a 1
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_9bcb8e6a2a5786 2,4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "6f5685c190f381ab4b86d355b145b35836efe355",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
