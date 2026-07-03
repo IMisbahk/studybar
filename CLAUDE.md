@@ -67,8 +67,14 @@
 - `GamificationEngine` runs on session log + backfill on launch
 - Support link: https://rzp.io/rzp/studybar in Settings
 
-## Roadmap backlog (post v1.7.57)
-Phase 7 Smart Insights (v1.8.0+), then Phases 5-6 skip, 8-9 power user/customization.
+## Roadmap backlog (post v1.8.0)
+Phases 5-6 skip, 8-9 power user/customization.
+
+## v1.8.0 (branch `release/1.8.0` — local only, not pushed)
+- `InsightsEngine` + **Insights** dashboard tab (Phase 7 Smart Insights)
+- Peak focus window, weekday/subject patterns, consistency trend, session length suggestion
+- Burnout + break warnings, weekly/monthly narrative summaries
+- All local stats — no cloud, no LLM
 
 ## Releases shipped 2026-07-03
 - **v1.6.0–1.6.5** — Phase 3 Timeline
