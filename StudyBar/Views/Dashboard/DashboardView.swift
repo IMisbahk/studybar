@@ -2,6 +2,9 @@ import SwiftUI
 
 enum DashboardSection: String, CaseIterable, Identifiable {
     case overview
+    case profile
+    case galaxy
+    case achievements
     case analytics
     case notes
     case timeline
@@ -12,6 +15,9 @@ enum DashboardSection: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .overview: "Overview"
+        case .profile: "Profile"
+        case .galaxy: "Galaxy"
+        case .achievements: "Achievements"
         case .analytics: "Analytics"
         case .notes: "Notes"
         case .timeline: "Timeline"
@@ -22,6 +28,9 @@ enum DashboardSection: String, CaseIterable, Identifiable {
     var systemImage: String {
         switch self {
         case .overview: "chart.bar.fill"
+        case .profile: "person.crop.circle.fill"
+        case .galaxy: "globe.americas.fill"
+        case .achievements: "medal.fill"
         case .analytics: "square.grid.3x3.fill"
         case .notes: "note.text"
         case .timeline: "timeline.selection"
@@ -42,9 +51,14 @@ struct DashboardView: View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             sidebar
         } detail: {
-            detailContent
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(nsColor: .windowBackgroundColor))
+            ZStack(alignment: .top) {
+                detailContent
+                AchievementUnlockBanner()
+                    .padding(.top, 12)
+                    .padding(.horizontal, 24)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(nsColor: .windowBackgroundColor))
         }
         .navigationSplitViewStyle(.balanced)
         .frame(minWidth: 720, minHeight: 480)
@@ -74,6 +88,12 @@ struct DashboardView: View {
         switch section {
         case .overview:
             DashboardOverviewView()
+        case .profile:
+            ProfileDashboardView()
+        case .galaxy:
+            GalaxyView()
+        case .achievements:
+            AchievementsView()
         case .analytics:
             AnalyticsDashboardView()
         case .notes:

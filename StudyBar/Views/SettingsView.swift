@@ -115,6 +115,9 @@ struct SettingsView: View {
 
     private var linksSection: some View {
         settingsSection(title: "More") {
+            Link(destination: URL(string: "https://rzp.io/rzp/studybar")!) {
+                Label("Support StudyBar", systemImage: "heart.fill")
+            }
             Link(destination: URL(string: "https://github.com/IMisbahk/studybar")!) {
                 Label("GitHub Repository", systemImage: "link")
             }

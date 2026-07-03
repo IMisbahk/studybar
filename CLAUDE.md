@@ -58,9 +58,13 @@
 - Segments, engine, tooltips, dashboard timeline, zoom, filters/popover compact view
 - Pre-1.6.0 sessions lack segments — shown as single blocks (fine)
 
-## Roadmap backlog (post v1.6.5)
-Phases 4-9: Gamification/Galaxy, Apple integration, White noise, Smart insights,
-Command palette/deep links, Customization themes.
+## Phase 4 Gamification (v1.7.0–1.7.5) — shipped 2026-07-03
+- XP/levels, ~83 global + 8 per-subject achievement templates, galaxy planets
+- `GamificationEngine` runs on session log + backfill on launch
+- Support link: https://rzp.io/rzp/studybar in Settings
+
+## Roadmap backlog (post v1.7.5)
+Phases 5-9: Apple integration, White noise, Smart insights, Command palette, Customization.
 
 ## Releases shipped 2026-07-03
 - **v1.6.0–1.6.5** — Phase 3 Timeline

@@ -272,6 +272,7 @@ final class SessionManager {
         )
         modelContext.insert(session)
         attachSegments(to: session, fallbackEnd: endedAt)
+        GamificationEngine.process(session: session, in: modelContext)
         draftNotes = ""
         segmentDrafts = []
     }

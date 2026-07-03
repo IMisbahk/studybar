@@ -51,6 +51,17 @@
 		B9C0D1E2F3A471890011234 /* TimelineDayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1E2F3A4B582901122345 /* TimelineDayRowView.swift */; };
 		D1E2F3A4B5C693012233456 /* TimelineSessionTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3A4B5C6D704123344567 /* TimelineSessionTooltip.swift */; };
 		F7A8B9C0D1E25F678899012 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B9C0D1E2F360789900123 /* TimelineView.swift */; };
+		G1A2B3C4D5E60718293A4B5C /* ProfileProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = H2B3C4D5E6F718293A4B5C6D /* ProfileProgress.swift */; };
+		I3C4D5E6F7A8293A4B5C6D7E /* SubjectProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = J4D5E6F7A8B93A4B5C6D7E8F /* SubjectProgress.swift */; };
+		K5E6F7A8B9C04B5C6D7E8F90 /* AchievementUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = L6F7A8B9C0D15C6D7E8F901 /* AchievementUnlock.swift */; };
+		M7A8B9C0D1E26D7E8F90112 /* GamificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = N8B9C0D1E2F37E8F9011223 /* GamificationEngine.swift */; };
+		O9C0D1E2F3A48F90122334 /* AchievementCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = P0D1E2F3A4B59A012233445 /* AchievementCatalog.swift */; };
+		Q1E2F3A4B5C60B123344556 /* GamificationUnlockCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = R2F3A4B5C6D71C234455667 /* GamificationUnlockCenter.swift */; };
+		S3A4B5C6D7E82D345566778 /* ProfileDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = T4B5C6D7E8F93E456677889 /* ProfileDashboardView.swift */; };
+		U5C6D7E8F9A04F567788901 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = V6D7E8F9A0B15A678899012 /* AchievementsView.swift */; };
+		W7E8F9A0B1C26B789900123 /* GalaxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = X8F9A0B1C2D37C890011234 /* GalaxyView.swift */; };
+		Y9A0B1C2D3E48D901122345 /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z0B1C2D3E4F59E012233456 /* PlanetView.swift */; };
+		A2C3D4E5F6A70F123344567 /* AchievementUnlockBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +112,17 @@
 		C0D1E2F3A4B582901122345 /* TimelineDayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDayRowView.swift; sourceTree = "<group>"; };
 		E2F3A4B5C6D704123344567 /* TimelineSessionTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSessionTooltip.swift; sourceTree = "<group>"; };
 		A8B9C0D1E2F360789900123 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		H2B3C4D5E6F718293A4B5C6D /* ProfileProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProgress.swift; sourceTree = "<group>"; };
+		J4D5E6F7A8B93A4B5C6D7E8F /* SubjectProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectProgress.swift; sourceTree = "<group>"; };
+		L6F7A8B9C0D15C6D7E8F901 /* AchievementUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementUnlock.swift; sourceTree = "<group>"; };
+		N8B9C0D1E2F37E8F9011223 /* GamificationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationEngine.swift; sourceTree = "<group>"; };
+		P0D1E2F3A4B59A012233445 /* AchievementCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCatalog.swift; sourceTree = "<group>"; };
+		R2F3A4B5C6D71C234455667 /* GamificationUnlockCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationUnlockCenter.swift; sourceTree = "<group>"; };
+		T4B5C6D7E8F93E456677889 /* ProfileDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDashboardView.swift; sourceTree = "<group>"; };
+		V6D7E8F9A0B15A678899012 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		X8F9A0B1C2D37C890011234 /* GalaxyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyView.swift; sourceTree = "<group>"; };
+		Z0B1C2D3E4F59E012233456 /* PlanetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetView.swift; sourceTree = "<group>"; };
+		B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementUnlockBanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +174,9 @@
 				1DB162A3B8B14954BEBF0291 /* Topic.swift */,
 				DC7A80CDCAD34F5F82EFC560 /* StudySession.swift */,
 				C4D5E6F7A8B92D345566779 /* SessionSegment.swift */,
+				H2B3C4D5E6F718293A4B5C6D /* ProfileProgress.swift */,
+				J4D5E6F7A8B93A4B5C6D7E8F /* SubjectProgress.swift */,
+				L6F7A8B9C0D15C6D7E8F901 /* AchievementUnlock.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,6 +199,9 @@
 				B5C6D7E8F9A04B5C6D7E8F90 /* ExportService.swift */,
 				C4D5E6F7A8B92C345566778 /* StudyDataStore.swift */,
 				E6F7A8B9C0D14E567788901 /* TimelineEngine.swift */,
+				N8B9C0D1E2F37E8F9011223 /* GamificationEngine.swift */,
+				P0D1E2F3A4B59A012233445 /* AchievementCatalog.swift */,
+				R2F3A4B5C6D71C234455667 /* GamificationUnlockCenter.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -211,6 +239,11 @@
 				C0D1E2F3A4B582901122345 /* TimelineDayRowView.swift */,
 				E2F3A4B5C6D704123344567 /* TimelineSessionTooltip.swift */,
 				A8B9C0D1E2F360789900123 /* TimelineView.swift */,
+				T4B5C6D7E8F93E456677889 /* ProfileDashboardView.swift */,
+				V6D7E8F9A0B15A678899012 /* AchievementsView.swift */,
+				X8F9A0B1C2D37C890011234 /* GalaxyView.swift */,
+				Z0B1C2D3E4F59E012233456 /* PlanetView.swift */,
+				B3D4E5F6A7B81A234455678 /* AchievementUnlockBanner.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -326,6 +359,17 @@
 				B9C0D1E2F3A471890011234 /* TimelineDayRowView.swift in Sources */,
 				D1E2F3A4B5C693012233456 /* TimelineSessionTooltip.swift in Sources */,
 				F7A8B9C0D1E25F678899012 /* TimelineView.swift in Sources */,
+				G1A2B3C4D5E60718293A4B5C /* ProfileProgress.swift in Sources */,
+				I3C4D5E6F7A8293A4B5C6D7E /* SubjectProgress.swift in Sources */,
+				K5E6F7A8B9C04B5C6D7E8F90 /* AchievementUnlock.swift in Sources */,
+				M7A8B9C0D1E26D7E8F90112 /* GamificationEngine.swift in Sources */,
+				O9C0D1E2F3A48F90122334 /* AchievementCatalog.swift in Sources */,
+				Q1E2F3A4B5C60B123344556 /* GamificationUnlockCenter.swift in Sources */,
+				S3A4B5C6D7E82D345566778 /* ProfileDashboardView.swift in Sources */,
+				U5C6D7E8F9A04F567788901 /* AchievementsView.swift in Sources */,
+				W7E8F9A0B1C26B789900123 /* GalaxyView.swift in Sources */,
+				Y9A0B1C2D3E48D901122345 /* PlanetView.swift in Sources */,
+				A2C3D4E5F6A70F123344567 /* AchievementUnlockBanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,7 +498,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10651;
+				CURRENT_PROJECT_VERSION = 10705;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -464,7 +508,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.6.51;
+				MARKETING_VERSION = 1.7.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -481,7 +525,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10651;
+				CURRENT_PROJECT_VERSION = 10705;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -491,7 +535,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.6.51;
+				MARKETING_VERSION = 1.7.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

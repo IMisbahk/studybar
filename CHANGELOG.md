@@ -2,6 +2,42 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.7.5] - 2026-07-03
+
+### Added
+- **Support StudyBar** link in Settings (above GitHub)
+- Galaxy nebula/constellation tiers and visual polish
+
+## [1.7.4] - 2026-07-03
+
+### Added
+- **Galaxy** dashboard — each subject is a planet that grows with study hours
+- Planet tiers: rings, moons, stars (cosmetic only)
+
+## [1.7.3] - 2026-07-03
+
+### Added
+- **~100 achievements** with category filters
+- Unlock banner animations in dashboard (respects Reduced Motion)
+
+## [1.7.2] - 2026-07-03
+
+### Added
+- Achievement engine: sessions, hours, streaks, habits, weekdays, per-subject mastery
+- **Achievements** dashboard tab
+
+## [1.7.1] - 2026-07-03
+
+### Added
+- **Profile** dashboard: overall level, XP bar, streaks, per-subject level cards
+
+## [1.7.0] - 2026-07-03
+
+### Added
+- XP system — 1 XP per minute studied, per-subject and overall levels
+- `ProfileProgress`, `SubjectProgress`, `AchievementUnlock` SwiftData models
+- Automatic backfill from existing session history on first launch
+
 ## [1.6.51] - 2026-07-03
 
 ### Fixed

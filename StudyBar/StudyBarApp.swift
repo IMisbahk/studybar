@@ -29,6 +29,8 @@ struct StudyBarApp: App {
         let manager = SessionManager(modelContext: container.mainContext)
         _sessionManager = State(initialValue: manager)
 
+        GamificationEngine.backfillIfNeeded(in: container.mainContext)
+
         NotificationManager.shared.configure(sessionManager: manager)
         DashboardWindowController.shared.configure(sessionManager: manager, modelContainer: container)
 
