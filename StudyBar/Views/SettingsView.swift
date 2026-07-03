@@ -34,7 +34,6 @@ struct SettingsView: View {
                 generalSection
                 floatingTimerSection
                 shortcutsSection
-                linksSection
                 quitSection
             }
             .padding(16)
@@ -110,17 +109,6 @@ struct SettingsView: View {
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
                 .fixedSize(horizontal: false, vertical: true)
-        }
-    }
-
-    private var linksSection: some View {
-        settingsSection(title: "More") {
-            Link(destination: URL(string: "https://rzp.io/rzp/studybar")!) {
-                Label("Support StudyBar", systemImage: "heart.fill")
-            }
-            Link(destination: URL(string: "https://github.com/IMisbahk/studybar")!) {
-                Label("GitHub Repository", systemImage: "link")
-            }
         }
     }
 
@@ -226,6 +214,17 @@ struct SettingsView: View {
                         Button("Retry") { checkForUpdates() }
                             .controlSize(.small)
                     }
+                }
+            }
+            .padding(10)
+            .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
+
+            VStack(alignment: .leading, spacing: 10) {
+                Link(destination: URL(string: "https://rzp.io/rzp/studybar")!) {
+                    Label("Support StudyBar", systemImage: "heart.fill")
+                }
+                Link(destination: URL(string: "https://github.com/IMisbahk/studybar")!) {
+                    Label("GitHub Repository", systemImage: "link")
                 }
             }
             .padding(10)

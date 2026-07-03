@@ -123,6 +123,34 @@ struct PeriodComparison: Hashable {
     }
 }
 
+struct AnalyticsSnapshot {
+    let overview: AnalyticsOverview
+    let dailyTotals: [DayStudyTotal]
+    let heatmapDayDetails: [Date: DayStudyDetail]
+    let weeklyTotals: [WeekStudyTotal]
+    let monthlyTotals: [MonthStudyTotal]
+    let dailyTrailing30: [DayStudyTotal]
+    let hourTotals: [HourStudyTotal]
+    let subjectTotals: [SubjectStudyTotal]
+    let currentStreak: Int
+    let longestStreak: Int
+
+    static func build(from sessions: [StudySession], heatmapRange: HeatmapRange) -> AnalyticsSnapshot {
+        AnalyticsSnapshot(
+            overview: AnalyticsEngine.overview(from: sessions),
+            dailyTotals: AnalyticsEngine.dailyTotals(from: sessions, range: heatmapRange),
+            heatmapDayDetails: AnalyticsEngine.dayDetails(from: sessions, range: heatmapRange),
+            weeklyTotals: AnalyticsEngine.weeklyTotals(from: sessions, trailingWeeks: 12),
+            monthlyTotals: AnalyticsEngine.monthlyTotals(from: sessions, trailingMonths: 12),
+            dailyTrailing30: AnalyticsEngine.dailyTotalsTrailing(days: 30, from: sessions),
+            hourTotals: AnalyticsEngine.hourOfDayTotals(from: sessions),
+            subjectTotals: AnalyticsEngine.subjectTotals(from: sessions),
+            currentStreak: AnalyticsEngine.currentStreak(from: sessions),
+            longestStreak: AnalyticsEngine.longestStreak(from: sessions)
+        )
+    }
+}
+
 enum AnalyticsEngine {
     private static var calendar: Calendar { .current }
 

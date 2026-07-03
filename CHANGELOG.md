@@ -2,6 +2,15 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.7.58] - 2026-07-03
+
+### Fixed
+- Analytics scroll performance — cached snapshot, lazy layout, rasterized chart cards
+
+### Changed
+- Export buttons and save toast pinned to top of Analytics page
+- Support and GitHub links moved below Updates in Settings
+
 ## [1.7.57] - 2026-07-03
 
 ### Added
@@ -277,6 +286,10 @@ First public release.
 - SwiftData persistence for subjects, topics, and session history
 - Local-only — no accounts, cloud sync, or network calls
 
+
+
+
+[1.6.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.6.0
 [1.5.33]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.33
 [1.5.32]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.32
 [1.5.31]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.31
