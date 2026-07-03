@@ -1,0 +1,55 @@
+StudyBar/Core/StudyDataStore.swift
+  s_ef133bb69a3d94::t_9fc2d670689564 12-25
+  s_ef133bb69a3d94::t_6e187c7dfce893 112
+  s_ef133bb69a3d94::t_a129169a440e07 26-27
+StudyBar/Views/SettingsView.swift
+  s_ef133bb69a3d94::t_95b64b96551fbd 99-116
+  s_ef133bb69a3d94::t_1fd68d15ac5c8e 50-57
+  s_ef133bb69a3d94::t_6d67890989fc4a 4,8,13-16
+  s_ef133bb69a3d94::t_5af667dd8b5e31 41
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_36577cbb75eb35 2,4
+StudyBar/Views/Dashboard/TimelineView.swift
+  s_ef133bb69a3d94::t_26bbfcb8d1088a 43-70,72,76-77
+  s_ef133bb69a3d94::t_8099c0cb9cc2cc 130-135
+CHANGELOG.md
+  s_ef133bb69a3d94::t_99a484a7b710b8 5-14
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_b477507673e44e 264
+  s_ef133bb69a3d94::t_b877c12ea23460 525,535,552,562
+  s_ef133bb69a3d94::t_98058261647548 218
+  s_ef133bb69a3d94::t_8ea247813543d6 136-137
+  s_ef133bb69a3d94::t_c11b4ae120e4a1 395-396
+  s_ef133bb69a3d94::t_8d6b5eafc4fc8f 69-70
+VERSION
+  s_ef133bb69a3d94::t_b877c12ea23460 1
+StudyBar/Core/StudyReminderScheduler.swift
+  s_ef133bb69a3d94::t_b0bf6ae73ece0d 1-94
+StudyBar/StudyBarApp.swift
+  s_ef133bb69a3d94::t_26478696faacae 18-22
+  s_ef133bb69a3d94::t_5a2b38523af413 55
+StudyBar/Core/SessionManager.swift
+  s_ef133bb69a3d94::t_276d2cd939f8bc 277-279
+  s_ef133bb69a3d94::t_7201be1877b8f0 276
+CLAUDE.md
+  s_ef133bb69a3d94::t_67bb2b91b104bb 75
+  s_ef133bb69a3d94::t_de3e78f32b3cf6 70,73-74,76-79
+StudyBar/Views/Dashboard/SessionLogView.swift
+  s_ef133bb69a3d94::t_44ba5e2880b99a 1-120
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "d8117b4c44d234762ad025f97d9cb3bd9c0267fa",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
