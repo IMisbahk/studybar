@@ -1,0 +1,25 @@
+CHANGELOG.md
+  s_ef133bb69a3d94::t_5523ab289c7288 5-9
+StudyBar.xcodeproj/project.pbxproj
+  s_ef133bb69a3d94::t_1b3c7438f69be1 457,467,484,494
+VERSION
+  s_ef133bb69a3d94::t_8b6afdb95d26e3 1
+packaging/homebrew/StudyBar.rb
+  s_ef133bb69a3d94::t_7590df553c1c49 2,4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "85131cf582b1fe28fa89e0acb846ec0628b8638d",
+  "prompts": {},
+  "sessions": {
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
