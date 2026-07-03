@@ -2,6 +2,12 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [1.6.0] - 2026-07-03
+
+### Added
+- `SessionSegment` SwiftData model — logs active, user-pause, and auto-pause intervals per session
+- `SessionManager` records pause/resume segments during live sessions
+
 ## [1.5.33] - 2026-07-03
 
 ### Added

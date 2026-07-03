@@ -46,6 +46,7 @@
 		E8F9A0B1C2D37E8F9011223 /* NotesBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0B1C2D3E48F90122334 /* NotesBrowserView.swift */; };
 		A0B1C2D3E4F59A012233445 /* AnalyticsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5A60B123344556 /* AnalyticsDashboardView.swift */; };
 		B3C4D5E6F7A81B234455667 /* StudyDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E6F7A8B92C345566778 /* StudyDataStore.swift */; };
+		B3C4D5E6F7A81C234455668 /* SessionSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E6F7A8B92D345566779 /* SessionSegment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		F9A0B1C2D3E48F90122334 /* NotesBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesBrowserView.swift; sourceTree = "<group>"; };
 		B1C2D3E4F5A60B123344556 /* AnalyticsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsDashboardView.swift; sourceTree = "<group>"; };
 		C4D5E6F7A8B92C345566778 /* StudyDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDataStore.swift; sourceTree = "<group>"; };
+		C4D5E6F7A8B92D345566779 /* SessionSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSegment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				A262244491B34E9D839FA6DC /* Subject.swift */,
 				1DB162A3B8B14954BEBF0291 /* Topic.swift */,
 				DC7A80CDCAD34F5F82EFC560 /* StudySession.swift */,
+				C4D5E6F7A8B92D345566779 /* SessionSegment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				E8F9A0B1C2D37E8F9011223 /* NotesBrowserView.swift in Sources */,
 				A0B1C2D3E4F59A012233445 /* AnalyticsDashboardView.swift in Sources */,
 				B3C4D5E6F7A81B234455667 /* StudyDataStore.swift in Sources */,
+				B3C4D5E6F7A81C234455668 /* SessionSegment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +438,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10533;
+				CURRENT_PROJECT_VERSION = 10600;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -444,7 +448,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.5.33;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -461,7 +465,7 @@
 				CODE_SIGN_ENTITLEMENTS = StudyBar/StudyBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10533;
+				CURRENT_PROJECT_VERSION = 10600;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -471,7 +475,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.5.33;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.misbah.studybar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

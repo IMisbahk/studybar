@@ -22,7 +22,7 @@ enum PopoverTab: String, CaseIterable, Hashable {
     var title: String {
         switch self {
         case .timer: "Timer"
-        case .history: "History"
+        case .history: "Timeline"
         case .settings: "Settings"
         }
     }
@@ -30,7 +30,7 @@ enum PopoverTab: String, CaseIterable, Hashable {
     var systemImage: String {
         switch self {
         case .timer: "timer"
-        case .history: "clock.arrow.circlepath"
+        case .history: "timeline.selection"
         case .settings: "gearshape"
         }
     }
@@ -61,6 +61,13 @@ final class SessionManager {
     private let modelContext: ModelContext
     private var timer: Timer?
     private var completionClearTask: Task<Void, Never>?
+    private var segmentDrafts: [SegmentDraft] = []
+
+    private struct SegmentDraft {
+        var kind: SessionSegmentKind
+        var startedAt: Date
+        var endedAt: Date?
+    }
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -100,6 +107,8 @@ final class SessionManager {
         phase = .running
         autoPausedBySystem = false
         lastCompletion = nil
+        resetSegmentDrafts()
+        beginSegment(.active)
 
         NotificationManager.shared.fireSessionStarted(subjectName: subjectName, topicName: topicName, minutes: minutes)
         startTimer()
@@ -117,6 +126,8 @@ final class SessionManager {
         phase = .running
         autoPausedBySystem = false
         lastCompletion = nil
+        resetSegmentDrafts()
+        beginSegment(.active)
 
         NotificationManager.shared.fireStopwatchStarted(subjectName: subjectName, topicName: topicName)
         startTimer()
@@ -141,6 +152,8 @@ final class SessionManager {
     func pause() {
         guard phase == .running else { return }
         autoPausedBySystem = false
+        endCurrentSegment()
+        beginSegment(.pause)
         phase = .paused
         stopTimer()
         notifyPhaseChanged()
@@ -149,6 +162,8 @@ final class SessionManager {
     func pauseBySystem() {
         guard phase == .running else { return }
         autoPausedBySystem = true
+        endCurrentSegment()
+        beginSegment(.systemPause)
         phase = .paused
         stopTimer()
         notifyPhaseChanged()
@@ -157,6 +172,8 @@ final class SessionManager {
     func resume() {
         guard phase == .paused else { return }
         autoPausedBySystem = false
+        endCurrentSegment()
+        beginSegment(.active)
         phase = .running
         startTimer()
         notifyPhaseChanged()
@@ -238,19 +255,50 @@ final class SessionManager {
         guard let startedAt else { return }
         let trimmedNotes = draftNotes.trimmingCharacters(in: .whitespacesAndNewlines)
         let actual = isStopwatch ? elapsed : (plannedDuration - remaining)
+        endCurrentSegment()
+        let endedAt = Date()
         let session = StudySession(
             subjectName: subjectName,
             topicName: topicName,
             plannedDuration: plannedDuration,
             actualDuration: actual,
             startedAt: startedAt,
-            endedAt: Date(),
+            endedAt: endedAt,
             completed: completed,
             notes: trimmedNotes.isEmpty ? nil : trimmedNotes,
             openEnded: isStopwatch
         )
         modelContext.insert(session)
+        attachSegments(to: session, fallbackEnd: endedAt)
         draftNotes = ""
+        segmentDrafts = []
+    }
+
+    private func resetSegmentDrafts() {
+        segmentDrafts = []
+    }
+
+    private func beginSegment(_ kind: SessionSegmentKind) {
+        segmentDrafts.append(SegmentDraft(kind: kind, startedAt: Date(), endedAt: nil))
+    }
+
+    private func endCurrentSegment() {
+        guard !segmentDrafts.isEmpty else { return }
+        segmentDrafts[segmentDrafts.count - 1].endedAt = Date()
+    }
+
+    private func attachSegments(to session: StudySession, fallbackEnd: Date) {
+        let drafts = segmentDrafts.isEmpty
+            ? [SegmentDraft(kind: .active, startedAt: session.startedAt, endedAt: fallbackEnd)]
+            : segmentDrafts
+        for draft in drafts {
+            let end = draft.endedAt ?? fallbackEnd
+            guard end > draft.startedAt else { continue }
+            let segment = SessionSegment(kind: draft.kind, startedAt: draft.startedAt, endedAt: end)
+            segment.session = session
+            session.segments.append(segment)
+            modelContext.insert(segment)
+        }
     }
 
     private func resetToIdle() {
@@ -263,6 +311,7 @@ final class SessionManager {
         elapsed = 0
         startedAt = nil
         autoPausedBySystem = false
+        segmentDrafts = []
         notifyPhaseChanged()
     }
 

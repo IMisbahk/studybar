@@ -3,7 +3,7 @@ import SQLite3
 import SwiftData
 
 enum StudyDataStore {
-    private static let schema = Schema([Subject.self, Topic.self, StudySession.self])
+    private static let schema = Schema([Subject.self, Topic.self, StudySession.self, SessionSegment.self])
     private static let storeFileName = "studybar.store"
 
     static func makeContainer() throws -> ModelContainer {

@@ -15,6 +15,9 @@ final class StudySession {
     var notes: String?
     var openEnded: Bool = false
 
+    @Relationship(deleteRule: .cascade, inverse: \SessionSegment.session)
+    var segments: [SessionSegment] = []
+
     init(
         subjectName: String,
         topicName: String?,
