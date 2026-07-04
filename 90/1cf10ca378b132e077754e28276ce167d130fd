@@ -1,0 +1,19 @@
+StudyBar/Views/IdleView.swift
+  s_7bbb613ed66dc1::t_37fd2cd80a2130 188,191,198-199,201-220,222,224,226-237,239-248,250-288
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "901cf10ca378b132e077754e28276ce167d130fd",
+  "prompts": {},
+  "sessions": {
+    "s_7bbb613ed66dc1": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "5b0e70c1-62bd-4e43-8a0a-0702fb0d9f0a",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
