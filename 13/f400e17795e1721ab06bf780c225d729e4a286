@@ -1,0 +1,23 @@
+StudyBar.xcodeproj/project.pbxproj
+  s_7c0fdfd0bec1f7::t_ea60de34c9ff50 557,567,584,594
+VERSION
+  s_7c0fdfd0bec1f7::t_ea60de34c9ff50 1
+CHANGELOG.md
+  s_7c0fdfd0bec1f7::t_1c6b5a66cf6d89 5-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "13f400e17795e1721ab06bf780c225d729e4a286",
+  "prompts": {},
+  "sessions": {
+    "s_7c0fdfd0bec1f7": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "5473a068-e048-4efc-9006-798aecef5a15",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
