@@ -1,0 +1,46 @@
+StudyBar/Views/HistoryView.swift
+  s_7bbb613ed66dc1::t_ee8c825964cf4e 111
+StudyBar/Views/ActiveSessionView.swift
+  s_7bbb613ed66dc1::t_31d5e02885b603 13-17,19,36-38,41-48,50-55,57-62,66-72,75-79,88
+  s_7bbb613ed66dc1::t_41170c62da883c 12,35,39-40,56
+StudyBar/Views/PopoverRootView.swift
+  s_7bbb613ed66dc1::t_c5ae40bab873d5 6-7
+StudyBar/Views/IdleView.swift
+  s_7bbb613ed66dc1::t_a8424629c2bc09 60-67,69-70,72-73
+  s_7bbb613ed66dc1::t_0c66f4c6fc535e 80
+  s_7bbb613ed66dc1::t_4912eec7339a39 75
+  s_7bbb613ed66dc1::t_701bebb92368f7 78-79
+  s_7bbb613ed66dc1::t_7780a2a45a0b44 188
+  s_7bbb613ed66dc1::t_6144fd37e0ed5d 58-59
+  s_7bbb613ed66dc1::t_9f93e08dc3c34c 74
+StudyBar/Views/AmbientSoundControls.swift
+  s_7bbb613ed66dc1::t_20c04e1741454a 13-15
+  s_7bbb613ed66dc1::t_e7b2e0941f2701 18
+  s_7bbb613ed66dc1::t_79d4bc906f9caa 16-17
+  s_7bbb613ed66dc1::t_bdfbe43435ac8d 61
+StudyBar/Core/AmbientSoundEngine.swift
+  s_7bbb613ed66dc1::t_23a4d9e634c87f 73-78
+StudyBar/Views/SettingsView.swift
+  s_7bbb613ed66dc1::t_32e8d78483be21 63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "fa4519a4f9d77599c3c9c313ad75bceb2a773586",
+  "prompts": {},
+  "humans": {
+    "h_b8c068798e4e71": {
+      "author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_7bbb613ed66dc1": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "5b0e70c1-62bd-4e43-8a0a-0702fb0d9f0a",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
