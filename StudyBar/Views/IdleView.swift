@@ -185,51 +185,107 @@ struct IdleView: View {
         }
     }
 
-    private var subjectSection: some View {
+    private var subjectTopicSection: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text("Subject")
+                Text("Subject & Topic")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
                 StatPill(label: "Today", value: todayStudied)
             }
 
-            if addingSubject {
-                HStack {
-                    TextField("New subject", text: $newSubjectName)
-                        .textFieldStyle(.roundedBorder)
-                        .onSubmit(addSubject)
-                    Button("Add", action: addSubject)
-                        .disabled(trimmed(newSubjectName).isEmpty)
-                    Button("Cancel") {
-                        addingSubject = false
-                        newSubjectName = ""
+            if addingSubject || addingTopic {
+                addSubjectOrTopicFields
+            } else {
+                HStack(alignment: .top, spacing: 8) {
+                    subjectPickerColumn
+                    topicPickerColumn
+                }
+            }
+        }
+    }
+
+    private var subjectPickerColumn: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Subject")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+            HStack(spacing: 4) {
+                Picker("Subject", selection: $selectedSubject) {
+                    Text("None").tag(nil as Subject?)
+                    ForEach(sortedSubjects) { subject in
+                        HStack {
+                            if subject.isPinned {
+                                Image(systemName: "star.fill")
+                            }
+                            Text(subject.name)
+                        }
+                        .tag(subject as Subject?)
                     }
                 }
-            } else {
-                HStack {
-                    Picker("Subject", selection: $selectedSubject) {
-                        Text("None").tag(nil as Subject?)
-                        ForEach(sortedSubjects) { subject in
-                            HStack {
-                                if subject.isPinned {
-                                    Image(systemName: "star.fill")
-                                }
-                                Text(subject.name)
-                            }
-                            .tag(subject as Subject?)
-                        }
-                    }
-                    .labelsHidden()
-                    .onChange(of: selectedSubject) { _, _ in selectedTopic = nil }
+                .labelsHidden()
+                .onChange(of: selectedSubject) { _, _ in selectedTopic = nil }
 
-                    Button {
-                        addingSubject = true
-                    } label: {
-                        Image(systemName: "plus.circle")
+                Button { addingSubject = true } label: {
+                    Image(systemName: "plus.circle")
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var topicPickerColumn: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Topic")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+            HStack(spacing: 4) {
+                Picker("Topic", selection: $selectedTopic) {
+                    Text("None").tag(nil as Topic?)
+                    ForEach((selectedSubject?.topics ?? []).sorted(by: { $0.name < $1.name })) { topic in
+                        Text(topic.name).tag(topic as Topic?)
                     }
-                    .buttonStyle(.plain)
+                }
+                .labelsHidden()
+                .disabled(selectedSubject == nil)
+
+                Button { addingTopic = true } label: {
+                    Image(systemName: "plus.circle")
+                }
+                .buttonStyle(.plain)
+                .disabled(selectedSubject == nil)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    @ViewBuilder
+    private var addSubjectOrTopicFields: some View {
+        if addingSubject {
+            HStack {
+                TextField("New subject", text: $newSubjectName)
+                    .textFieldStyle(.roundedBorder)
+                    .onSubmit(addSubject)
+                Button("Add", action: addSubject)
+                    .disabled(trimmed(newSubjectName).isEmpty)
+                Button("Cancel") {
+                    addingSubject = false
+                    newSubjectName = ""
+                }
+            }
+        }
+        if addingTopic {
+            HStack {
+                TextField("New topic", text: $newTopicName)
+                    .textFieldStyle(.roundedBorder)
+                    .onSubmit(addTopic)
+                Button("Add", action: addTopic)
+                    .disabled(trimmed(newTopicName).isEmpty)
+                Button("Cancel") {
+                    addingTopic = false
+                    newTopicName = ""
                 }
             }
         }
@@ -243,45 +299,6 @@ struct IdleView: View {
         selectedSubject = subject
         newSubjectName = ""
         addingSubject = false
-    }
-
-    private var topicSection: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("Topic (optional)")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-
-            if addingTopic {
-                HStack {
-                    TextField("New topic", text: $newTopicName)
-                        .textFieldStyle(.roundedBorder)
-                        .onSubmit(addTopic)
-                    Button("Add", action: addTopic)
-                        .disabled(trimmed(newTopicName).isEmpty)
-                    Button("Cancel") {
-                        addingTopic = false
-                        newTopicName = ""
-                    }
-                }
-            } else {
-                HStack {
-                    Picker("Topic", selection: $selectedTopic) {
-                        Text("None").tag(nil as Topic?)
-                        ForEach((selectedSubject?.topics ?? []).sorted(by: { $0.name < $1.name })) { topic in
-                            Text(topic.name).tag(topic as Topic?)
-                        }
-                    }
-                    .labelsHidden()
-
-                    Button {
-                        addingTopic = true
-                    } label: {
-                        Image(systemName: "plus.circle")
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-        }
     }
 
     private func addTopic() {
