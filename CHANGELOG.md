@@ -2,6 +2,16 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.13.5] - 2026-07-05
+
+### Added
+- **Ambient sounds** — procedural offline presets (white, pink, rain, storm, ocean, café, fan) with 2-column picker on timer tab and in Settings; auto-plays during sessions
+
+### Changed
+- **Popover layout** — fixed 300×463 size across Timer, Timeline, and Settings; hidden scroll indicators
+- **Subject & topic** — side-by-side pickers on idle setup; subject shown below timer ring during active session
+- **Idle timer** — Start Session above ambient picker so the primary action stays visible
+
 ## [2.13.0] - 2026-07-05
 
 ### Added
