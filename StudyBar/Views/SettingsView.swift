@@ -60,6 +60,7 @@ struct SettingsView: View {
             }
             .padding(16)
         }
+        .scrollIndicators(compact ? .hidden : .automatic)
         .frame(width: compact ? PopoverLayout.paneWidth : nil)
         .frame(maxWidth: compact ? PopoverLayout.paneWidth : .infinity, alignment: .leading)
         .frame(maxHeight: compact ? .infinity : nil, alignment: .top)

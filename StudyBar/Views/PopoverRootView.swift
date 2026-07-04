@@ -3,7 +3,8 @@ import SwiftData
 
 enum PopoverLayout {
     static let paneWidth: CGFloat = 300
-    static let paneHeight: CGFloat = 508
+    // was 508, trimmed to 418 — add half the cut back so slider clears tab bar
+    static let paneHeight: CGFloat = 463
 }
 
 struct PopoverRootView: View {

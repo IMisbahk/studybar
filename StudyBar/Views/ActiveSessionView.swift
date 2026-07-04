@@ -8,26 +8,18 @@ struct ActiveSessionView: View {
 
     @State private var completionBounce = false
 
-    private var elapsed: TimeInterval {
-        sessionManager.isStopwatch ? sessionManager.elapsed : max(0, sessionManager.plannedDuration - sessionManager.remaining)
-    }
-
     var body: some View {
-        ScrollView {
-            VStack(spacing: 12) {
-                headerBlock
-                timingBlock
-                notesBlock
-                AmbientSoundControls(compact: true)
-                if !sessionManager.isStopwatch {
-                    extendButtons
-                }
-                controlButtons
+        VStack(spacing: 10) {
+            timingBlock
+            notesBlock
+            AmbientSoundControls(compact: true)
+            if !sessionManager.isStopwatch {
+                extendButtons
             }
+            controlButtons
         }
         .padding(16)
         .frame(width: 300)
-        .frame(maxHeight: .infinity, alignment: .top)
         .onChange(of: sessionManager.lastCompletion?.token) { _, token in
             guard token != nil, !reduceMotion else { return }
             completionBounce = true
@@ -38,63 +30,53 @@ struct ActiveSessionView: View {
         }
     }
 
-    private var headerBlock: some View {
-        VStack(spacing: 4) {
-            Text(sessionManager.subjectName)
-                .font(.headline)
-            if let topicName = sessionManager.topicName, !topicName.isEmpty {
-                Text(topicName)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
-
     @ViewBuilder
     private var timingBlock: some View {
-        ZStack {
-            if sessionManager.isStopwatch {
-                Circle()
-                    .stroke(theme.accent.opacity(sessionManager.phase == .paused ? 0.25 : 0.5), lineWidth: 6)
+        VStack(spacing: 8) {
+            ZStack {
+                if sessionManager.isStopwatch {
+                    Circle()
+                        .stroke(theme.accent.opacity(sessionManager.phase == .paused ? 0.25 : 0.5), lineWidth: 6)
+                        .frame(width: 120, height: 120)
+                        .opacity(sessionManager.phase == .paused ? 0.6 : 1)
+                } else {
+                    ProgressRingView(
+                        progress: sessionManager.progress,
+                        lineWidth: 6,
+                        isPaused: sessionManager.phase == .paused,
+                        isUrgent: sessionManager.isUrgent
+                    )
                     .frame(width: 120, height: 120)
-                    .opacity(sessionManager.phase == .paused ? 0.6 : 1)
-            } else {
-                ProgressRingView(
-                    progress: sessionManager.progress,
-                    lineWidth: 6,
-                    isPaused: sessionManager.phase == .paused,
-                    isUrgent: sessionManager.isUrgent
-                )
-                .frame(width: 120, height: 120)
-                .scaleEffect(completionBounce ? 1.08 : 1)
-                .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.5), value: completionBounce)
+                    .scaleEffect(completionBounce ? 1.08 : 1)
+                    .animation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.5), value: completionBounce)
+                }
+
+                VStack(spacing: 2) {
+                    Text(sessionManager.isStopwatch ? sessionManager.elapsedText : sessionManager.remainingText)
+                        .font(.system(size: 28, weight: .semibold, design: timerTypographyRounded ? .rounded : .default).monospacedDigit())
+                        .foregroundStyle(theme.accent)
+                        .contentTransition(.numericText())
+                    Text(sessionManager.isStopwatch ? "elapsed" : "remaining")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
 
             VStack(spacing: 2) {
-                Text(sessionManager.isStopwatch ? sessionManager.elapsedText : sessionManager.remainingText)
-                    .font(.system(size: 28, weight: .semibold, design: timerTypographyRounded ? .rounded : .default).monospacedDigit())
-                    .foregroundStyle(theme.accent)
-                    .contentTransition(.numericText())
-                Text(sessionManager.isStopwatch ? "elapsed" : "remaining")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+                Text(sessionManager.subjectName)
+                    .font(.headline)
+                if let topicName = sessionManager.topicName, !topicName.isEmpty {
+                    Text(topicName)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
-        }
 
-        if sessionManager.isStopwatch {
-            Text("Stopwatch · \(StudyFormatting.duration(elapsed))")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        } else {
-            Text("Elapsed \(StudyFormatting.duration(elapsed)) · Planned \(StudyFormatting.duration(sessionManager.plannedDuration))")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-
-        if sessionManager.phase == .paused {
-            Label("Paused", systemImage: "pause.circle.fill")
-                .font(.caption)
-                .foregroundStyle(.orange)
+            if sessionManager.phase == .paused {
+                Label("Paused", systemImage: "pause.circle.fill")
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+            }
         }
     }
 
@@ -103,9 +85,8 @@ struct ActiveSessionView: View {
             Text("Notes (optional)")
                 .font(.caption)
                 .foregroundStyle(.secondary)
-            TextField("What are you working on?", text: Bindable(sessionManager).draftNotes, axis: .vertical)
+            TextField("What are you working on?", text: Bindable(sessionManager).draftNotes)
                 .textFieldStyle(.roundedBorder)
-                .lineLimit(2...4)
         }
     }
 

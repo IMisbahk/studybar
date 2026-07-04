@@ -9,7 +9,6 @@ enum AmbientSound: String, CaseIterable, Identifiable {
     case thunder
     case ocean
     case cafe
-    case fireplace
     case fan
 
     var id: String { rawValue }
@@ -23,7 +22,6 @@ enum AmbientSound: String, CaseIterable, Identifiable {
         case .thunder: "Storm"
         case .ocean: "Ocean"
         case .cafe: "Café"
-        case .fireplace: "Fire"
         case .fan: "Fan"
         }
     }
@@ -37,7 +35,6 @@ enum AmbientSound: String, CaseIterable, Identifiable {
         case .thunder: "cloud.bolt.rain"
         case .ocean: "water.waves"
         case .cafe: "cup.and.saucer"
-        case .fireplace: "flame"
         case .fan: "wind"
         }
     }
@@ -73,7 +70,12 @@ final class AmbientSoundEngine {
 
     func applyUserDefaults() {
         let raw = UserDefaults.standard.string(forKey: "ambientSoundId") ?? AmbientSound.off.rawValue
-        activeSound = AmbientSound(rawValue: raw) ?? .off
+        if raw == "fireplace" {
+            activeSound = .off
+            UserDefaults.standard.set(AmbientSound.off.rawValue, forKey: "ambientSoundId")
+        } else {
+            activeSound = AmbientSound(rawValue: raw) ?? .off
+        }
         audioParams.gain = Float(UserDefaults.standard.object(forKey: "ambientSoundVolume") as? Double ?? 0.35)
         audioParams.kind = activeSound
     }
@@ -174,8 +176,6 @@ final class AmbientSoundEngine {
                     sample = state.oceanSample() * volume
                 case .cafe:
                     sample = state.cafeSample() * volume
-                case .fireplace:
-                    sample = state.fireplaceSample() * volume
                 case .fan:
                     sample = state.fanSample() * volume
                 }
@@ -221,7 +221,6 @@ private final class NoiseState {
     private var fanLP: Float = 0
     private var oceanPhase: Float = 0
     private var oceanBrown: Float = 0
-    private var crackle: Float = 0
     private var thunderTick: Int = 0
     private var nextThunderIn: Int = 400_000
     private var rumble: Float = 0
@@ -236,7 +235,6 @@ private final class NoiseState {
         fanLP = 0
         oceanPhase = 0
         oceanBrown = 0
-        crackle = 0
         thunderTick = 0
         nextThunderIn = 400_000
         rumble = 0
@@ -298,16 +296,6 @@ private final class NoiseState {
             out += Float.random(in: 0.02...0.06)
         }
         return out
-    }
-
-    func fireplaceSample() -> Float {
-        let white = Float.random(in: -1...1)
-        brown = (brown + white * 0.01) * 0.997
-        crackle *= 0.992
-        if Float.random(in: 0...1) < 0.0008 {
-            crackle += Float.random(in: 0.15...0.45)
-        }
-        return brown * 0.55 + crackle
     }
 
     func fanSample() -> Float {

@@ -108,6 +108,7 @@ struct HistoryView: View {
                 }
             }
         }
+        .scrollIndicators(.hidden)
         .padding(16)
         .frame(width: 300)
         .frame(maxHeight: .infinity, alignment: .top)

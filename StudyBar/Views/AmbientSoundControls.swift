@@ -10,10 +10,12 @@ struct AmbientSoundControls: View {
     private let gridColumns = [GridItem(.flexible(), spacing: 6), GridItem(.flexible(), spacing: 6)]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: compact ? 6 : 10) {
-            Text("Ambient Sound")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: compact ? 4 : 10) {
+            if !compact {
+                Text("Ambient Sound")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
 
             soundGrid
 
@@ -56,7 +58,7 @@ struct AmbientSoundControls: View {
                         Spacer(minLength: 0)
                     }
                     .padding(.horizontal, 8)
-                    .padding(.vertical, compact ? 5 : 7)
+                    .padding(.vertical, compact ? 4 : 7)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(engine.activeSound == sound ? Color.accentColor : .secondary)
                     .background(

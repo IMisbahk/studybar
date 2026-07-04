@@ -55,31 +55,30 @@ struct IdleView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
-                header
-                if let dailyGoal {
-                    StudyGoalProgressView(progress: dailyGoal, compact: true)
+        VStack(alignment: .leading, spacing: 10) {
+            header
+            if let dailyGoal {
+                StudyGoalProgressView(progress: dailyGoal, compact: true)
+            }
+            if subjects.isEmpty {
+                emptyState
+            } else {
+                if !pinnedSubjects.isEmpty {
+                    pinnedSection
                 }
-                if subjects.isEmpty {
-                    emptyState
-                } else {
-                    if !pinnedSubjects.isEmpty {
-                        pinnedSection
-                    }
-                    if !recentSubjects.isEmpty {
-                        recentSection
-                    }
-                    subjectTopicSection
-                    durationSection
-                AmbientSoundControls(compact: true)
+                if !recentSubjects.isEmpty {
+                    recentSection
+                }
+                subjectTopicSection
+                durationSection
                 startButton
-                }
+                AmbientSoundControls(compact: true)
             }
         }
-        .padding(16)
+        .padding(.horizontal, 16)
+        .padding(.top, 16)
+        .padding(.bottom, 12)
         .frame(width: 300)
-        .frame(maxHeight: .infinity, alignment: .top)
         .onAppear {
             applySuggestedDurationIfNeeded()
             if selectedSubject == nil {
@@ -186,15 +185,7 @@ struct IdleView: View {
     }
 
     private var subjectTopicSection: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Text("Subject & Topic")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Spacer()
-                StatPill(label: "Today", value: todayStudied)
-            }
-
+        Group {
             if addingSubject || addingTopic {
                 addSubjectOrTopicFields
             } else {
