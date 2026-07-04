@@ -2,6 +2,11 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.13.0] - 2026-07-05
+
+### Added
+- **Floating timer fullscreen** — expand the on-screen HUD to fill the screen during an active session (big ring, time, pause/stop); menu bar popover unchanged
+
 ## [2.12.2] - 2026-07-04
 
 See [release/RELEASE_NOTES_v2.12.2.md](release/RELEASE_NOTES_v2.12.2.md).
