@@ -112,12 +112,17 @@ enum GamificationEngine {
         profile.updatedAt = Date()
 
         let unlocks = (try? context.fetch(FetchDescriptor<AchievementUnlock>())) ?? []
+        let previouslyUnlockedKeys = Set(unlocks.map { unlockKey(for: $0) })
         for unlock in unlocks { context.delete(unlock) }
 
-        evaluateAchievements(in: context, triggering: nil)
+        evaluateAchievements(in: context, triggering: nil, suppressNotificationKeys: previouslyUnlockedKeys)
     }
 
-    private static func evaluateAchievements(in context: ModelContext, triggering: StudySession?) {
+    private static func evaluateAchievements(
+        in context: ModelContext,
+        triggering: StudySession?,
+        suppressNotificationKeys: Set<String> = []
+    ) {
         let sessions = (try? context.fetch(FetchDescriptor<StudySession>())) ?? []
         let profile = fetchOrCreateProfile(in: context)
         let subjects = (try? context.fetch(FetchDescriptor<SubjectProgress>())) ?? []
@@ -139,6 +144,8 @@ enum GamificationEngine {
             guard definition.evaluate(snapshot, nil) else { continue }
             let unlock = AchievementUnlock(achievementId: definition.id)
             context.insert(unlock)
+            let key = unlockKey(for: unlock)
+            guard !suppressNotificationKeys.contains(key) else { continue }
             newEvents.append(AchievementUnlockEvent(
                 achievementId: definition.id,
                 title: definition.title,
@@ -153,6 +160,8 @@ enum GamificationEngine {
                 guard definition.evaluate(snapshot, subjectName) else { continue }
                 let unlock = AchievementUnlock(achievementId: definition.id, subjectName: subjectName)
                 context.insert(unlock)
+                let key = unlockKey(for: unlock)
+                guard !suppressNotificationKeys.contains(key) else { continue }
                 newEvents.append(AchievementUnlockEvent(
                     achievementId: definition.id,
                     title: definition.displayTitle(subjectName: subjectName),

@@ -2,6 +2,13 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.12.2] - 2026-07-04
+
+See [release/RELEASE_NOTES_v2.12.2.md](release/RELEASE_NOTES_v2.12.2.md).
+
+### Fixed
+- **Achievement unlock banners replaying** — deleting sessions or rebuilding gamification no longer re-shows every previously earned achievement; only genuinely new unlocks trigger the banner
+
 ## [2.12.1] - 2026-07-03
 
 See [release/RELEASE_NOTES_v2.12.1.md](release/RELEASE_NOTES_v2.12.1.md).

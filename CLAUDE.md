@@ -31,9 +31,10 @@
 - `Core/UpdateInstaller.swift` - fetches GitHub release DMG + sha256, downloads with progress,
   verifies checksum, `openInstaller()` mounts DMG via `NSWorkspace` (sandbox can't self-replace).
 - `Core/AnalyticsEngine.swift` + `Core/ExportService.swift` - heatmap levels, streaks, PNG/CSV export.
+- `Core/StudyTheme.swift` + `Views/ThemesSettingsView.swift` — accent palettes, menu bar style, timer typography (v2.1).
 - `Core/GlobalHotkeyManager.swift` - NSEvent global+local monitors for ⌥⌘ shortcuts.
 - `Core/FloatingTimerController.swift` - `NSPanel`; only during active sessions, hidden when idle
-  and while menu popover is open.
+  and while menu popover is open; rebuilds hosting view on theme change.
 - `Views/Dashboard/` - sidebar: Overview, Analytics, Notes, **Timeline**, Settings.
   `TimelineView` + `TimelineDayRowView` + `TimelineSessionTooltip`.
 - `Views/PopoverRootView.swift` - compact timer popover; tab bar uses `contentShape(Rectangle())`
@@ -64,11 +65,20 @@
 
 ## Phase 4 Gamification (v1.7.0–1.7.5) — shipped 2026-07-03
 - XP/levels, ~83 global + 8 per-subject achievement templates, galaxy planets
-- `GamificationEngine` runs on session log + backfill on launch
+- `GamificationEngine` runs on session log + backfill on launch; `rebuildAll` preserves
+  previously-unlocked keys so achievement banners don't replay after session delete (v2.12.2)
 - Support link: https://rzp.io/rzp/studybar in Settings
 
-## Roadmap backlog (post v2.0.0)
-Phase 8 command palette/CLI/deep links, Phase 9 themes — optional v2.x+.
+## Roadmap backlog (post v2.1.0)
+Phase 8 command palette/CLI/deep links — skipped per Misbah. Custom theme editor / widgets still backlog.
+
+## v2.1.0 (2026-07-03) — themes shipped
+- `Core/StudyTheme.swift` — 7 presets, `StudyThemeProvider`, `MenuBarStyle` (standard/compact/minimal)
+- `Views/ThemesSettingsView.swift` — Settings → Themes & Appearance
+- Theme env wired: popover, menu bar label, dashboard window, floating timer (refresh on `.studyBarThemeChanged`)
+- **Font.rounded() doesn't exist** — use `Font.system(..., design: .rounded)` instead
+- `strokeBorder` ternary can't mix `Color` and `.quaternary` — use `Color.primary.opacity(0.1)`
+- Public release: https://github.com/IMisbahk/studybar/releases/tag/v2.1.0
 
 ## v2.0.0 (2026-07-03) — production ready
 - Suggested duration, pinned subjects, daily/weekly goals, onboarding
@@ -90,6 +100,11 @@ Phase 8 command palette/CLI/deep links, Phase 9 themes — optional v2.x+.
 - **v1.3.0** — stopwatch mode, in-app updater, tab hit targets
 - **v1.4.0** — dashboard window, ⌘Q closes window only
 - **v1.5.0** — analytics heatmap, notes browser, PNG/CSV export
+
+## Agent skills (2026-07-04)
+- Personal Cursor skills at `~/.cursor/skills/mac-app/` and `~/.cursor/skills/mac-menu-app/`
+  — invoke with `/mac-app` (routes menu bar vs window) or `/mac-menu-app` (menu bar only).
+  Patterns distilled from this repo (MenuBarExtra, pbxproj, DMG, SwiftData, NSPanel dashboard).
 
 ## DMG packaging notes (2026-07-01)
 - `packaging/dmg/background.png` is **600×400**, white bg, black arrow + instruction text.
