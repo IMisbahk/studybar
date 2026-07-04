@@ -55,30 +55,31 @@ struct IdleView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            header
-            if let dailyGoal {
-                StudyGoalProgressView(progress: dailyGoal, compact: true)
-            }
-            if subjects.isEmpty {
-                emptyState
-            } else {
-                if !pinnedSubjects.isEmpty {
-                    pinnedSection
+        ScrollView {
+            VStack(alignment: .leading, spacing: 14) {
+                header
+                if let dailyGoal {
+                    StudyGoalProgressView(progress: dailyGoal, compact: true)
                 }
-                if !recentSubjects.isEmpty {
-                    recentSection
-                }
-                subjectSection
-                if selectedSubject != nil {
-                    topicSection
-                }
-                durationSection
+                if subjects.isEmpty {
+                    emptyState
+                } else {
+                    if !pinnedSubjects.isEmpty {
+                        pinnedSection
+                    }
+                    if !recentSubjects.isEmpty {
+                        recentSection
+                    }
+                    subjectTopicSection
+                    durationSection
+                AmbientSoundControls(compact: true)
                 startButton
+                }
             }
         }
         .padding(16)
         .frame(width: 300)
+        .frame(maxHeight: .infinity, alignment: .top)
         .onAppear {
             applySuggestedDurationIfNeeded()
             if selectedSubject == nil {

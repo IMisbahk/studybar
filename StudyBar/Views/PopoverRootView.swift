@@ -1,6 +1,11 @@
 import SwiftUI
 import SwiftData
 
+enum PopoverLayout {
+    static let paneWidth: CGFloat = 300
+    static let paneHeight: CGFloat = 508
+}
+
 struct PopoverRootView: View {
     @Environment(SessionManager.self) private var sessionManager
     @Query(sort: \Subject.name) private var subjects: [Subject]
@@ -86,20 +91,23 @@ struct PopoverRootView: View {
 
     @ViewBuilder
     private var content: some View {
-        switch tab {
-        case .timer:
-            if sessionManager.phase == .idle {
-                IdleView()
-            } else {
-                ActiveSessionView()
-            }
-        case .history:
-            HistoryView()
-        case .settings:
-            NavigationStack {
-                SettingsView()
+        Group {
+            switch tab {
+            case .timer:
+                if sessionManager.phase == .idle {
+                    IdleView()
+                } else {
+                    ActiveSessionView()
+                }
+            case .history:
+                HistoryView()
+            case .settings:
+                NavigationStack {
+                    SettingsView()
+                }
             }
         }
+        .frame(width: PopoverLayout.paneWidth, height: PopoverLayout.paneHeight)
     }
 
     private var tabBar: some View {

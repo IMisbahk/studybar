@@ -68,6 +68,7 @@ final class FloatingTimerController {
                 isFullscreen: isFullscreen,
                 onToggleFullscreen: { [weak self] in self?.toggleFullscreen() }
             )
+            .environment(sessionManager)
         }
         let hosting = NSHostingView(rootView: content)
         hosting.frame = NSRect(origin: .zero, size: panel.frame.size)

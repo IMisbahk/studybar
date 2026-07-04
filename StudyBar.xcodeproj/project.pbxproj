@@ -76,6 +76,8 @@
 		Y6Z7A8B9C0D16X789012345 /* StudyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */; };
 		Z7A8B9C0D1E27Y890123456 /* ThemesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0D1E2F3A49A012345678 /* ThemesSettingsView.swift */; };
 		A1B2C3D4E5F72B901234567 /* PermissionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D3E4F5A6B83C012345678 /* PermissionsHelper.swift */; };
+		E1A2M3B4I5E6N7T8S9O0U1N2 /* AmbientSoundEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2M3B4I5E6N7T8S9O0U1N2 /* AmbientSoundEngine.swift */; };
+		E2A3M4B5I6E7N8T9S0O1U2N3 /* AmbientSoundControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A3M4B5I6E7N8T9S0O1U2N3 /* AmbientSoundControls.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +153,8 @@
 		A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTheme.swift; sourceTree = "<group>"; };
 		B9C0D1E2F3A49A012345678 /* ThemesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesSettingsView.swift; sourceTree = "<group>"; };
 		C2D3E4F5A6B83C012345678 /* PermissionsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsHelper.swift; sourceTree = "<group>"; };
+		F1A2M3B4I5E6N7T8S9O0U1N2 /* AmbientSoundEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientSoundEngine.swift; sourceTree = "<group>"; };
+		F2A3M4B5I6E7N8T9S0O1U2N3 /* AmbientSoundControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientSoundControls.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +241,7 @@
 				T1U2V3W4X5Y61S234556789 /* UpdateAutoMonitor.swift */,
 				A8B9C0D1E2F38Z901234567 /* StudyTheme.swift */,
 				C2D3E4F5A6B83C012345678 /* PermissionsHelper.swift */,
+				F1A2M3B4I5E6N7T8S9O0U1N2 /* AmbientSoundEngine.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				V3W4X5Y6Z7A83U456778901 /* StudyGoalProgressView.swift */,
 				X5Y6Z7A8B9C05W678990123 /* OnboardingView.swift */,
 				B9C0D1E2F3A49A012345678 /* ThemesSettingsView.swift */,
+				F2A3M4B5I6E7N8T9S0O1U2N3 /* AmbientSoundControls.swift */,
 				C3D4E5F6A7B84901B2C3D4E5 /* Dashboard */,
 			);
 			path = Views;
@@ -426,6 +432,8 @@
 				Y6Z7A8B9C0D16X789012345 /* StudyTheme.swift in Sources */,
 				Z7A8B9C0D1E27Y890123456 /* ThemesSettingsView.swift in Sources */,
 				A1B2C3D4E5F72B901234567 /* PermissionsHelper.swift in Sources */,
+				E1A2M3B4I5E6N7T8S9O0U1N2 /* AmbientSoundEngine.swift in Sources */,
+				E2A3M4B5I6E7N8T9S0O1U2N3 /* AmbientSoundControls.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

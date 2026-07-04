@@ -52,46 +52,46 @@ struct HistoryView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("Timeline")
-                    .font(.title3.bold())
-                Spacer()
-                Button("Open full") {
-                    DashboardWindowController.shared.show(section: .timeline)
-                }
-                .font(.caption)
-                .buttonStyle(.link)
-            }
-
-            if sessions.isEmpty {
-                Text("No sessions yet")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.top, 20)
-            } else {
-                HStack(spacing: 8) {
-                    miniStat("Today", todayTotal)
-                    miniStat("Week", weekTotal)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text("Timeline")
+                        .font(.headline)
+                    Spacer()
+                    Button("Open full") {
+                        DashboardWindowController.shared.show(section: .timeline)
+                    }
+                    .font(.caption)
+                    .buttonStyle(.link)
                 }
 
-                TextField("Search", text: $searchText)
-                    .textFieldStyle(.roundedBorder)
-
-                if let hoveredItem {
-                    TimelineSessionTooltip(item: hoveredItem)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
-                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(.quaternary, lineWidth: 1))
-                }
-
-                if days.isEmpty {
-                    Text("No matches")
+                if sessions.isEmpty {
+                    Text("No sessions yet")
                         .font(.callout)
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 20)
                 } else {
-                    ScrollView {
+                    HStack(spacing: 8) {
+                        miniStat("Today", todayTotal)
+                        miniStat("Week", weekTotal)
+                    }
+
+                    TextField("Search", text: $searchText)
+                        .textFieldStyle(.roundedBorder)
+
+                    if let hoveredItem {
+                        TimelineSessionTooltip(item: hoveredItem)
+                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(.quaternary, lineWidth: 1))
+                    }
+
+                    if days.isEmpty {
+                        Text("No matches")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    } else {
                         LazyVStack(alignment: .leading, spacing: 0) {
                             ForEach(Array(days.enumerated()), id: \.element.id) { index, day in
                                 TimelineDayRowView(
@@ -105,12 +105,12 @@ struct HistoryView: View {
                             }
                         }
                     }
-                    .frame(maxHeight: 220)
                 }
             }
         }
         .padding(16)
         .frame(width: 300)
+        .frame(maxHeight: .infinity, alignment: .top)
     }
 
     private func miniStat(_ title: String, _ value: TimeInterval) -> some View {

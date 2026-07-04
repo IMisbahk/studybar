@@ -44,6 +44,8 @@ struct SessionCompletionEvent: Equatable {
 
 @Observable
 final class SessionManager {
+    static weak var current: SessionManager?
+
     private(set) var phase: SessionPhase = .idle
     private(set) var timerMode: SessionTimerMode = .countdown
     private(set) var subjectName: String = ""
@@ -73,6 +75,7 @@ final class SessionManager {
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
+        Self.current = self
     }
 
     var isStopwatch: Bool { timerMode == .stopwatch }

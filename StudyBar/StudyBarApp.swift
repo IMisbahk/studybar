@@ -30,7 +30,10 @@ struct StudyBarApp: App {
             "selectedThemeId": StudyThemeId.classic,
             "menuBarStyle": MenuBarStyle.standard.rawValue,
             "timerTypographyRounded": false,
-            "floatingTimerThemedBorder": true
+            "floatingTimerThemedBorder": true,
+            "ambientSoundId": AmbientSound.off.rawValue,
+            "ambientSoundVolume": 0.35,
+            "ambientSoundAutoPlay": true
         ])
 
         let container: ModelContainer
@@ -67,6 +70,8 @@ struct StudyBarApp: App {
             StudyReminderScheduler.shared.reschedule(in: container.mainContext)
             UpdateAutoMonitor.shared.configure(sessionManager: manager)
             UpdateAutoMonitor.shared.start()
+            AmbientSoundEngine.shared.applyUserDefaults()
+            AmbientSoundEngine.shared.startObservingSession()
         }
     }
 

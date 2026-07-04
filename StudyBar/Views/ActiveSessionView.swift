@@ -14,19 +14,20 @@ struct ActiveSessionView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 16) {
+            VStack(spacing: 12) {
                 headerBlock
                 timingBlock
                 notesBlock
+                AmbientSoundControls(compact: true)
                 if !sessionManager.isStopwatch {
                     extendButtons
                 }
                 controlButtons
             }
-            .padding(16)
         }
+        .padding(16)
         .frame(width: 300)
-        .frame(maxHeight: 400)
+        .frame(maxHeight: .infinity, alignment: .top)
         .onChange(of: sessionManager.lastCompletion?.token) { _, token in
             guard token != nil, !reduceMotion else { return }
             completionBounce = true

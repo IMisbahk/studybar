@@ -53,14 +53,16 @@ struct SettingsView: View {
                 themesSection
                 remindersSection
                 dataSection
+                ambientSoundSection
                 floatingTimerSection
                 shortcutsSection
                 quitSection
             }
             .padding(16)
         }
-        .frame(width: compact ? 300 : nil)
-        .frame(maxWidth: compact ? 300 : .infinity, alignment: .leading)
+        .frame(width: compact ? PopoverLayout.paneWidth : nil)
+        .frame(maxWidth: compact ? PopoverLayout.paneWidth : .infinity, alignment: .leading)
+        .frame(maxHeight: compact ? .infinity : nil, alignment: .top)
         .onAppear {
             checkForUpdates()
             StudyReminderScheduler.shared.reschedule(in: modelContext)
@@ -203,6 +205,12 @@ struct SettingsView: View {
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
                 .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var ambientSoundSection: some View {
+        settingsSection(title: "Ambient Sound") {
+            AmbientSoundControls(compact: compact)
         }
     }
 

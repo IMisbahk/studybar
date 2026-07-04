@@ -102,6 +102,8 @@ struct FloatingTimerView: View {
                     .buttonStyle(.bordered)
                     .controlSize(.large)
             }
+            AmbientSoundControls(compact: false)
+                .frame(maxWidth: 420)
             Spacer()
         }
         .padding(40)

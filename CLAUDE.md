@@ -106,11 +106,16 @@ Phase 8 command palette/CLI/deep links — skipped per Misbah. Custom theme edit
   — invoke with `/mac-app` (routes menu bar vs window) or `/mac-menu-app` (menu bar only).
   Patterns distilled from this repo (MenuBarExtra, pbxproj, DMG, SwiftData, NSPanel dashboard).
 
-## Focus timer fullscreen (dev branch 2026-07-04)
+## Focus timer fullscreen (v2.13.0)
 - Floating timer panel (on-screen HUD) has ↗ button that expands the **same panel**
   to fill the screen — big ring + time + pause/stop. Menu popover untouched.
-- `FocusTimerWindowController` / `FocusTimerView` are dead code (separate window approach
-  abandoned) — safe to delete when Misbah approves.
+- `FocusTimerWindowController` / `FocusTimerView` are dead code — safe to delete when Misbah approves.
+
+## Ambient sounds (dev branch 2026-07-05)
+- `Core/AmbientSoundEngine.swift` — procedural white noise / rain / café via `AVAudioEngine`
+  (no bundled files, works offline). Auto-plays during active sessions when enabled.
+- `Views/AmbientSoundControls.swift` — picker in Settings, active session popover, fullscreen HUD.
+- UserDefaults: `ambientSoundId`, `ambientSoundVolume`, `ambientSoundAutoPlay`.
 
 ## DMG packaging notes (2026-07-01)
 - `packaging/dmg/background.png` is **600×400**, white bg, black arrow + instruction text.
