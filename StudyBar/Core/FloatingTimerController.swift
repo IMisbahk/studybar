@@ -1,15 +1,21 @@
 import AppKit
 import SwiftUI
 
+@MainActor
 final class FloatingTimerController {
+    static weak var shared: FloatingTimerController?
+
     private weak var sessionManager: SessionManager?
     private var panel: NSPanel?
     private var panelIsVisible = false
     private var menuPopoverIsOpen = false
+    private var isFullscreen = false
+    private var compactFrame: NSRect?
     private var observers: [NSObjectProtocol] = []
 
     init(sessionManager: SessionManager) {
         self.sessionManager = sessionManager
+        Self.shared = self
     }
 
     func start() {
@@ -38,12 +44,34 @@ final class FloatingTimerController {
         })
     }
 
+    func toggleFullscreen() {
+        guard let panel, panelIsVisible else { return }
+        isFullscreen.toggle()
+        if isFullscreen {
+            compactFrame = panel.frame
+            let target = (panel.screen ?? NSScreen.main)?.visibleFrame
+                ?? NSRect(x: 0, y: 0, width: 800, height: 600)
+            panel.setFrame(target, display: true)
+            panel.isMovableByWindowBackground = false
+        } else if let compactFrame {
+            panel.setFrame(compactFrame, display: true)
+            panel.isMovableByWindowBackground = true
+        }
+        refreshPanelContent()
+    }
+
     private func refreshPanelContent() {
         guard let sessionManager, let panel else { return }
-        let content = StudyThemeProvider {
-            FloatingTimerView(sessionManager: sessionManager)
+        let content = StudyThemeProvider { [self] in
+            FloatingTimerView(
+                sessionManager: sessionManager,
+                isFullscreen: isFullscreen,
+                onToggleFullscreen: { [weak self] in self?.toggleFullscreen() }
+            )
         }
-        panel.contentView = NSHostingView(rootView: content)
+        let hosting = NSHostingView(rootView: content)
+        hosting.frame = NSRect(origin: .zero, size: panel.frame.size)
+        panel.contentView = hosting
     }
 
     deinit {
@@ -55,7 +83,6 @@ final class FloatingTimerController {
     private func syncVisibility() {
         guard let sessionManager else { return }
 
-        // never cover the menu bar popover
         if menuPopoverIsOpen {
             hidePanel()
             return
@@ -63,8 +90,8 @@ final class FloatingTimerController {
 
         let enabled = UserDefaults.standard.object(forKey: "floatingTimerEnabled") as? Bool ?? true
 
-        // only show during an active session — never when idle (empty timer blocked clicks)
         guard enabled, sessionManager.phase != .idle else {
+            if isFullscreen { isFullscreen = false }
             hidePanel()
             return
         }
@@ -74,16 +101,11 @@ final class FloatingTimerController {
 
     private func showPanel(sessionManager: SessionManager) {
         let opacity = UserDefaults.standard.object(forKey: "floatingTimerOpacity") as? Double ?? 0.9
+        let compactSize = NSSize(width: 228, height: 72)
 
         if panel == nil {
-            let content = StudyThemeProvider {
-                FloatingTimerView(sessionManager: sessionManager)
-            }
-            let hosting = NSHostingView(rootView: content)
-            hosting.frame.size = NSSize(width: 200, height: 72)
-
             let panel = NSPanel(
-                contentRect: NSRect(x: 200, y: 200, width: 200, height: 72),
+                contentRect: NSRect(x: 200, y: 200, width: compactSize.width, height: compactSize.height),
                 styleMask: [.nonactivatingPanel, .borderless, .fullSizeContentView],
                 backing: .buffered,
                 defer: false
@@ -96,8 +118,8 @@ final class FloatingTimerController {
             panel.isOpaque = false
             panel.hasShadow = true
             panel.hidesOnDeactivate = false
-            panel.contentView = hosting
             self.panel = panel
+            refreshPanelContent()
         }
 
         panel?.alphaValue = opacity

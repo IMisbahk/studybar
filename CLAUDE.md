@@ -106,6 +106,12 @@ Phase 8 command palette/CLI/deep links — skipped per Misbah. Custom theme edit
   — invoke with `/mac-app` (routes menu bar vs window) or `/mac-menu-app` (menu bar only).
   Patterns distilled from this repo (MenuBarExtra, pbxproj, DMG, SwiftData, NSPanel dashboard).
 
+## Focus timer fullscreen (dev branch 2026-07-04)
+- Floating timer panel (on-screen HUD) has ↗ button that expands the **same panel**
+  to fill the screen — big ring + time + pause/stop. Menu popover untouched.
+- `FocusTimerWindowController` / `FocusTimerView` are dead code (separate window approach
+  abandoned) — safe to delete when Misbah approves.
+
 ## DMG packaging notes (2026-07-01)
 - `packaging/dmg/background.png` is **600×400**, white bg, black arrow + instruction text.
   Window bounds in `configure.applescript` are derived from PNG dimensions.
