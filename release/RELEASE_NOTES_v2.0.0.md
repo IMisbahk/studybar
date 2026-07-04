@@ -46,7 +46,7 @@ StudyBar 2.0 is the complete study timer experience: start sessions from the men
 - macOS 14.0 or later
 
 ## Install
-Download `StudyBar-2.0.0.dmg` from [GitHub Releases](https://github.com/IMisbahk/studybar/releases), drag to Applications, and launch.
+Download `StudyBar-2.0.0.dmg` from [GitHub Releases](https://github.com/IMisbahk/studybar/releases/tag/v2.0.0), drag to Applications, and launch.
 
 ---
 

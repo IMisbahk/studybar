@@ -21,9 +21,9 @@ Alternatives: **System Settings → Privacy & Security → Open Anyway**, or `xa
 
 1. Go to [github.com/IMisbahk/studybar/releases/latest](https://github.com/IMisbahk/studybar/releases/latest)
 2. Download **`StudyBar-x.y.z.zip`**
-3. Double-click the zip — inside you'll find **`StudyBar-x.y.z.dmg`** (not the repo)
+3. Double-click the zip — inside you'll find **`StudyBar-x.y.z.dmg`**
 4. Double-click the dmg → drag **StudyBar.app** to **Applications**
-5. Launch from Applications or Spotlight
+5. Launch from Applications or Spotlight — look for the **book icon in the menu bar**
 
 Alternatively, download **`StudyBar-x.y.z.dmg`** directly from the same Releases page.
 
@@ -33,10 +33,10 @@ Each release includes `StudyBar-x.y.z.sha256`:
 
 ```bash
 cd ~/Downloads
-shasum -a 256 -c StudyBar-1.0.0.sha256
+shasum -a 256 -c StudyBar-2.13.0.sha256
 ```
 
-Both `StudyBar-1.0.0.zip` and `StudyBar-1.0.0.dmg` must report `OK`.
+Both `StudyBar-2.13.0.zip` and `StudyBar-2.13.0.dmg` must report `OK`.
 
 ---
 
@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/inst
 Install a specific version:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/install-release.sh) 1.0.0
+bash <(curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/install-release.sh) 2.13.0
 ```
 
 Or clone first (safer — review the script before running):
@@ -117,6 +117,12 @@ Select the **StudyBar** scheme, pick **My Mac**, press **⌘R**.
 
 ## Upgrading
 
+### In-app (recommended)
+
+Settings → **Download Update** → **Restart to Update** when idle. Requires install in `/Applications`.
+
+### Manual
+
 1. Quit StudyBar (Settings → **Quit StudyBar**)
 2. Install the new version using any method above (overwrites `/Applications/StudyBar.app`)
 3. Relaunch — SwiftData history is preserved (stored outside the app bundle)
@@ -132,8 +138,7 @@ rm -rf /Applications/StudyBar.app
 Remove local data (optional — deletes all subjects and session history):
 
 ```bash
-# SwiftData default store location varies; check ~/Library/Application Support/
-rm -f ~/Library/Application Support/default.store*
+rm -rf ~/Library/Application\ Support/StudyBar
 ```
 
 Disable launch at login if enabled: **System Settings → General → Login Items → remove StudyBar**.
@@ -144,8 +149,10 @@ Disable launch at login if enabled: **System Settings → General → Login Item
 
 | Problem | Fix |
 |---------|-----|
-| App won’t open (Gatekeeper) | Right-click → Open, or allow in Privacy & Security |
+| App won't open (Gatekeeper) | Right-click → Open, or allow in Privacy & Security |
 | No menu bar icon | Check the right side of the menu bar; icon is a book |
 | No notifications | System Settings → Notifications → StudyBar → allow alerts |
+| Global shortcuts don't work | Settings → enable global shortcuts; grant Accessibility if prompted |
 | `xcodebuild` plugin error | Run `xcodebuild -runFirstLaunch` once |
 | Launch at login fails | App may need to live in `/Applications` for `SMAppService` |
+| Update install fails | Ensure app is in `/Applications`; quit StudyBar before updating |

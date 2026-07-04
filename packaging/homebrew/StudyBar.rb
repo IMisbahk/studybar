@@ -1,7 +1,7 @@
 cask "studybar" do
-  version "2.0.0"
+  version "2.13.0"
 
-  sha256 "d4ec15792521a7c453517426a95f7886837d1694caf7f312292be6072a55413d"
+  sha256 "e6c2e18d08a1c3a08d086b3c0d8d28fa1af3a6aa4f00034a5183e31077e70af4"
 
   url "https://github.com/IMisbahk/studybar/releases/download/v#{version}/StudyBar-#{version}.dmg"
   name "StudyBar"
@@ -13,8 +13,6 @@ cask "studybar" do
   app "StudyBar.app"
 
   zap trash: [
-    "~/Library/Application Support/default.store",
-    "~/Library/Application Support/default.store-shm",
-    "~/Library/Application Support/default.store-wal",
+    "~/Library/Application Support/StudyBar",
   ]
 end

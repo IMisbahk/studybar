@@ -109,12 +109,10 @@ Phase 8 command palette/CLI/deep links — skipped per Misbah. Custom theme edit
 ## Focus timer fullscreen (v2.13.0)
 - Floating timer panel (on-screen HUD) has ↗ button that expands the **same panel**
   to fill the screen — big ring + time + pause/stop. Menu popover untouched.
-- `FocusTimerWindowController` / `FocusTimerView` are dead code — safe to delete when Misbah approves.
 
-## Ambient sounds (dev branch 2026-07-05)
-- `Core/AmbientSoundEngine.swift` — procedural white noise / rain / café via `AVAudioEngine`
-  (no bundled files, works offline). Auto-plays during active sessions when enabled.
-- `Views/AmbientSoundControls.swift` — picker in Settings, active session popover, fullscreen HUD.
+## Ambient sounds (v2.13.5)
+- `Core/AmbientSoundEngine.swift` — procedural presets via `AVAudioEngine` (offline).
+- Popover: 2-column grid, fixed 300×463 pane, hidden scroll indicators.
 - UserDefaults: `ambientSoundId`, `ambientSoundVolume`, `ambientSoundAutoPlay`.
 
 ## DMG packaging notes (2026-07-01)
@@ -126,3 +124,8 @@ Phase 8 command palette/CLI/deep links — skipped per Misbah. Custom theme edit
 - Post-mount copy of `.background` failed on read-only attach; stage everything in
   `srcfolder` instead (including `.background` + `.hidden`).
 - Icon Y at ~28% of bg height leaves room for labels below icons on white bg.
+
+## Repo polish (2026-07-05)
+- Removed dead `FocusTimerWindowController` / `FocusTimerView` (superseded by `FloatingTimerController` fullscreen)
+- Cleared local `build/` + `.DS_Store` caches; docs/README/SECURITY/Homebrew updated to v2.13.x
+- Homebrew cask pinned to latest published release (v2.13.0) until v2.13.5 tag ships

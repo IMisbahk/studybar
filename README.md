@@ -4,20 +4,46 @@
   <img src="docs/app-icon.png" width="128" alt="StudyBar app icon">
 </p>
 
-A native macOS menu bar study timer. Pick a subject, start a session, and the menu bar icon becomes a live countdown with a progress ring. Fully local — no accounts, no cloud, no network.
+A native macOS menu bar study timer. Pick a subject, start a session, and the menu bar icon becomes a live countdown with a progress ring. Dashboard analytics, XP, ambient sounds, themes — fully local, no accounts, no cloud.
+
+**Latest release:** [v2.13.0](https://github.com/IMisbahk/studybar/releases/tag/v2.13.0) · **Current source:** [`2.13.5`](VERSION)
 
 ![Active session screenshot](docs/screenshots/active-session.png)
 
 ## Features
 
-- **Menu bar native** — lives in the menu bar only (no dock icon, no main window)
+### Core timer
+- **Menu bar native** — lives in the menu bar (no Dock icon); optional floating HUD and full dashboard window
 - **Live countdown** — icon morphs to `mm:ss` + animated progress ring while studying
 - **Subjects & topics** — editable lists, persisted with SwiftData
-- **Duration presets** — 25 / 50 / 90 min, or custom
+- **Duration presets** — 25 / 50 / 90 min, custom input, stopwatch mode, suggested duration from history
 - **Session controls** — pause, resume, stop early, extend +5 / +10 min
-- **Notifications** — alerts when a session starts and completes
-- **History** — today / week / month / daily-average totals, per-subject breakdown
-- **Settings** — launch at login, sound on session end, manage subjects, quit
+- **Floating timer** — draggable on-screen HUD; expand to fullscreen focus mode (↗)
+- **Ambient sounds** — offline procedural presets (white, pink, rain, storm, ocean, café, fan)
+
+### History & insights
+- **History** — today / week / month / daily-average totals, per-subject breakdown, session log with bulk delete
+- **Timeline** — day view with pause segments, zoom, filters (dashboard + compact popover tab)
+- **Analytics** — heatmap, streaks, charts, time-of-day breakdown, monthly PDF report
+- **Smart insights** — study patterns and recommendations
+- **Notes browser** — searchable session notes
+
+### Goals & gamification
+- **Daily & weekly goals** — progress rings in timer and dashboard
+- **XP & levels** — profile progression with achievement unlocks
+- **Galaxy view** — per-subject planets tied to study time
+
+### Customization
+- **7 color themes** — Classic, Forest, Sunset, Lavender, Ocean, Rose, Monochrome
+- **Menu bar styles** — Standard, Compact, Minimal
+- **Rounded timer digits** and themed floating timer border
+
+### System integration
+- **Notifications** — session start/complete, pause nudge, Sunday recap, study reminders
+- **Global shortcuts** — ⌥⌘S start, ⌥⌘P pause, ⌥⌘R resume, ⌥⌘E +10 min, ⌥⌘H timeline (opt-in)
+- **Auto-pause** — lock screen, sleep, lid close
+- **In-app updates** — check every 6 hours; Settings → Download Update → Restart to Update
+- **Backup & restore** — local zip of SwiftData store
 
 **Requirements:** macOS 14.0 (Sonoma) or later · Apple Silicon or Intel
 
@@ -28,13 +54,12 @@ A native macOS menu bar study timer. Pick a subject, start a session, and the me
 
 ### Option 1 — Direct download (recommended)
 
-**[Download StudyBar.zip](https://github.com/IMisbahk/studybar/releases/latest)** (from Releases)
+**[Download latest release](https://github.com/IMisbahk/studybar/releases/latest)**
 
-1. Download `StudyBar-x.y.z.zip` from the [Releases](https://github.com/IMisbahk/studybar/releases/latest) page
-2. Double-click the zip to extract — you'll see **`StudyBar-x.y.z.dmg`** inside (not the repo, not source files)
-3. Double-click the `.dmg` to open it
-4. Drag **StudyBar.app** to your **Applications** folder
-5. Launch StudyBar — click the **book icon in the menu bar** (top right). There is **no Dock icon**; the app only lives in the menu bar.
+1. Download `StudyBar-x.y.z.zip` from [Releases](https://github.com/IMisbahk/studybar/releases/latest)
+2. Double-click the zip — inside you'll find **`StudyBar-x.y.z.dmg`**
+3. Double-click the `.dmg` → drag **StudyBar.app** to **Applications**
+4. Launch StudyBar — click the **book icon in the menu bar** (top right). No Dock icon by default.
 
 ### First launch — macOS may block the app (one time)
 
@@ -46,36 +71,36 @@ StudyBar isn't notarized (that costs $99/year). macOS may warn that the app "can
 2. **Right-click** `StudyBar.app` → **Open**
 3. Click **Open** in the dialog
 
-After that, double-click works. You don't need System Settings unless you want **Privacy & Security → Open Anyway** instead.
+After that, double-click works. Or use **Privacy & Security → Open Anyway**, or:
 
-**Or use the install script** — it strips quarantine for you:
+```bash
+xattr -cr /Applications/StudyBar.app
+```
+
+**Or use the install script** — downloads the latest release and strips quarantine:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/install-release.sh | bash
 ```
 
-**Or Terminal:** `xattr -cr /Applications/StudyBar.app`
+**In-app updates (v1.5.3+):** Settings → Download Update → **Restart to Update**. Install to `/Applications` for this to work.
 
-**In-app updates (v1.5.3+):** Settings → Download Update → **Restart to Update**. StudyBar quits, installs, and reopens automatically. Install to `/Applications` for this to work.
-
-You can also download `StudyBar-x.y.z.dmg` directly from Releases if you prefer to skip the zip step.
-
-Verify checksum (optional):
+Verify checksum (optional — replace version with your download):
 
 ```bash
-shasum -a 256 -c StudyBar-1.0.0.sha256
+shasum -a 256 -c StudyBar-2.13.0.sha256
 ```
 
-### Option 2 — Install script (latest release)
+### Option 2 — Install script
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/install-release.sh | bash
 ```
 
-Or pin a version:
+Pin a version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/install-release.sh | bash -s -- 1.0.0
+curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/install-release.sh | bash -s -- 2.13.0
 ```
 
 ### Option 3 — Homebrew (local cask)
@@ -84,7 +109,7 @@ curl -fsSL https://raw.githubusercontent.com/IMisbahk/studybar/main/scripts/inst
 brew install --cask ./packaging/homebrew/StudyBar.rb
 ```
 
-> After each new release, update `version` and `sha256` in `packaging/homebrew/StudyBar.rb` (see [docs/RELEASING.md](docs/RELEASING.md)).
+> Cask pins `version` and `sha256` to a GitHub release. See [docs/RELEASING.md](docs/RELEASING.md) after each release.
 
 ### Option 4 — Build from source
 
@@ -107,9 +132,10 @@ Full details: [docs/INSTALL.md](docs/INSTALL.md)
 
 1. Click the **book icon** in the menu bar
 2. Add a subject (+ button), pick a duration, tap **Start Session**
-3. Allow notifications when macOS asks
-4. Click the icon again during a session for pause / stop / extend
-5. Check **History** and **Settings** via the bottom tab bar
+3. Allow notifications when prompted (or skip — reminders stay off)
+4. During a session: pause / stop / extend from the popover, floating HUD, or ⌥⌘ shortcuts
+5. Open **History**, **Timeline**, or **Settings** via the bottom tab bar
+6. Press **⌥⌘H** or use Settings → **Open Dashboard** for the full analytics window
 
 ## Development
 
@@ -133,7 +159,7 @@ StudyBar uses [Semantic Versioning](https://semver.org/). The canonical version 
 | `StudyBar-x.y.z.dmg` | Same dmg, for direct download without the zip wrapper |
 | `StudyBar-x.y.z.sha256` | SHA-256 checksums for zip + dmg |
 
-Releases are built automatically when a `v*` tag is pushed. Maintainer guide: [docs/RELEASING.md](docs/RELEASING.md).
+Releases build automatically when a `v*` tag is pushed. Maintainer guide: [docs/RELEASING.md](docs/RELEASING.md).
 
 ## Project layout
 
@@ -141,14 +167,15 @@ Releases are built automatically when a `v*` tag is pushed. Maintainer guide: [d
 StudyBar/           Swift source (Models, Core, Views)
 StudyBar.xcodeproj/ Xcode project
 scripts/            build, package, install, version bump
-packaging/          Homebrew cask
+packaging/          Homebrew cask + DMG assets
 docs/               install, development, releasing guides
+release/            public release note drafts
 .github/workflows/  CI + release automation
 ```
 
 ## Privacy
 
-All data stays on your Mac. SwiftData stores subjects, topics, and session history locally. No analytics, no network calls.
+All data stays on your Mac. SwiftData stores subjects, topics, and session history at `~/Library/Application Support/StudyBar/`. No analytics, no network calls except optional GitHub update checks.
 
 ## License
 

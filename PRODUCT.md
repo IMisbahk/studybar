@@ -1,7 +1,11 @@
 # StudyBar — macOS Menu Bar Study Timer
 
+> **Status (July 2026):** v2.13.5 in source; [v2.13.0](https://github.com/IMisbahk/studybar/releases/tag/v2.13.0) is the latest public release. Everything below was the original v1 spec — most of it shipped, plus a lot more (dashboard, analytics, gamification, themes, ambient sounds, timeline, insights). See [CHANGELOG.md](CHANGELOG.md) for the full history.
+
 ## What this is
-A native macOS menu bar app (like the "Claude usage" style popover apps) for running focused study sessions. Lives in the menu bar, no dock icon, no main window. Click to open a small popover, pick a subject + duration, start a session, and the menu bar icon itself turns into a live countdown with a progress ring.
+A native macOS menu bar app (like the "Claude usage" style popover apps) for running focused study sessions. Lives in the menu bar (no Dock icon). Click to open a small popover, pick a subject + duration, start a session, and the menu bar icon itself turns into a live countdown with a progress ring.
+
+**Also shipped:** optional floating HUD (with fullscreen focus mode), full dashboard window (⌥⌘H), in-app updates, backup/restore, global shortcuts, study goals, XP/achievements, 7 themes, ambient sounds, timeline with pause segments, analytics/insights exports.
 
 ## Tech stack
 - Swift + SwiftUI

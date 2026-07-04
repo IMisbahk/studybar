@@ -6,7 +6,7 @@ rootDir="$(cd "$(dirname "$0")/.." && pwd)"
 newVersion="${1:-}"
 
 if [[ -z "$newVersion" ]]; then
-  echo "usage: $0 <version>   e.g. 1.0.1 or 1.1.0" >&2
+  echo "usage: $0 <version>   e.g. 2.13.6 or 2.14.0" >&2
   exit 1
 fi
 
@@ -17,7 +17,7 @@ fi
 
 pbxproj="$rootDir/StudyBar.xcodeproj/project.pbxproj"
 
-# marketing = x.y.z; build number = encoded semver (1.0.0 -> 10000)
+# marketing = x.y.z; build number = encoded semver (2.13.5 -> 21305)
 IFS='.' read -r major minor patch <<< "$newVersion"
 buildNumber=$((major * 10000 + minor * 100 + patch))
 

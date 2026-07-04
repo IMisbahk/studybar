@@ -6,7 +6,7 @@ labels: bug
 ---
 
 **macOS version:** e.g. 14.5
-**StudyBar version:** e.g. 1.0.0 (Settings or `VERSION` file)
+**StudyBar version:** e.g. 2.13.0 (Settings or [`VERSION`](../../VERSION) file)
 
 **What happened:**
 

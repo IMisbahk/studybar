@@ -4,6 +4,8 @@ All notable changes to StudyBar are documented here. Versioning follows [Semanti
 
 ## [2.13.5] - 2026-07-05
 
+See [release/RELEASE_NOTES_v2.13.5.md](release/RELEASE_NOTES_v2.13.5.md).
+
 ### Added
 - **Ambient sounds** — procedural offline presets (white, pink, rain, storm, ocean, café, fan) with 2-column picker on timer tab and in Settings; auto-plays during sessions
 
@@ -13,6 +15,8 @@ All notable changes to StudyBar are documented here. Versioning follows [Semanti
 - **Idle timer** — Start Session above ambient picker so the primary action stays visible
 
 ## [2.13.0] - 2026-07-05
+
+See [release/RELEASE_NOTES_v2.13.0.md](release/RELEASE_NOTES_v2.13.0.md).
 
 ### Added
 - **Floating timer fullscreen** — expand the on-screen HUD to fill the screen during an active session (big ring, time, pause/stop); menu bar popover unchanged
@@ -388,6 +392,18 @@ First public release.
 
 
 
+[2.13.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.13.0
+[2.12.2]: https://github.com/IMisbahk/studybar/releases/tag/v2.12.2
+[2.12.1]: https://github.com/IMisbahk/studybar/releases/tag/v2.12.1
+[2.12.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.12.0
+[2.1.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.1.0
+[2.0.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.0.0
+[1.8.1]: https://github.com/IMisbahk/studybar/releases/tag/v1.8.1
+[1.8.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.8.0
+[1.7.58]: https://github.com/IMisbahk/studybar/releases/tag/v1.7.58
+[1.7.57]: https://github.com/IMisbahk/studybar/releases/tag/v1.7.57
+[1.7.5]: https://github.com/IMisbahk/studybar/releases/tag/v1.7.5
+[1.6.51]: https://github.com/IMisbahk/studybar/releases/tag/v1.6.51
 [1.6.0]: https://github.com/IMisbahk/studybar/releases/tag/v1.6.0
 [1.5.33]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.33
 [1.5.32]: https://github.com/IMisbahk/studybar/releases/tag/v1.5.32

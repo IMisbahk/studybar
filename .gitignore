@@ -11,6 +11,8 @@ xcuserdata/
 .build/
 *.hmap
 *.ipa
+*.swp
+*~
 
 # Agent-only files (not for public repo)
 CLAUDE.md
