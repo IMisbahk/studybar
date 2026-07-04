@@ -1,0 +1,56 @@
+release/RELEASE_NOTES_v2.12.2.md
+  s_1d89b0226e1627::t_1276ff2ea77047 1-13
+CLAUDE.md
+  s_ef133bb69a3d94::t_78b01a06e3db48 34
+  s_ef133bb69a3d94::t_bec8eab40d55fc 37
+  s_558b3ff9a94457::t_4c78fbfcd52ea6 104-108
+  s_ef133bb69a3d94::t_220fcdb7ed0127 72-81
+  s_1d89b0226e1627::t_98fcf402190d31 68-69
+StudyBar/Core/GamificationEngine.swift
+  s_1d89b0226e1627::t_a22c25f0daebc9 147-148
+  s_1d89b0226e1627::t_1bfeaf6566bfe1 115,118,121-125
+  s_1d89b0226e1627::t_ecf46960ffdfe7 163-164
+VERSION
+  s_1d89b0226e1627::t_89412830349325 1
+CHANGELOG.md
+  s_1d89b0226e1627::t_75a2eeededc73c 5-11
+StudyBar.xcodeproj/project.pbxproj
+  s_1d89b0226e1627::t_89412830349325 557,567,584,594
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c3b01d4c6f617e55ae3e6ce163be18e72abd5a43",
+  "prompts": {},
+  "humans": {
+    "h_b8c068798e4e71": {
+      "author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_1d89b0226e1627": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9fbc727d-5b71-48ac-b4d5-90ed8262f30a",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    },
+    "s_558b3ff9a94457": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "102b943f-7c1a-401f-881e-396332a4bcc6",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    },
+    "s_ef133bb69a3d94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2f11f776-5c0b-4a3f-a66b-f3297428f1f9",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
