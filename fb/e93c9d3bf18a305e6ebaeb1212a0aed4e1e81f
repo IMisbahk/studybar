@@ -1,0 +1,30 @@
+StudyBar.xcodeproj/project.pbxproj
+  s_9bf4c9fd003571::t_8406df5dfd4c4f 565,575,592,602
+VERSION
+  s_9bf4c9fd003571::t_8406df5dfd4c4f 1
+StudyBar/Core/TimelineEngine.swift
+  s_9bf4c9fd003571::t_374659a9db0ba5 22
+release/RELEASE_NOTES_v2.14.11.md
+  s_9bf4c9fd003571::t_af01cc24dbbad4 1-8
+CHANGELOG.md
+  s_9bf4c9fd003571::t_b52f06551fbf2d 5-9
+  s_9bf4c9fd003571::t_4555a541d90a0c 414
+CLAUDE.md
+  s_9bf4c9fd003571::t_9c0e945649109c 61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "fbe93c9d3bf18a305e6ebaeb1212a0aed4e1e81f",
+  "prompts": {},
+  "sessions": {
+    "s_9bf4c9fd003571": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9abcbc97-64bc-4b57-824c-48c7412e8e6f",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
