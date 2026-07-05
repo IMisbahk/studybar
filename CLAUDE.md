@@ -108,7 +108,8 @@ Phase 8 command palette/CLI/deep links — skipped per Misbah. Custom theme edit
 
 ## Focus timer fullscreen (v2.13.0)
 - Floating timer panel (on-screen HUD) has ↗ button that expands the **same panel**
-  to fill the screen — big ring + time + pause/stop. Menu popover untouched.
+ to fill the screen — big ring + time + pause/stop. Menu popover untouched.
+- **v2.14.1** — exit fullscreen always shrinks panel to 248×72; stale fullscreen frames reset on session end and before compact show (fixes mini UI trapped on screen-sized overlay).
 
 ## Ambient sounds (v2.13.5)
 - `Core/AmbientSoundEngine.swift` — procedural presets via `AVAudioEngine` (offline).

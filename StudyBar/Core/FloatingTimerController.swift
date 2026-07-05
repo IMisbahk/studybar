@@ -5,6 +5,8 @@ import SwiftUI
 final class FloatingTimerController {
     static weak var shared: FloatingTimerController?
 
+    private static let compactSize = NSSize(width: 248, height: 72)
+
     private weak var sessionManager: SessionManager?
     private var panel: NSPanel?
     private var panelIsVisible = false
@@ -48,13 +50,13 @@ final class FloatingTimerController {
         guard let panel, panelIsVisible else { return }
         isFullscreen.toggle()
         if isFullscreen {
-            compactFrame = panel.frame
+            compactFrame = NSRect(origin: panel.frame.origin, size: Self.compactSize)
             let target = (panel.screen ?? NSScreen.main)?.visibleFrame
                 ?? NSRect(x: 0, y: 0, width: 800, height: 600)
             panel.setFrame(target, display: true)
             panel.isMovableByWindowBackground = false
-        } else if let compactFrame {
-            panel.setFrame(compactFrame, display: true)
+        } else {
+            applyCompactFrame(to: panel, origin: compactFrame?.origin ?? panel.frame.origin)
             panel.isMovableByWindowBackground = true
         }
         refreshPanelContent()
@@ -92,7 +94,7 @@ final class FloatingTimerController {
         let enabled = UserDefaults.standard.object(forKey: "floatingTimerEnabled") as? Bool ?? true
 
         guard enabled, sessionManager.phase != .idle else {
-            if isFullscreen { isFullscreen = false }
+            resetCompactLayout()
             hidePanel()
             return
         }
@@ -100,13 +102,47 @@ final class FloatingTimerController {
         showPanel(sessionManager: sessionManager)
     }
 
+    private func resetCompactLayout() {
+        isFullscreen = false
+        compactFrame = nil
+        if let panel {
+            applyCompactFrame(to: panel, origin: panel.frame.origin)
+            refreshPanelContent()
+        }
+    }
+
+    private func applyCompactFrame(to panel: NSPanel, origin: NSPoint) {
+        var frame = NSRect(origin: origin, size: Self.compactSize)
+        if let screen = panel.screen ?? NSScreen.main {
+            frame = frameWithinVisibleScreen(frame, on: screen.visibleFrame)
+        }
+        panel.setFrame(frame, display: true)
+        compactFrame = frame
+    }
+
+    private func frameWithinVisibleScreen(_ frame: NSRect, on visible: NSRect) -> NSRect {
+        var adjusted = frame
+        if adjusted.maxX > visible.maxX {
+            adjusted.origin.x = visible.maxX - adjusted.width
+        }
+        if adjusted.minX < visible.minX {
+            adjusted.origin.x = visible.minX
+        }
+        if adjusted.maxY > visible.maxY {
+            adjusted.origin.y = visible.maxY - adjusted.height
+        }
+        if adjusted.minY < visible.minY {
+            adjusted.origin.y = visible.minY
+        }
+        return adjusted
+    }
+
     private func showPanel(sessionManager: SessionManager) {
         let opacity = UserDefaults.standard.object(forKey: "floatingTimerOpacity") as? Double ?? 0.9
-        let compactSize = NSSize(width: 248, height: 72)
 
         if panel == nil {
             let panel = NSPanel(
-                contentRect: NSRect(x: 200, y: 200, width: compactSize.width, height: compactSize.height),
+                contentRect: NSRect(x: 200, y: 200, width: Self.compactSize.width, height: Self.compactSize.height),
                 styleMask: [.nonactivatingPanel, .borderless, .fullSizeContentView],
                 backing: .buffered,
                 defer: false
@@ -120,6 +156,11 @@ final class FloatingTimerController {
             panel.hasShadow = true
             panel.hidesOnDeactivate = false
             self.panel = panel
+            refreshPanelContent()
+        }
+
+        if let panel, !isFullscreen, panel.frame.size != Self.compactSize {
+            applyCompactFrame(to: panel, origin: panel.frame.origin)
             refreshPanelContent()
         }
 

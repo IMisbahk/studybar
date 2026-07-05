@@ -2,6 +2,11 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.14.1] - 2026-07-06
+
+### Fixed
+- **Floating timer fullscreen exit** — exiting fullscreen now always shrinks the panel back to the compact HUD; stale fullscreen-sized frames from prior sessions no longer leave the mini UI centered on a full-screen overlay
+
 ## [2.14.0] - 2026-07-05
 
 See [release/RELEASE_NOTES_v2.14.0.md](release/RELEASE_NOTES_v2.14.0.md).
@@ -401,6 +406,7 @@ First public release.
 
 
 
+[2.14.1]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.1
 [2.14.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.0
 [2.13.5]: https://github.com/IMisbahk/studybar/releases/tag/v2.13.5
 [2.13.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.13.0
