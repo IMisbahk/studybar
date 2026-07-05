@@ -6,6 +6,7 @@ struct HistoryView: View {
     @Query(sort: \StudySession.startedAt, order: .reverse) private var sessions: [StudySession]
     @State private var searchText = ""
     @State private var hoveredSessionId: PersistentIdentifier?
+    @State private var hoverAnchorRect: CGRect?
 
     private var calendar: Calendar { .current }
 
@@ -80,30 +81,32 @@ struct HistoryView: View {
                     TextField("Search", text: $searchText)
                         .textFieldStyle(.roundedBorder)
 
-                    if let hoveredItem {
-                        TimelineSessionTooltip(item: hoveredItem)
-                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
-                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(.quaternary, lineWidth: 1))
-                    }
-
                     if days.isEmpty {
                         Text("No matches")
                             .font(.callout)
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .center)
                     } else {
-                        LazyVStack(alignment: .leading, spacing: 0) {
-                            ForEach(Array(days.enumerated()), id: \.element.id) { index, day in
-                                TimelineDayRowView(
-                                    day: day,
-                                    zoom: .compact,
-                                    isFirst: index == 0,
-                                    isLast: index == days.count - 1,
-                                    hoveredSessionId: $hoveredSessionId
-                                )
-                                .padding(.vertical, 4)
+                        ZStack(alignment: .topLeading) {
+                            LazyVStack(alignment: .leading, spacing: 0) {
+                                ForEach(Array(days.enumerated()), id: \.element.id) { index, day in
+                                    TimelineDayRowView(
+                                        day: day,
+                                        zoom: .compact,
+                                        isFirst: index == 0,
+                                        isLast: index == days.count - 1,
+                                        hoveredSessionId: $hoveredSessionId,
+                                        hoverAnchorRect: $hoverAnchorRect
+                                    )
+                                    .padding(.vertical, 4)
+                                }
+                            }
+
+                            if let hoveredItem, let anchor = hoverAnchorRect {
+                                timelineHoverCard(for: hoveredItem, anchor: anchor)
                             }
                         }
+                        .coordinateSpace(name: "timelineHoverSpace")
                     }
                 }
             }
@@ -125,5 +128,22 @@ struct HistoryView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(8)
         .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 8))
+    }
+
+    private func timelineHoverCard(for item: TimelineSessionItem, anchor: CGRect) -> some View {
+        let cardWidth: CGFloat = 220
+        let cardHeight: CGFloat = 78
+        let timelineWidth: CGFloat = 268
+        let x = min(max(anchor.midX, cardWidth / 2), timelineWidth - cardWidth / 2)
+        let y = max(anchor.minY - cardHeight / 2 - 8, cardHeight / 2 + 4)
+
+        return TimelineSessionTooltip(item: item, compact: true)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(.quaternary, lineWidth: 1))
+            .shadow(color: .black.opacity(0.18), radius: 8, y: 3)
+            .position(x: x, y: y)
+            .allowsHitTesting(false)
+            .zIndex(1)
+            .animation(nil, value: hoveredSessionId)
     }
 }

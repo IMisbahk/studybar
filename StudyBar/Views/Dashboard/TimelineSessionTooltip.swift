@@ -2,10 +2,42 @@ import SwiftUI
 
 struct TimelineSessionTooltip: View {
     let item: TimelineSessionItem
+    var compact = false
 
     private var session: StudySession { item.session }
 
     var body: some View {
+        if compact {
+            compactBody
+        } else {
+            fullBody
+        }
+    }
+
+    private var compactBody: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                Circle()
+                    .fill(TimelineEngine.subjectColor(for: session.subjectName))
+                    .frame(width: 8, height: 8)
+                Text(session.subjectName)
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(1)
+                if let topic = session.topicName {
+                    Text("· \(topic)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+            }
+            detailRow("Start", session.startedAt.formatted(date: .omitted, time: .shortened))
+            detailRow("Duration", StudyFormatting.duration(session.actualDuration))
+        }
+        .padding(10)
+        .frame(width: 220)
+    }
+
+    private var fullBody: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
                 Circle()

@@ -2,6 +2,11 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.14.12] - 2026-07-06
+
+### Fixed
+- **Popover timeline hover card** — session details float above the hovered block instead of inserting into the list, so rows no longer jump; compact card + `onHover` for snappier feedback
+
 ## [2.14.11] - 2026-07-06
 
 ### Changed
@@ -411,6 +416,7 @@ First public release.
 
 
 
+[2.14.12]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.12
 [2.14.11]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.11
 [2.14.1]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.1
 [2.14.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.0

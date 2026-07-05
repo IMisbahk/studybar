@@ -64,7 +64,8 @@ struct TimelineView: View {
                                     zoom: zoom,
                                     isFirst: index == 0,
                                     isLast: index == days.count - 1,
-                                    hoveredSessionId: $hoveredSessionId
+                                    hoveredSessionId: $hoveredSessionId,
+                                    hoverAnchorRect: .constant(nil)
                                 )
                                 .padding(.vertical, 8)
                             }

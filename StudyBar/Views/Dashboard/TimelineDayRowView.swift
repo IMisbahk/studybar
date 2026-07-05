@@ -7,6 +7,7 @@ struct TimelineDayRowView: View {
     let isFirst: Bool
     let isLast: Bool
     @Binding var hoveredSessionId: PersistentIdentifier?
+    @Binding var hoverAnchorRect: CGRect?
 
     private var calendar: Calendar { .current }
 
@@ -110,28 +111,30 @@ struct TimelineDayRowView: View {
         let color = TimelineEngine.subjectColor(for: item.session.subjectName)
         ForEach(item.activeBlocks) { block in
             let blockWidth = max(4, (block.xEnd - block.xStart) * width)
-            RoundedRectangle(cornerRadius: 4)
-                .fill(color)
-                .frame(width: blockWidth, height: zoom.rowHeight - 10)
-                .offset(x: block.xStart * width, y: 5)
-                .overlay {
-                    ForEach(item.pauses) { pause in
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(Color(nsColor: .windowBackgroundColor).opacity(0.85))
-                            .frame(width: max(2, (pause.xEnd - pause.xStart) * width), height: zoom.rowHeight - 14)
-                            .offset(x: pause.xStart * width, y: 7)
+            let blockHeight = zoom.rowHeight - 10
+            GeometryReader { geo in
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(color)
+                    .overlay {
+                        ForEach(item.pauses) { pause in
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color(nsColor: .windowBackgroundColor).opacity(0.85))
+                                .frame(width: max(2, (pause.xEnd - pause.xStart) * width), height: zoom.rowHeight - 14)
+                                .offset(x: pause.xStart * width - block.xStart * width, y: 2)
+                        }
                     }
-                }
-                .onContinuousHover { phase in
-                    switch phase {
-                    case .active:
-                        hoveredSessionId = item.id
-                    case .ended:
-                        if hoveredSessionId == item.id { hoveredSessionId = nil }
-                    default:
-                        break
+                    .onHover { hovering in
+                        if hovering {
+                            hoveredSessionId = item.id
+                            hoverAnchorRect = geo.frame(in: .named("timelineHoverSpace"))
+                        } else if hoveredSessionId == item.id {
+                            hoveredSessionId = nil
+                            hoverAnchorRect = nil
+                        }
                     }
-                }
+            }
+            .frame(width: blockWidth, height: blockHeight)
+            .offset(x: block.xStart * width, y: 5)
         }
     }
 }
