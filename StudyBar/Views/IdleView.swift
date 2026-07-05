@@ -216,15 +216,15 @@ struct IdleView: View {
                     }
                 }
                 .labelsHidden()
+                .pickerStyle(.menu)
+                .frame(maxWidth: .infinity)
+                .lineLimit(1)
                 .onChange(of: selectedSubject) { _, _ in selectedTopic = nil }
 
-                Button { addingSubject = true } label: {
-                    Image(systemName: "plus.circle")
-                }
-                .buttonStyle(.plain)
+                addSubjectTopicButton(enabled: true) { addingSubject = true }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
     }
 
     private var topicPickerColumn: some View {
@@ -240,16 +240,27 @@ struct IdleView: View {
                     }
                 }
                 .labelsHidden()
+                .pickerStyle(.menu)
+                .frame(maxWidth: .infinity)
+                .lineLimit(1)
                 .disabled(selectedSubject == nil)
 
-                Button { addingTopic = true } label: {
-                    Image(systemName: "plus.circle")
-                }
-                .buttonStyle(.plain)
-                .disabled(selectedSubject == nil)
+                addSubjectTopicButton(enabled: selectedSubject != nil) { addingTopic = true }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func addSubjectTopicButton(enabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: "plus")
+                .font(.system(size: 10, weight: .bold))
+                .foregroundStyle(enabled ? .secondary : .tertiary)
+                .frame(width: 20, height: 20)
+                .background(Color.primary.opacity(enabled ? 0.08 : 0.04), in: Circle())
+        }
+        .buttonStyle(.plain)
+        .disabled(!enabled)
     }
 
     @ViewBuilder

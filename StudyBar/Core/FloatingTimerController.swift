@@ -102,7 +102,7 @@ final class FloatingTimerController {
 
     private func showPanel(sessionManager: SessionManager) {
         let opacity = UserDefaults.standard.object(forKey: "floatingTimerOpacity") as? Double ?? 0.9
-        let compactSize = NSSize(width: 228, height: 72)
+        let compactSize = NSSize(width: 248, height: 72)
 
         if panel == nil {
             let panel = NSPanel(
@@ -112,7 +112,7 @@ final class FloatingTimerController {
                 defer: false
             )
             panel.isFloatingPanel = true
-            panel.level = .normal
+            panel.level = .floating
             panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
             panel.isMovableByWindowBackground = true
             panel.backgroundColor = .clear
@@ -125,9 +125,9 @@ final class FloatingTimerController {
 
         panel?.alphaValue = opacity
         if !panelIsVisible {
-            panel?.orderFront(nil)
             panelIsVisible = true
         }
+        panel?.orderFrontRegardless()
     }
 
     private func hidePanel() {

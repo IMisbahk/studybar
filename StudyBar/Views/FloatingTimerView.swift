@@ -50,12 +50,14 @@ struct FloatingTimerView: View {
                     .font(timerFont)
             }
             Spacer(minLength: 0)
-            pauseButton
-            fullscreenButton
+            HStack(spacing: 6) {
+                pauseButton
+                fullscreenButton
+            }
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, 14)
         .padding(.vertical, 10)
-        .frame(width: 228, height: 72)
+        .frame(width: 248, height: 72)
     }
 
     private var fullscreenBody: some View {

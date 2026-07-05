@@ -2,6 +2,15 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.14.0] - 2026-07-05
+
+See [release/RELEASE_NOTES_v2.14.0.md](release/RELEASE_NOTES_v2.14.0.md).
+
+### Fixed
+- **Floating timer always on top** — HUD uses `.floating` window level and `orderFrontRegardless()` so other windows don't cover it during sessions
+- **Floating timer layout** — compact HUD widened (228→248px) with better control spacing
+- **Subject & topic pickers** — menu-style pickers flex in the 300px popover; smaller add buttons replace oversized `plus.circle` icons
+
 ## [2.13.5] - 2026-07-05
 
 See [release/RELEASE_NOTES_v2.13.5.md](release/RELEASE_NOTES_v2.13.5.md).
@@ -392,6 +401,8 @@ First public release.
 
 
 
+[2.14.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.0
+[2.13.5]: https://github.com/IMisbahk/studybar/releases/tag/v2.13.5
 [2.13.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.13.0
 [2.12.2]: https://github.com/IMisbahk/studybar/releases/tag/v2.12.2
 [2.12.1]: https://github.com/IMisbahk/studybar/releases/tag/v2.12.1

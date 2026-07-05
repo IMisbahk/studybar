@@ -129,3 +129,5 @@ Phase 8 command palette/CLI/deep links — skipped per Misbah. Custom theme edit
 - Removed dead `FocusTimerWindowController` / `FocusTimerView` (superseded by `FloatingTimerController` fullscreen)
 - Cleared local `build/` + `.DS_Store` caches; docs/README/SECURITY/Homebrew updated to v2.13.x
 - Homebrew cask pinned to latest published release (v2.13.0) until v2.13.5 tag ships
+- **Floating timer always-on-top** — `NSPanel.level` must be `.floating` (not `.normal` despite `isFloatingPanel`); use `orderFrontRegardless()` on show. Compact HUD widened 228→248 for control padding.
+- **Idle subject/topic row** — side-by-side pickers in 300px popover need `.pickerStyle(.menu)` + `frame(maxWidth: .infinity)`; `plus.circle` at default size reads as huge white orbs — use small `plus` in a 20pt circle instead.
