@@ -1,0 +1,33 @@
+CLAUDE.md
+  s_9bf4c9fd003571::t_db9f17fe91bf8e 111-112
+release/RELEASE_NOTES_v2.14.1.md
+  s_9bf4c9fd003571::t_fa4dd352bf1cf6 1-9
+StudyBar/Core/FloatingTimerController.swift
+  s_9bf4c9fd003571::t_218acf18d67146 53,58-59
+  s_9bf4c9fd003571::t_e4df0f413444da 162-166
+  s_9bf4c9fd003571::t_a2472f3d5b61d2 8-9
+  s_9bf4c9fd003571::t_f4c74bf119be80 97,105-139,145
+StudyBar.xcodeproj/project.pbxproj
+  s_9bf4c9fd003571::t_84635037da81f3 565,575,592,602
+VERSION
+  s_9bf4c9fd003571::t_84635037da81f3 1
+CHANGELOG.md
+  s_9bf4c9fd003571::t_9f3468846681d2 5-9
+  s_9bf4c9fd003571::t_427d10f1f82f8d 409
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "adb00b1267f7d07e77804f47de2cfa2389a7de6b",
+  "prompts": {},
+  "sessions": {
+    "s_9bf4c9fd003571": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9abcbc97-64bc-4b57-824c-48c7412e8e6f",
+        "model": "default"
+      },
+      "human_author": "Misbah Khursheed <m.misbahkhursheed@gmail.com>"
+    }
+  }
+}
