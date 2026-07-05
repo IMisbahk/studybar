@@ -19,12 +19,7 @@ enum TimelineZoom: String, CaseIterable, Identifiable {
 
     // seconds from midnight for visible window
     func window(on day: Date, calendar: Calendar = .current) -> (start: TimeInterval, end: TimeInterval) {
-        switch self {
-        case .day:
-            return (0, 24 * 3600)
-        case .focus, .compact:
-            return (6 * 3600, 23 * 3600)
-        }
+        (0, 24 * 3600)
     }
 
     var rowHeight: CGFloat {

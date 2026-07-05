@@ -58,6 +58,7 @@
 ## Phase 3 Timeline (v1.6.0–1.6.5) — shipped 2026-07-03
 - Segments, engine, tooltips, dashboard timeline, zoom, filters/popover compact view
 - Pre-1.6.0 sessions lack segments — shown as single blocks (fine)
+- **v2.14.11** — timeline window is full 24h (was 6a–11p on Focus/Compact zoom)
 
 ## Phase 2 Analytics (v1.7.52–1.7.57) — shipped 2026-07-03
 - Full analytics dashboard: stats, scores, daily/monthly/time-of-day charts, pie chart

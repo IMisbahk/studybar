@@ -2,6 +2,11 @@
 
 All notable changes to StudyBar are documented here. Versioning follows [Semantic Versioning](https://semver.org/).
 
+## [2.14.11] - 2026-07-06
+
+### Changed
+- **Timeline hours** — Focus, Day, and Compact zoom levels now span the full day (12 AM–11:59 PM) so late-night and early-morning sessions appear on the track
+
 ## [2.14.1] - 2026-07-06
 
 ### Fixed
@@ -406,6 +411,7 @@ First public release.
 
 
 
+[2.14.11]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.11
 [2.14.1]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.1
 [2.14.0]: https://github.com/IMisbahk/studybar/releases/tag/v2.14.0
 [2.13.5]: https://github.com/IMisbahk/studybar/releases/tag/v2.13.5
